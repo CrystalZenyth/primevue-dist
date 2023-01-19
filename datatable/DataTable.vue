@@ -59,6 +59,7 @@
                             @column-dragleave="onColumnHeaderDragLeave($event)"
                             @column-drop="onColumnHeaderDrop($event)"
                             @column-resizestart="onColumnResizeStart($event)"
+                            @column-resizestart-keyboard="onColumnResizeStartKeyboard($event)"
                             @checkbox-change="toggleRowsWithCheckbox($event)"
                         />
                         <DTTableBody
@@ -213,6 +214,7 @@ import VirtualScroller from 'primevue/virtualscroller';
 import TableBody from './TableBody.vue';
 import TableFooter from './TableFooter.vue';
 import TableHeader from './TableHeader.vue';
+import { nextTick } from 'vue';
 
 export default {
     name: 'DataTable',
@@ -1390,6 +1392,42 @@ export default {
             this.lastResizeHelperX = event.pageX - containerLeft + this.$el.scrollLeft;
 
             this.bindColumnResizeEvents();
+        },
+        onColumnResizeStartKeyboard(event) {
+            let containerLeft = DomHandler.getOffset(this.$el).left;
+
+            this.resizeColumnElement = event.target.parentElement;
+            this.columnResizing = true;
+            this.lastResizeHelperX = event.target.offsetLeft - containerLeft + this.$el.scrollLeft;
+
+            let increment = 0;
+
+            switch (event.code) {
+                case 'ArrowDown':
+                case 'ArrowLeft':
+                    increment = -30;
+                    event.preventDefault();
+                    break;
+
+                case 'ArrowUp':
+                case 'ArrowRight':
+                    increment = 30;
+                    event.preventDefault();
+                    break;
+
+                default:
+                    break;
+            }
+
+            this.$refs.resizeHelper.style.height = this.$el.offsetHeight + 'px';
+            this.$refs.resizeHelper.style.top = 0 + 'px';
+            this.$refs.resizeHelper.style.left = event.target.offsetLeft + increment - containerLeft + this.$el.scrollLeft + 'px';
+
+            this.$refs.resizeHelper.style.display = 'block';
+
+            nextTick(() => {
+                this.onColumnResizeEnd();
+            })
         },
         onColumnResize(event) {
             let containerLeft = DomHandler.getOffset(this.$el).left;

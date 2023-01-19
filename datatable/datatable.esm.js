@@ -4,7 +4,7 @@ import { DomHandler, ObjectUtils, UniqueComponentId, ZIndexUtils, ConnectedOverl
 import VirtualScroller from 'primevue/virtualscroller';
 import OverlayEventBus from 'primevue/overlayeventbus';
 import Ripple from 'primevue/ripple';
-import { openBlock, createElementBlock, normalizeClass, createElementVNode, withKeys, withModifiers, resolveComponent, resolveDirective, normalizeStyle, createBlock, resolveDynamicComponent, toDisplayString, createCommentVNode, Fragment, withDirectives, createTextVNode, renderList, mergeProps, createVNode, withCtx, Transition, renderSlot, createSlots } from 'vue';
+import { openBlock, createElementBlock, normalizeClass, createElementVNode, withKeys, withModifiers, resolveComponent, resolveDirective, normalizeStyle, createBlock, resolveDynamicComponent, toDisplayString, createCommentVNode, Fragment, withDirectives, createTextVNode, renderList, mergeProps, createVNode, withCtx, Transition, nextTick, renderSlot, createSlots } from 'vue';
 import Button from 'primevue/button';
 import Dropdown from 'primevue/dropdown';
 import FocusTrap from 'primevue/focustrap';
@@ -2418,6 +2418,7 @@ var script$2 = {
         'column-dragleave',
         'column-drop',
         'column-resizestart',
+        'column-resizestart-keyboard',
         'checkbox-change',
         'filter-change',
         'filter-apply',
@@ -2539,6 +2540,9 @@ var script$2 = {
         },
         onResizeStart(event) {
             this.$emit('column-resizestart', event);
+        },
+        onResizeStartKeyboard(event) {
+            this.$emit('column-resizestart-keyboard', event);
         },
         getMultiSortMetaIndex() {
             return this.multiSortMeta.findIndex((meta) => meta.field === this.columnProp('field') || meta.field === this.columnProp('sortField'));
@@ -2679,19 +2683,21 @@ function render$2(_ctx, _cache, $props, $setup, $data, $options) {
     colspan: $options.columnProp('colspan'),
     rowspan: $options.columnProp('rowspan'),
     "aria-sort": $options.ariaSort,
-    onClick: _cache[8] || (_cache[8] = (...args) => ($options.onClick && $options.onClick(...args))),
-    onKeydown: _cache[9] || (_cache[9] = (...args) => ($options.onKeyDown && $options.onKeyDown(...args))),
-    onMousedown: _cache[10] || (_cache[10] = (...args) => ($options.onMouseDown && $options.onMouseDown(...args))),
-    onDragstart: _cache[11] || (_cache[11] = (...args) => ($options.onDragStart && $options.onDragStart(...args))),
-    onDragover: _cache[12] || (_cache[12] = (...args) => ($options.onDragOver && $options.onDragOver(...args))),
-    onDragleave: _cache[13] || (_cache[13] = (...args) => ($options.onDragLeave && $options.onDragLeave(...args))),
-    onDrop: _cache[14] || (_cache[14] = (...args) => ($options.onDrop && $options.onDrop(...args)))
+    onClick: _cache[9] || (_cache[9] = (...args) => ($options.onClick && $options.onClick(...args))),
+    onKeydown: _cache[10] || (_cache[10] = (...args) => ($options.onKeyDown && $options.onKeyDown(...args))),
+    onMousedown: _cache[11] || (_cache[11] = (...args) => ($options.onMouseDown && $options.onMouseDown(...args))),
+    onDragstart: _cache[12] || (_cache[12] = (...args) => ($options.onDragStart && $options.onDragStart(...args))),
+    onDragover: _cache[13] || (_cache[13] = (...args) => ($options.onDragOver && $options.onDragOver(...args))),
+    onDragleave: _cache[14] || (_cache[14] = (...args) => ($options.onDragLeave && $options.onDragLeave(...args))),
+    onDrop: _cache[15] || (_cache[15] = (...args) => ($options.onDrop && $options.onDrop(...args)))
   }, [
     ($props.resizableColumns && !$options.columnProp('frozen'))
       ? (openBlock(), createElementBlock("span", {
           key: 0,
           class: "p-column-resizer",
-          onMousedown: _cache[0] || (_cache[0] = (...args) => ($options.onResizeStart && $options.onResizeStart(...args)))
+          tabindex: "0",
+          onKeydown: _cache[0] || (_cache[0] = (...args) => ($options.onResizeStartKeyboard && $options.onResizeStartKeyboard(...args))),
+          onMousedown: _cache[1] || (_cache[1] = (...args) => ($options.onResizeStart && $options.onResizeStart(...args)))
         }, null, 32))
       : createCommentVNode("", true),
     createElementVNode("div", _hoisted_2$2, [
@@ -2736,8 +2742,8 @@ function render$2(_ctx, _cache, $props, $setup, $data, $options) {
             filters: $props.filters,
             filtersStore: $props.filtersStore,
             filterInputProps: $props.filterInputProps,
-            onFilterChange: _cache[1] || (_cache[1] = $event => (_ctx.$emit('filter-change', $event))),
-            onFilterApply: _cache[2] || (_cache[2] = $event => (_ctx.$emit('filter-apply'))),
+            onFilterChange: _cache[2] || (_cache[2] = $event => (_ctx.$emit('filter-change', $event))),
+            onFilterApply: _cache[3] || (_cache[3] = $event => (_ctx.$emit('filter-apply'))),
             filterMenuStyle: $options.columnProp('filterMenuStyle'),
             filterMenuClass: $options.columnProp('filterMenuClass'),
             showOperator: $options.columnProp('showFilterOperator'),
@@ -2747,11 +2753,11 @@ function render$2(_ctx, _cache, $props, $setup, $data, $options) {
             showAddButton: $options.columnProp('showAddButton'),
             matchModeOptions: $options.columnProp('filterMatchModeOptions'),
             maxConstraints: $options.columnProp('maxConstraints'),
-            onOperatorChange: _cache[3] || (_cache[3] = $event => (_ctx.$emit('operator-change', $event))),
-            onMatchmodeChange: _cache[4] || (_cache[4] = $event => (_ctx.$emit('matchmode-change', $event))),
-            onConstraintAdd: _cache[5] || (_cache[5] = $event => (_ctx.$emit('constraint-add', $event))),
-            onConstraintRemove: _cache[6] || (_cache[6] = $event => (_ctx.$emit('constraint-remove', $event))),
-            onApplyClick: _cache[7] || (_cache[7] = $event => (_ctx.$emit('apply-click', $event)))
+            onOperatorChange: _cache[4] || (_cache[4] = $event => (_ctx.$emit('operator-change', $event))),
+            onMatchmodeChange: _cache[5] || (_cache[5] = $event => (_ctx.$emit('matchmode-change', $event))),
+            onConstraintAdd: _cache[6] || (_cache[6] = $event => (_ctx.$emit('constraint-add', $event))),
+            onConstraintRemove: _cache[7] || (_cache[7] = $event => (_ctx.$emit('constraint-remove', $event))),
+            onApplyClick: _cache[8] || (_cache[8] = $event => (_ctx.$emit('apply-click', $event)))
           }, null, 8, ["field", "type", "showMenu", "filterElement", "filterHeaderTemplate", "filterFooterTemplate", "filterClearTemplate", "filterApplyTemplate", "filters", "filtersStore", "filterInputProps", "filterMenuStyle", "filterMenuClass", "showOperator", "showClearButton", "showApplyButton", "showMatchModes", "showAddButton", "matchModeOptions", "maxConstraints"]))
         : createCommentVNode("", true)
     ])
@@ -2770,6 +2776,7 @@ var script$1 = {
         'column-dragleave',
         'column-drop',
         'column-resizestart',
+        'column-resizestart-keyboard',
         'checkbox-change',
         'filter-change',
         'filter-apply',
@@ -2942,24 +2949,25 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
                       reorderableColumns: $props.reorderableColumns,
                       resizableColumns: $props.resizableColumns,
                       onColumnResizestart: _cache[6] || (_cache[6] = $event => (_ctx.$emit('column-resizestart', $event))),
+                      onColumnResizestartKeyboard: _cache[7] || (_cache[7] = $event => (_ctx.$emit('column-resizestart-keyboard', $event))),
                       sortMode: $props.sortMode,
                       sortField: $props.sortField,
                       sortOrder: $props.sortOrder,
                       multiSortMeta: $props.multiSortMeta,
                       allRowsSelected: $props.allRowsSelected,
                       empty: $props.empty,
-                      onCheckboxChange: _cache[7] || (_cache[7] = $event => (_ctx.$emit('checkbox-change', $event))),
+                      onCheckboxChange: _cache[8] || (_cache[8] = $event => (_ctx.$emit('checkbox-change', $event))),
                       filters: $props.filters,
                       filterDisplay: $props.filterDisplay,
                       filtersStore: $props.filtersStore,
                       filterInputProps: $props.filterInputProps,
-                      onFilterChange: _cache[8] || (_cache[8] = $event => (_ctx.$emit('filter-change', $event))),
-                      onFilterApply: _cache[9] || (_cache[9] = $event => (_ctx.$emit('filter-apply'))),
-                      onOperatorChange: _cache[10] || (_cache[10] = $event => (_ctx.$emit('operator-change', $event))),
-                      onMatchmodeChange: _cache[11] || (_cache[11] = $event => (_ctx.$emit('matchmode-change', $event))),
-                      onConstraintAdd: _cache[12] || (_cache[12] = $event => (_ctx.$emit('constraint-add', $event))),
-                      onConstraintRemove: _cache[13] || (_cache[13] = $event => (_ctx.$emit('constraint-remove', $event))),
-                      onApplyClick: _cache[14] || (_cache[14] = $event => (_ctx.$emit('apply-click', $event)))
+                      onFilterChange: _cache[9] || (_cache[9] = $event => (_ctx.$emit('filter-change', $event))),
+                      onFilterApply: _cache[10] || (_cache[10] = $event => (_ctx.$emit('filter-apply'))),
+                      onOperatorChange: _cache[11] || (_cache[11] = $event => (_ctx.$emit('operator-change', $event))),
+                      onMatchmodeChange: _cache[12] || (_cache[12] = $event => (_ctx.$emit('matchmode-change', $event))),
+                      onConstraintAdd: _cache[13] || (_cache[13] = $event => (_ctx.$emit('constraint-add', $event))),
+                      onConstraintRemove: _cache[14] || (_cache[14] = $event => (_ctx.$emit('constraint-remove', $event))),
+                      onApplyClick: _cache[15] || (_cache[15] = $event => (_ctx.$emit('apply-click', $event)))
                     }, null, 8, ["column", "groupRowsBy", "groupRowSortField", "reorderableColumns", "resizableColumns", "sortMode", "sortField", "sortOrder", "multiSortMeta", "allRowsSelected", "empty", "filters", "filterDisplay", "filtersStore", "filterInputProps"]))
                   : createCommentVNode("", true)
               ], 64))
@@ -2982,7 +2990,7 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
                                 key: 0,
                                 checked: $props.allRowsSelected,
                                 disabled: $props.empty,
-                                onChange: _cache[15] || (_cache[15] = $event => (_ctx.$emit('checkbox-change', $event)))
+                                onChange: _cache[16] || (_cache[16] = $event => (_ctx.$emit('checkbox-change', $event)))
                               }, null, 8, ["checked", "disabled"]))
                             : createCommentVNode("", true),
                           (col.children && col.children.filter)
@@ -3000,8 +3008,8 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
                                 filters: $props.filters,
                                 filtersStore: $props.filtersStore,
                                 filterInputProps: $props.filterInputProps,
-                                onFilterChange: _cache[16] || (_cache[16] = $event => (_ctx.$emit('filter-change', $event))),
-                                onFilterApply: _cache[17] || (_cache[17] = $event => (_ctx.$emit('filter-apply'))),
+                                onFilterChange: _cache[17] || (_cache[17] = $event => (_ctx.$emit('filter-change', $event))),
+                                onFilterApply: _cache[18] || (_cache[18] = $event => (_ctx.$emit('filter-apply'))),
                                 filterMenuStyle: $options.columnProp(col, 'filterMenuStyle'),
                                 filterMenuClass: $options.columnProp(col, 'filterMenuClass'),
                                 showOperator: $options.columnProp(col, 'showFilterOperator'),
@@ -3011,11 +3019,11 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
                                 showAddButton: $options.columnProp(col, 'showAddButton'),
                                 matchModeOptions: $options.columnProp(col, 'filterMatchModeOptions'),
                                 maxConstraints: $options.columnProp(col, 'maxConstraints'),
-                                onOperatorChange: _cache[18] || (_cache[18] = $event => (_ctx.$emit('operator-change', $event))),
-                                onMatchmodeChange: _cache[19] || (_cache[19] = $event => (_ctx.$emit('matchmode-change', $event))),
-                                onConstraintAdd: _cache[20] || (_cache[20] = $event => (_ctx.$emit('constraint-add', $event))),
-                                onConstraintRemove: _cache[21] || (_cache[21] = $event => (_ctx.$emit('constraint-remove', $event))),
-                                onApplyClick: _cache[22] || (_cache[22] = $event => (_ctx.$emit('apply-click', $event)))
+                                onOperatorChange: _cache[19] || (_cache[19] = $event => (_ctx.$emit('operator-change', $event))),
+                                onMatchmodeChange: _cache[20] || (_cache[20] = $event => (_ctx.$emit('matchmode-change', $event))),
+                                onConstraintAdd: _cache[21] || (_cache[21] = $event => (_ctx.$emit('constraint-add', $event))),
+                                onConstraintRemove: _cache[22] || (_cache[22] = $event => (_ctx.$emit('constraint-remove', $event))),
+                                onApplyClick: _cache[23] || (_cache[23] = $event => (_ctx.$emit('apply-click', $event)))
                               }, null, 8, ["field", "type", "showMenu", "filterElement", "filterHeaderTemplate", "filterFooterTemplate", "filterClearTemplate", "filterApplyTemplate", "filters", "filtersStore", "filterInputProps", "filterMenuStyle", "filterMenuClass", "showOperator", "showClearButton", "showApplyButton", "showMatchModes", "showAddButton", "matchModeOptions", "maxConstraints"]))
                             : createCommentVNode("", true)
                         ], 6))
@@ -3038,8 +3046,8 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
                   ? (openBlock(), createBlock(_component_DTHeaderCell, {
                       key: 0,
                       column: col,
-                      onColumnClick: _cache[23] || (_cache[23] = $event => (_ctx.$emit('column-click', $event))),
-                      onColumnMousedown: _cache[24] || (_cache[24] = $event => (_ctx.$emit('column-mousedown', $event))),
+                      onColumnClick: _cache[24] || (_cache[24] = $event => (_ctx.$emit('column-click', $event))),
+                      onColumnMousedown: _cache[25] || (_cache[25] = $event => (_ctx.$emit('column-mousedown', $event))),
                       groupRowsBy: $props.groupRowsBy,
                       groupRowSortField: $props.groupRowSortField,
                       sortMode: $props.sortMode,
@@ -3048,17 +3056,17 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
                       multiSortMeta: $props.multiSortMeta,
                       allRowsSelected: $props.allRowsSelected,
                       empty: $props.empty,
-                      onCheckboxChange: _cache[25] || (_cache[25] = $event => (_ctx.$emit('checkbox-change', $event))),
+                      onCheckboxChange: _cache[26] || (_cache[26] = $event => (_ctx.$emit('checkbox-change', $event))),
                       filters: $props.filters,
                       filterDisplay: $props.filterDisplay,
                       filtersStore: $props.filtersStore,
-                      onFilterChange: _cache[26] || (_cache[26] = $event => (_ctx.$emit('filter-change', $event))),
-                      onFilterApply: _cache[27] || (_cache[27] = $event => (_ctx.$emit('filter-apply'))),
-                      onOperatorChange: _cache[28] || (_cache[28] = $event => (_ctx.$emit('operator-change', $event))),
-                      onMatchmodeChange: _cache[29] || (_cache[29] = $event => (_ctx.$emit('matchmode-change', $event))),
-                      onConstraintAdd: _cache[30] || (_cache[30] = $event => (_ctx.$emit('constraint-add', $event))),
-                      onConstraintRemove: _cache[31] || (_cache[31] = $event => (_ctx.$emit('constraint-remove', $event))),
-                      onApplyClick: _cache[32] || (_cache[32] = $event => (_ctx.$emit('apply-click', $event)))
+                      onFilterChange: _cache[27] || (_cache[27] = $event => (_ctx.$emit('filter-change', $event))),
+                      onFilterApply: _cache[28] || (_cache[28] = $event => (_ctx.$emit('filter-apply'))),
+                      onOperatorChange: _cache[29] || (_cache[29] = $event => (_ctx.$emit('operator-change', $event))),
+                      onMatchmodeChange: _cache[30] || (_cache[30] = $event => (_ctx.$emit('matchmode-change', $event))),
+                      onConstraintAdd: _cache[31] || (_cache[31] = $event => (_ctx.$emit('constraint-add', $event))),
+                      onConstraintRemove: _cache[32] || (_cache[32] = $event => (_ctx.$emit('constraint-remove', $event))),
+                      onApplyClick: _cache[33] || (_cache[33] = $event => (_ctx.$emit('apply-click', $event)))
                     }, null, 8, ["column", "groupRowsBy", "groupRowSortField", "sortMode", "sortField", "sortOrder", "multiSortMeta", "allRowsSelected", "empty", "filters", "filterDisplay", "filtersStore"]))
                   : createCommentVNode("", true)
               ], 64))
@@ -4247,6 +4255,39 @@ var script = {
 
             this.bindColumnResizeEvents();
         },
+        onColumnResizeStartKeyboard(event) {
+            let containerLeft = DomHandler.getOffset(this.$el).left;
+
+            this.resizeColumnElement = event.target.parentElement;
+            this.columnResizing = true;
+            this.lastResizeHelperX = event.target.offsetLeft - containerLeft + this.$el.scrollLeft;
+
+            let increment = 0;
+
+            switch (event.code) {
+                case 'ArrowDown':
+                case 'ArrowLeft':
+                    increment = -30;
+                    event.preventDefault();
+                    break;
+
+                case 'ArrowUp':
+                case 'ArrowRight':
+                    increment = 30;
+                    event.preventDefault();
+                    break;
+            }
+
+            this.$refs.resizeHelper.style.height = this.$el.offsetHeight + 'px';
+            this.$refs.resizeHelper.style.top = 0 + 'px';
+            this.$refs.resizeHelper.style.left = event.target.offsetLeft + increment - containerLeft + this.$el.scrollLeft + 'px';
+
+            this.$refs.resizeHelper.style.display = 'block';
+
+            nextTick(() => {
+                this.onColumnResizeEnd();
+            });
+        },
         onColumnResize(event) {
             let containerLeft = DomHandler.getOffset(this.$el).left;
 
@@ -5253,7 +5294,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               onColumnDragleave: _cache[5] || (_cache[5] = $event => ($options.onColumnHeaderDragLeave($event))),
               onColumnDrop: _cache[6] || (_cache[6] = $event => ($options.onColumnHeaderDrop($event))),
               onColumnResizestart: _cache[7] || (_cache[7] = $event => ($options.onColumnResizeStart($event))),
-              onCheckboxChange: _cache[8] || (_cache[8] = $event => ($options.toggleRowsWithCheckbox($event)))
+              onColumnResizestartKeyboard: _cache[8] || (_cache[8] = $event => ($options.onColumnResizeStartKeyboard($event))),
+              onCheckboxChange: _cache[9] || (_cache[9] = $event => ($options.toggleRowsWithCheckbox($event)))
             }, null, 8, ["columnGroup", "columns", "rowGroupMode", "groupRowsBy", "groupRowSortField", "reorderableColumns", "resizableColumns", "allRowsSelected", "empty", "sortMode", "sortField", "sortOrder", "multiSortMeta", "filters", "filtersStore", "filterDisplay", "filterInputProps", "onFilterChange", "onFilterApply"]),
             ($props.frozenValue)
               ? (openBlock(), createBlock(_component_DTTableBody, {
@@ -5288,26 +5330,26 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                   responsiveLayout: $props.responsiveLayout,
                   isVirtualScrollerDisabled: true,
                   onRowgroupToggle: $options.toggleRowGroup,
-                  onRowClick: _cache[9] || (_cache[9] = $event => ($options.onRowClick($event))),
-                  onRowDblclick: _cache[10] || (_cache[10] = $event => ($options.onRowDblClick($event))),
-                  onRowRightclick: _cache[11] || (_cache[11] = $event => ($options.onRowRightClick($event))),
+                  onRowClick: _cache[10] || (_cache[10] = $event => ($options.onRowClick($event))),
+                  onRowDblclick: _cache[11] || (_cache[11] = $event => ($options.onRowDblClick($event))),
+                  onRowRightclick: _cache[12] || (_cache[12] = $event => ($options.onRowRightClick($event))),
                   onRowTouchend: $options.onRowTouchEnd,
                   onRowKeydown: $options.onRowKeyDown,
                   onRowMousedown: $options.onRowMouseDown,
-                  onRowDragstart: _cache[12] || (_cache[12] = $event => ($options.onRowDragStart($event))),
-                  onRowDragover: _cache[13] || (_cache[13] = $event => ($options.onRowDragOver($event))),
-                  onRowDragleave: _cache[14] || (_cache[14] = $event => ($options.onRowDragLeave($event))),
-                  onRowDragend: _cache[15] || (_cache[15] = $event => ($options.onRowDragEnd($event))),
-                  onRowDrop: _cache[16] || (_cache[16] = $event => ($options.onRowDrop($event))),
-                  onRowToggle: _cache[17] || (_cache[17] = $event => ($options.toggleRow($event))),
-                  onRadioChange: _cache[18] || (_cache[18] = $event => ($options.toggleRowWithRadio($event))),
-                  onCheckboxChange: _cache[19] || (_cache[19] = $event => ($options.toggleRowWithCheckbox($event))),
-                  onCellEditInit: _cache[20] || (_cache[20] = $event => ($options.onCellEditInit($event))),
-                  onCellEditComplete: _cache[21] || (_cache[21] = $event => ($options.onCellEditComplete($event))),
-                  onCellEditCancel: _cache[22] || (_cache[22] = $event => ($options.onCellEditCancel($event))),
-                  onRowEditInit: _cache[23] || (_cache[23] = $event => ($options.onRowEditInit($event))),
-                  onRowEditSave: _cache[24] || (_cache[24] = $event => ($options.onRowEditSave($event))),
-                  onRowEditCancel: _cache[25] || (_cache[25] = $event => ($options.onRowEditCancel($event))),
+                  onRowDragstart: _cache[13] || (_cache[13] = $event => ($options.onRowDragStart($event))),
+                  onRowDragover: _cache[14] || (_cache[14] = $event => ($options.onRowDragOver($event))),
+                  onRowDragleave: _cache[15] || (_cache[15] = $event => ($options.onRowDragLeave($event))),
+                  onRowDragend: _cache[16] || (_cache[16] = $event => ($options.onRowDragEnd($event))),
+                  onRowDrop: _cache[17] || (_cache[17] = $event => ($options.onRowDrop($event))),
+                  onRowToggle: _cache[18] || (_cache[18] = $event => ($options.toggleRow($event))),
+                  onRadioChange: _cache[19] || (_cache[19] = $event => ($options.toggleRowWithRadio($event))),
+                  onCheckboxChange: _cache[20] || (_cache[20] = $event => ($options.toggleRowWithCheckbox($event))),
+                  onCellEditInit: _cache[21] || (_cache[21] = $event => ($options.onCellEditInit($event))),
+                  onCellEditComplete: _cache[22] || (_cache[22] = $event => ($options.onCellEditComplete($event))),
+                  onCellEditCancel: _cache[23] || (_cache[23] = $event => ($options.onCellEditCancel($event))),
+                  onRowEditInit: _cache[24] || (_cache[24] = $event => ($options.onRowEditInit($event))),
+                  onRowEditSave: _cache[25] || (_cache[25] = $event => ($options.onRowEditSave($event))),
+                  onRowEditCancel: _cache[26] || (_cache[26] = $event => ($options.onRowEditCancel($event))),
                   editingMeta: $data.d_editingMeta,
                   onEditingMetaChange: $options.onEditingMetaChange
                 }, null, 8, ["value", "columns", "dataKey", "selection", "selectionKeys", "selectionMode", "contextMenu", "contextMenuSelection", "rowGroupMode", "groupRowsBy", "expandableRowGroups", "rowClass", "rowStyle", "editMode", "compareSelectionBy", "scrollable", "expandedRowIcon", "collapsedRowIcon", "expandedRows", "expandedRowKeys", "expandedRowGroups", "editingRows", "editingRowKeys", "templates", "responsiveLayout", "onRowgroupToggle", "onRowTouchend", "onRowKeydown", "onRowMousedown", "editingMeta", "onEditingMetaChange"]))
@@ -5344,26 +5386,26 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               virtualScrollerContentProps: slotProps,
               isVirtualScrollerDisabled: $options.virtualScrollerDisabled,
               onRowgroupToggle: $options.toggleRowGroup,
-              onRowClick: _cache[26] || (_cache[26] = $event => ($options.onRowClick($event))),
-              onRowDblclick: _cache[27] || (_cache[27] = $event => ($options.onRowDblClick($event))),
-              onRowRightclick: _cache[28] || (_cache[28] = $event => ($options.onRowRightClick($event))),
+              onRowClick: _cache[27] || (_cache[27] = $event => ($options.onRowClick($event))),
+              onRowDblclick: _cache[28] || (_cache[28] = $event => ($options.onRowDblClick($event))),
+              onRowRightclick: _cache[29] || (_cache[29] = $event => ($options.onRowRightClick($event))),
               onRowTouchend: $options.onRowTouchEnd,
               onRowKeydown: $event => ($options.onRowKeyDown($event, slotProps)),
               onRowMousedown: $options.onRowMouseDown,
-              onRowDragstart: _cache[29] || (_cache[29] = $event => ($options.onRowDragStart($event))),
-              onRowDragover: _cache[30] || (_cache[30] = $event => ($options.onRowDragOver($event))),
-              onRowDragleave: _cache[31] || (_cache[31] = $event => ($options.onRowDragLeave($event))),
-              onRowDragend: _cache[32] || (_cache[32] = $event => ($options.onRowDragEnd($event))),
-              onRowDrop: _cache[33] || (_cache[33] = $event => ($options.onRowDrop($event))),
-              onRowToggle: _cache[34] || (_cache[34] = $event => ($options.toggleRow($event))),
-              onRadioChange: _cache[35] || (_cache[35] = $event => ($options.toggleRowWithRadio($event))),
-              onCheckboxChange: _cache[36] || (_cache[36] = $event => ($options.toggleRowWithCheckbox($event))),
-              onCellEditInit: _cache[37] || (_cache[37] = $event => ($options.onCellEditInit($event))),
-              onCellEditComplete: _cache[38] || (_cache[38] = $event => ($options.onCellEditComplete($event))),
-              onCellEditCancel: _cache[39] || (_cache[39] = $event => ($options.onCellEditCancel($event))),
-              onRowEditInit: _cache[40] || (_cache[40] = $event => ($options.onRowEditInit($event))),
-              onRowEditSave: _cache[41] || (_cache[41] = $event => ($options.onRowEditSave($event))),
-              onRowEditCancel: _cache[42] || (_cache[42] = $event => ($options.onRowEditCancel($event))),
+              onRowDragstart: _cache[30] || (_cache[30] = $event => ($options.onRowDragStart($event))),
+              onRowDragover: _cache[31] || (_cache[31] = $event => ($options.onRowDragOver($event))),
+              onRowDragleave: _cache[32] || (_cache[32] = $event => ($options.onRowDragLeave($event))),
+              onRowDragend: _cache[33] || (_cache[33] = $event => ($options.onRowDragEnd($event))),
+              onRowDrop: _cache[34] || (_cache[34] = $event => ($options.onRowDrop($event))),
+              onRowToggle: _cache[35] || (_cache[35] = $event => ($options.toggleRow($event))),
+              onRadioChange: _cache[36] || (_cache[36] = $event => ($options.toggleRowWithRadio($event))),
+              onCheckboxChange: _cache[37] || (_cache[37] = $event => ($options.toggleRowWithCheckbox($event))),
+              onCellEditInit: _cache[38] || (_cache[38] = $event => ($options.onCellEditInit($event))),
+              onCellEditComplete: _cache[39] || (_cache[39] = $event => ($options.onCellEditComplete($event))),
+              onCellEditCancel: _cache[40] || (_cache[40] = $event => ($options.onCellEditCancel($event))),
+              onRowEditInit: _cache[41] || (_cache[41] = $event => ($options.onRowEditInit($event))),
+              onRowEditSave: _cache[42] || (_cache[42] = $event => ($options.onRowEditSave($event))),
+              onRowEditCancel: _cache[43] || (_cache[43] = $event => ($options.onRowEditCancel($event))),
               editingMeta: $data.d_editingMeta,
               onEditingMetaChange: $options.onEditingMetaChange
             }, null, 8, ["value", "class", "columns", "empty", "dataKey", "selection", "selectionKeys", "selectionMode", "contextMenu", "contextMenuSelection", "rowGroupMode", "groupRowsBy", "expandableRowGroups", "rowClass", "rowStyle", "editMode", "compareSelectionBy", "scrollable", "expandedRowIcon", "collapsedRowIcon", "expandedRows", "expandedRowKeys", "expandedRowGroups", "editingRows", "editingRowKeys", "templates", "responsiveLayout", "virtualScrollerContentProps", "isVirtualScrollerDisabled", "onRowgroupToggle", "onRowTouchend", "onRowKeydown", "onRowMousedown", "editingMeta", "onEditingMetaChange"]),
@@ -5387,7 +5429,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           rowsPerPageOptions: $props.rowsPerPageOptions,
           currentPageReportTemplate: $props.currentPageReportTemplate,
           class: "p-paginator-bottom",
-          onPage: _cache[43] || (_cache[43] = $event => ($options.onPage($event))),
+          onPage: _cache[44] || (_cache[44] = $event => ($options.onPage($event))),
           alwaysShow: $props.alwaysShowPaginator
         }, createSlots({ _: 2 }, [
           (_ctx.$slots.paginatorstart)

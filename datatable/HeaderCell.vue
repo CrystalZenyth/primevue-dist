@@ -15,7 +15,7 @@
         @dragleave="onDragLeave"
         @drop="onDrop"
     >
-        <span v-if="resizableColumns && !columnProp('frozen')" class="p-column-resizer" @mousedown="onResizeStart"></span>
+        <span v-if="resizableColumns && !columnProp('frozen')" class="p-column-resizer" tabindex="0" @keydown="onResizeStartKeyboard" @mousedown="onResizeStart"></span>
         <div class="p-column-header-content">
             <component v-if="column.children && column.children.header" :is="column.children.header" :column="column" />
             <span v-if="columnProp('header')" class="p-column-title">{{ columnProp('header') }}</span>
@@ -72,6 +72,7 @@ export default {
         'column-dragleave',
         'column-drop',
         'column-resizestart',
+        'column-resizestart-keyboard',
         'checkbox-change',
         'filter-change',
         'filter-apply',
@@ -193,6 +194,9 @@ export default {
         },
         onResizeStart(event) {
             this.$emit('column-resizestart', event);
+        },
+        onResizeStartKeyboard(event) {
+            this.$emit('column-resizestart-keyboard', event);
         },
         getMultiSortMetaIndex() {
             return this.multiSortMeta.findIndex((meta) => meta.field === this.columnProp('field') || meta.field === this.columnProp('sortField'));

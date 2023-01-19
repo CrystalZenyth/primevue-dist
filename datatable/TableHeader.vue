@@ -17,6 +17,7 @@
                         :reorderableColumns="reorderableColumns"
                         :resizableColumns="resizableColumns"
                         @column-resizestart="$emit('column-resizestart', $event)"
+                        @column-resizestart-keyboard="$emit('column-resizestart-keyboard', $event)"
                         :sortMode="sortMode"
                         :sortField="sortField"
                         :sortOrder="sortOrder"
@@ -127,6 +128,7 @@ export default {
         'column-dragleave',
         'column-drop',
         'column-resizestart',
+        'column-resizestart-keyboard',
         'checkbox-change',
         'filter-change',
         'filter-apply',
