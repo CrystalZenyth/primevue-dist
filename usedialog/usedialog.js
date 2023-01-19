@@ -1,0 +1,22 @@
+this.primevue = this.primevue || {};
+this.primevue.usedialog = (function (exports, vue) {
+    'use strict';
+
+    const PrimeVueDialogSymbol = Symbol();
+
+    function useDialog() {
+        const PrimeVueDialog = vue.inject(PrimeVueDialogSymbol);
+
+        if (!PrimeVueDialog) {
+            throw new Error('No PrimeVue Dialog provided!');
+        }
+
+        return PrimeVueDialog;
+    }
+
+    exports.PrimeVueDialogSymbol = PrimeVueDialogSymbol;
+    exports.useDialog = useDialog;
+
+    return exports;
+
+})({}, Vue);
