@@ -2,6 +2,17 @@ this.primevue = this.primevue || {};
 this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, OverlayEventBus, Ripple, vue, Button, Dropdown, FocusTrap, Portal) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Paginator__default = /*#__PURE__*/_interopDefaultLegacy(Paginator);
+    var VirtualScroller__default = /*#__PURE__*/_interopDefaultLegacy(VirtualScroller);
+    var OverlayEventBus__default = /*#__PURE__*/_interopDefaultLegacy(OverlayEventBus);
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+    var Button__default = /*#__PURE__*/_interopDefaultLegacy(Button);
+    var Dropdown__default = /*#__PURE__*/_interopDefaultLegacy(Dropdown);
+    var FocusTrap__default = /*#__PURE__*/_interopDefaultLegacy(FocusTrap);
+    var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
+
     var script$a = {
         name: 'RowCheckbox',
         emits: ['change'],
@@ -251,7 +262,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
         },
         beforeUnmount() {
             if (this.overlayEventListener) {
-                OverlayEventBus.off('overlay-click', this.overlayEventListener);
+                OverlayEventBus__default["default"].off('overlay-click', this.overlayEventListener);
                 this.overlayEventListener = null;
             }
         },
@@ -301,7 +312,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
             switchCellToViewMode() {
                 this.d_editing = false;
                 this.unbindDocumentEditListener();
-                OverlayEventBus.off('overlay-click', this.overlayEventListener);
+                OverlayEventBus__default["default"].off('overlay-click', this.overlayEventListener);
                 this.overlayEventListener = null;
             },
             onClick(event) {
@@ -319,7 +330,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
                             }
                         };
 
-                        OverlayEventBus.on('overlay-click', this.overlayEventListener);
+                        OverlayEventBus__default["default"].on('overlay-click', this.overlayEventListener);
                     }
                 }
             },
@@ -554,7 +565,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
             DTCheckbox: script$a
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -565,13 +576,13 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
     const _hoisted_2$7 = ["aria-expanded", "aria-controls", "aria-label"];
     const _hoisted_3$5 = ["aria-label"];
     const _hoisted_4$4 = /*#__PURE__*/vue.createElementVNode("span", { class: "p-row-editor-init-icon pi pi-fw pi-pencil" }, null, -1);
-    const _hoisted_5$3 = [
+    const _hoisted_5$4 = [
       _hoisted_4$4
     ];
-    const _hoisted_6$3 = ["aria-label"];
-    const _hoisted_7$2 = /*#__PURE__*/vue.createElementVNode("span", { class: "p-row-editor-save-icon pi pi-fw pi-check" }, null, -1);
-    const _hoisted_8$1 = [
-      _hoisted_7$2
+    const _hoisted_6$4 = ["aria-label"];
+    const _hoisted_7$3 = /*#__PURE__*/vue.createElementVNode("span", { class: "p-row-editor-save-icon pi pi-fw pi-check" }, null, -1);
+    const _hoisted_8$2 = [
+      _hoisted_7$3
     ];
     const _hoisted_9$1 = ["aria-label"];
     const _hoisted_10$1 = /*#__PURE__*/vue.createElementVNode("span", { class: "p-row-editor-cancel-icon pi pi-fw pi-times" }, null, -1);
@@ -690,7 +701,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
                                     type: "button",
                                     "aria-label": $options.initButtonAriaLabel,
                                     onClick: _cache[3] || (_cache[3] = (...args) => ($options.onRowEditInit && $options.onRowEditInit(...args)))
-                                  }, _hoisted_5$3, 8, _hoisted_3$5)), [
+                                  }, _hoisted_5$4, 8, _hoisted_3$5)), [
                                     [_directive_ripple]
                                   ])
                                 : vue.createCommentVNode("", true),
@@ -701,7 +712,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
                                     type: "button",
                                     "aria-label": $options.saveButtonAriaLabel,
                                     onClick: _cache[4] || (_cache[4] = (...args) => ($options.onRowEditSave && $options.onRowEditSave(...args)))
-                                  }, _hoisted_8$1, 8, _hoisted_6$3)), [
+                                  }, _hoisted_8$2, 8, _hoisted_6$4)), [
                                     [_directive_ripple]
                                   ])
                                 : vue.createCommentVNode("", true),
@@ -1240,13 +1251,13 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
     const _hoisted_2$6 = ["onClick"];
     const _hoisted_3$4 = ["tabindex", "aria-selected", "onClick", "onDblclick", "onContextmenu", "onKeydown", "onDragstart", "onDragover"];
     const _hoisted_4$3 = ["id"];
-    const _hoisted_5$2 = ["colspan"];
-    const _hoisted_6$2 = {
+    const _hoisted_5$3 = ["colspan"];
+    const _hoisted_6$3 = {
       key: 1,
       class: "p-datatable-emptymessage",
       role: "row"
     };
-    const _hoisted_7$1 = ["colspan"];
+    const _hoisted_7$2 = ["colspan"];
 
     function render$7(_ctx, _cache, $props, $setup, $data, $options) {
       const _component_DTBodyCell = vue.resolveComponent("DTBodyCell");
@@ -1361,7 +1372,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
                           data: rowData,
                           index: $options.getRowIndex(index)
                         }, null, 8, ["data", "index"]))
-                      ], 8, _hoisted_5$2)
+                      ], 8, _hoisted_5$3)
                     ], 8, _hoisted_4$3))
                   : vue.createCommentVNode("", true),
                 ($props.templates['groupfooter'] && $props.rowGroupMode === 'subheader' && $options.shouldRenderRowGroupFooter($props.value, rowData, $options.getRowIndex(index)))
@@ -1378,12 +1389,12 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
                   : vue.createCommentVNode("", true)
               ], 64))
             }), 128))
-          : (vue.openBlock(), vue.createElementBlock("tr", _hoisted_6$2, [
+          : (vue.openBlock(), vue.createElementBlock("tr", _hoisted_6$3, [
               vue.createElementVNode("td", { colspan: $options.columnsLength }, [
                 ($props.templates.empty)
                   ? (vue.openBlock(), vue.createBlock(vue.resolveDynamicComponent($props.templates.empty), { key: 0 }))
                   : vue.createCommentVNode("", true)
-              ], 8, _hoisted_7$1)
+              ], 8, _hoisted_7$2)
             ]))
       ], 4))
     }
@@ -1698,7 +1709,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
         overlayEventListener: null,
         beforeUnmount() {
             if (this.overlayEventListener) {
-                OverlayEventBus.off('overlay-click', this.overlayEventListener);
+                OverlayEventBus__default["default"].off('overlay-click', this.overlayEventListener);
                 this.overlayEventListener = null;
             }
 
@@ -1890,7 +1901,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
             onContentClick(event) {
                 this.selfClick = true;
 
-                OverlayEventBus.emit('overlay-click', {
+                OverlayEventBus__default["default"].emit('overlay-click', {
                     originalEvent: event,
                     target: this.overlay
                 });
@@ -1915,7 +1926,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
                     }
                 };
 
-                OverlayEventBus.on('overlay-click', this.overlayEventListener);
+                OverlayEventBus__default["default"].on('overlay-click', this.overlayEventListener);
             },
             onOverlayLeave() {
                 this.onOverlayHide();
@@ -1928,7 +1939,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
                 this.unbindResizeListener();
                 this.unbindScrollListener();
                 this.overlay = null;
-                OverlayEventBus.off('overlay-click', this.overlayEventListener);
+                OverlayEventBus__default["default"].off('overlay-click', this.overlayEventListener);
                 this.overlayEventListener = null;
             },
             overlayRef(el) {
@@ -2079,12 +2090,12 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
             }
         },
         components: {
-            CFDropdown: Dropdown,
-            CFButton: Button,
-            Portal: Portal
+            CFDropdown: Dropdown__default["default"],
+            CFButton: Button__default["default"],
+            Portal: Portal__default["default"]
         },
         directives: {
-            focustrap: FocusTrap
+            focustrap: FocusTrap__default["default"]
         }
     };
 
@@ -2094,15 +2105,15 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
       _hoisted_2$4
     ];
     const _hoisted_4$2 = /*#__PURE__*/vue.createElementVNode("span", { class: "pi pi-filter-slash" }, null, -1);
-    const _hoisted_5$1 = [
+    const _hoisted_5$2 = [
       _hoisted_4$2
     ];
-    const _hoisted_6$1 = ["id", "aria-modal"];
-    const _hoisted_7 = {
+    const _hoisted_6$2 = ["id", "aria-modal"];
+    const _hoisted_7$1 = {
       key: 0,
       class: "p-column-filter-row-items"
     };
-    const _hoisted_8 = ["onClick", "onKeydown", "tabindex"];
+    const _hoisted_8$1 = ["onClick", "onKeydown", "tabindex"];
     const _hoisted_9 = /*#__PURE__*/vue.createElementVNode("li", { class: "p-column-filter-separator" }, null, -1);
     const _hoisted_10 = {
       key: 0,
@@ -2156,7 +2167,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
               class: vue.normalizeClass([{ 'p-hidden-space': !$options.hasRowFilter() }, "p-column-filter-clear-button p-link"]),
               type: "button",
               onClick: _cache[2] || (_cache[2] = $event => ($options.clearFilter()))
-            }, _hoisted_5$1, 2))
+            }, _hoisted_5$2, 2))
           : vue.createCommentVNode("", true),
         vue.createVNode(_component_Portal, null, {
           default: vue.withCtx(() => [
@@ -2185,7 +2196,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
                         filterCallback: $options.filterCallback
                       }, null, 8, ["field", "filterModel", "filterCallback"])),
                       ($props.display === 'row')
-                        ? (vue.openBlock(), vue.createElementBlock("ul", _hoisted_7, [
+                        ? (vue.openBlock(), vue.createElementBlock("ul", _hoisted_7$1, [
                             (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($options.matchModes, (matchMode, i) => {
                               return (vue.openBlock(), vue.createElementBlock("li", {
                                 key: matchMode.label,
@@ -2196,7 +2207,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
                                   vue.withKeys(vue.withModifiers($event => ($options.onRowMatchModeChange(matchMode.value)), ["prevent"]), ["enter"])
                                 ],
                                 tabindex: i === 0 ? '0' : null
-                              }, vue.toDisplayString(matchMode.label), 43, _hoisted_8))
+                              }, vue.toDisplayString(matchMode.label), 43, _hoisted_8$1))
                             }), 128)),
                             _hoisted_9,
                             vue.createElementVNode("li", {
@@ -2314,7 +2325,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
                         filterModel: $props.filters[$props.field],
                         filterCallback: $options.filterCallback
                       }, null, 8, ["field", "filterModel", "filterCallback"]))
-                    ], 42, _hoisted_6$1)), [
+                    ], 42, _hoisted_6$2)), [
                       [_directive_focustrap, { autoFocus: true }]
                     ])
                   : vue.createCommentVNode("", true)
@@ -2653,12 +2664,17 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
     };
 
     const _hoisted_1$2 = ["tabindex", "colspan", "rowspan", "aria-sort"];
-    const _hoisted_2$2 = { class: "p-column-header-content" };
+    const _hoisted_2$2 = ["aria-label"];
     const _hoisted_3$2 = {
+      key: 2,
+      class: "p-column-resizer-keyboard-helper"
+    };
+    const _hoisted_4$1 = { class: "p-column-header-content" };
+    const _hoisted_5$1 = {
       key: 1,
       class: "p-column-title"
     };
-    const _hoisted_4$1 = {
+    const _hoisted_6$1 = {
       key: 3,
       class: "p-sortable-column-badge"
     };
@@ -2675,24 +2691,37 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
         colspan: $options.columnProp('colspan'),
         rowspan: $options.columnProp('rowspan'),
         "aria-sort": $options.ariaSort,
-        onClick: _cache[9] || (_cache[9] = (...args) => ($options.onClick && $options.onClick(...args))),
-        onKeydown: _cache[10] || (_cache[10] = (...args) => ($options.onKeyDown && $options.onKeyDown(...args))),
-        onMousedown: _cache[11] || (_cache[11] = (...args) => ($options.onMouseDown && $options.onMouseDown(...args))),
-        onDragstart: _cache[12] || (_cache[12] = (...args) => ($options.onDragStart && $options.onDragStart(...args))),
-        onDragover: _cache[13] || (_cache[13] = (...args) => ($options.onDragOver && $options.onDragOver(...args))),
-        onDragleave: _cache[14] || (_cache[14] = (...args) => ($options.onDragLeave && $options.onDragLeave(...args))),
-        onDrop: _cache[15] || (_cache[15] = (...args) => ($options.onDrop && $options.onDrop(...args)))
+        onClick: _cache[10] || (_cache[10] = (...args) => ($options.onClick && $options.onClick(...args))),
+        onKeydown: _cache[11] || (_cache[11] = (...args) => ($options.onKeyDown && $options.onKeyDown(...args))),
+        onMousedown: _cache[12] || (_cache[12] = (...args) => ($options.onMouseDown && $options.onMouseDown(...args))),
+        onDragstart: _cache[13] || (_cache[13] = (...args) => ($options.onDragStart && $options.onDragStart(...args))),
+        onDragover: _cache[14] || (_cache[14] = (...args) => ($options.onDragOver && $options.onDragOver(...args))),
+        onDragleave: _cache[15] || (_cache[15] = (...args) => ($options.onDragLeave && $options.onDragLeave(...args))),
+        onDrop: _cache[16] || (_cache[16] = (...args) => ($options.onDrop && $options.onDrop(...args)))
       }, [
         ($props.resizableColumns && !$options.columnProp('frozen'))
           ? (vue.openBlock(), vue.createElementBlock("span", {
               key: 0,
               class: "p-column-resizer",
-              tabindex: "0",
-              onKeydown: _cache[0] || (_cache[0] = (...args) => ($options.onResizeStartKeyboard && $options.onResizeStartKeyboard(...args))),
-              onMousedown: _cache[1] || (_cache[1] = (...args) => ($options.onResizeStart && $options.onResizeStart(...args)))
+              onMousedown: _cache[0] || (_cache[0] = (...args) => ($options.onResizeStart && $options.onResizeStart(...args)))
             }, null, 32))
           : vue.createCommentVNode("", true),
-        vue.createElementVNode("div", _hoisted_2$2, [
+        ($props.resizableColumns && !$options.columnProp('frozen'))
+          ? (vue.openBlock(), vue.createElementBlock("input", {
+              key: 1,
+              class: "p-column-resizer-assistive-text",
+              max: "3000",
+              tabindex: "0",
+              onFocusin: _cache[1] || (_cache[1] = (...args) => ($options.onResizeStartKeyboard && $options.onResizeStartKeyboard(...args))),
+              onKeydown: _cache[2] || (_cache[2] = (...args) => ($options.onResizeStartKeyboard && $options.onResizeStartKeyboard(...args))),
+              type: "range",
+              "aria-label": $options.columnProp('header') ? `resize width of ${$options.columnProp('header')}` : 'resize width of unlabeled column'
+            }, null, 40, _hoisted_2$2))
+          : vue.createCommentVNode("", true),
+        ($props.resizableColumns && !$options.columnProp('frozen'))
+          ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_3$2))
+          : vue.createCommentVNode("", true),
+        vue.createElementVNode("div", _hoisted_4$1, [
           ($props.column.children && $props.column.children.header)
             ? (vue.openBlock(), vue.createBlock(vue.resolveDynamicComponent($props.column.children.header), {
                 key: 0,
@@ -2700,7 +2729,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
               }, null, 8, ["column"]))
             : vue.createCommentVNode("", true),
           ($options.columnProp('header'))
-            ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_3$2, vue.toDisplayString($options.columnProp('header')), 1))
+            ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_5$1, vue.toDisplayString($options.columnProp('header')), 1))
             : vue.createCommentVNode("", true),
           ($options.columnProp('sortable'))
             ? (vue.openBlock(), vue.createElementBlock("span", {
@@ -2709,7 +2738,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
               }, null, 2))
             : vue.createCommentVNode("", true),
           ($options.isMultiSorted())
-            ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_4$1, vue.toDisplayString($options.getBadgeValue()), 1))
+            ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_6$1, vue.toDisplayString($options.getBadgeValue()), 1))
             : vue.createCommentVNode("", true),
           ($options.columnProp('selectionMode') === 'multiple' && $props.filterDisplay !== 'row')
             ? (vue.openBlock(), vue.createBlock(_component_DTHeaderCheckbox, {
@@ -2734,8 +2763,8 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
                 filters: $props.filters,
                 filtersStore: $props.filtersStore,
                 filterInputProps: $props.filterInputProps,
-                onFilterChange: _cache[2] || (_cache[2] = $event => (_ctx.$emit('filter-change', $event))),
-                onFilterApply: _cache[3] || (_cache[3] = $event => (_ctx.$emit('filter-apply'))),
+                onFilterChange: _cache[3] || (_cache[3] = $event => (_ctx.$emit('filter-change', $event))),
+                onFilterApply: _cache[4] || (_cache[4] = $event => (_ctx.$emit('filter-apply'))),
                 filterMenuStyle: $options.columnProp('filterMenuStyle'),
                 filterMenuClass: $options.columnProp('filterMenuClass'),
                 showOperator: $options.columnProp('showFilterOperator'),
@@ -2745,11 +2774,11 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
                 showAddButton: $options.columnProp('showAddButton'),
                 matchModeOptions: $options.columnProp('filterMatchModeOptions'),
                 maxConstraints: $options.columnProp('maxConstraints'),
-                onOperatorChange: _cache[4] || (_cache[4] = $event => (_ctx.$emit('operator-change', $event))),
-                onMatchmodeChange: _cache[5] || (_cache[5] = $event => (_ctx.$emit('matchmode-change', $event))),
-                onConstraintAdd: _cache[6] || (_cache[6] = $event => (_ctx.$emit('constraint-add', $event))),
-                onConstraintRemove: _cache[7] || (_cache[7] = $event => (_ctx.$emit('constraint-remove', $event))),
-                onApplyClick: _cache[8] || (_cache[8] = $event => (_ctx.$emit('apply-click', $event)))
+                onOperatorChange: _cache[5] || (_cache[5] = $event => (_ctx.$emit('operator-change', $event))),
+                onMatchmodeChange: _cache[6] || (_cache[6] = $event => (_ctx.$emit('matchmode-change', $event))),
+                onConstraintAdd: _cache[7] || (_cache[7] = $event => (_ctx.$emit('constraint-add', $event))),
+                onConstraintRemove: _cache[8] || (_cache[8] = $event => (_ctx.$emit('constraint-remove', $event))),
+                onApplyClick: _cache[9] || (_cache[9] = $event => (_ctx.$emit('apply-click', $event)))
               }, null, 8, ["field", "type", "showMenu", "filterElement", "filterHeaderTemplate", "filterFooterTemplate", "filterClearTemplate", "filterApplyTemplate", "filters", "filtersStore", "filterInputProps", "filterMenuStyle", "filterMenuClass", "showOperator", "showClearButton", "showApplyButton", "showMatchModes", "showAddButton", "matchModeOptions", "maxConstraints"]))
             : vue.createCommentVNode("", true)
         ])
@@ -3399,9 +3428,13 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
         rangeRowIndex: null,
         documentColumnResizeListener: null,
         documentColumnResizeEndListener: null,
+        documentColumnResizeKeyboardEndListener: null,
         lastResizeHelperX: null,
         resizeColumnElement: null,
+        resizeKeyboardIcon: null,
         columnResizing: false,
+        columnResizingKeyboard: false,
+        columnResizeKeyboardHelper: null,
         colReorderIconWidth: null,
         colReorderIconHeight: null,
         draggedColumn: null,
@@ -3474,6 +3507,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
         },
         beforeUnmount() {
             this.unbindColumnResizeEvents();
+            this.unbindColumnResizeKeyboardEvents();
             this.destroyStyleElement();
             this.destroyResponsiveStyle();
         },
@@ -4251,34 +4285,49 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
                 let containerLeft = utils.DomHandler.getOffset(this.$el).left;
 
                 this.resizeColumnElement = event.target.parentElement;
-                this.columnResizing = true;
+                this.columnResizingKeyboard = true;
                 this.lastResizeHelperX = event.target.offsetLeft - containerLeft + this.$el.scrollLeft;
 
                 let increment = 0;
+                let matchingEvent = false;
 
                 switch (event.code) {
                     case 'ArrowDown':
                     case 'ArrowLeft':
                         increment = -30;
-                        event.preventDefault();
+                        // event.preventDefault();
+                        matchingEvent = true;
                         break;
 
                     case 'ArrowUp':
                     case 'ArrowRight':
                         increment = 30;
-                        event.preventDefault();
+                        // event.preventDefault();
+                        matchingEvent = true;
                         break;
+                }
+
+                this.columnResizeKeyboardHelper = utils.DomHandler.findSingle(event.target.parentNode, '.p-column-resizer-keyboard-helper');
+                if (this.columnResizeKeyboardHelper) {
+                    this.columnResizeKeyboardHelper.style.display = 'block';
                 }
 
                 this.$refs.resizeHelper.style.height = this.$el.offsetHeight + 'px';
                 this.$refs.resizeHelper.style.top = 0 + 'px';
                 this.$refs.resizeHelper.style.left = event.target.offsetLeft + increment - containerLeft + this.$el.scrollLeft + 'px';
 
-                this.$refs.resizeHelper.style.display = 'block';
+                this.bindColumnResizeKeyboardEvents();
 
-                vue.nextTick(() => {
-                    this.onColumnResizeEnd();
-                });
+                if (this.columnResizeKeyboardHelper) ;
+
+                if (matchingEvent) {
+                    vue.nextTick(() => {
+                        this.$refs.resizeHelper.style.display = 'block';
+                        this.onColumnResizeEnd();
+
+                        if (this.columnResizeKeyboardHelper) ;
+                    });
+                }
             },
             onColumnResize(event) {
                 let containerLeft = utils.DomHandler.getOffset(this.$el).left;
@@ -4340,12 +4389,30 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
                     this.saveState();
                 }
             },
+            onColumnResizeKeyboardEnd() {
+                this.unbindColumnResizeKeyboardEvents();
+                if (this.columnResizeKeyboardHelper) {
+                    this.columnResizeKeyboardHelper.style.display = 'none';
+                }
+                if (this.$refs.resizeHelperKeyboard) {
+                    this.$refs.resizeHelperKeyboard.style.display = 'none';
+                }
+                this.$refs.resizeKeyboardIcon.style.display = 'none';
+            },
             resizeTableCells(newColumnWidth, nextColumnWidth) {
                 let colIndex = utils.DomHandler.index(this.resizeColumnElement);
                 let widths = [];
                 let headers = utils.DomHandler.find(this.$refs.table, '.p-datatable-thead > tr > th');
 
-                headers.forEach((header) => widths.push(utils.DomHandler.getOuterWidth(header)));
+                headers.forEach((header) => {
+                    const width = utils.DomHandler.getOuterWidth(header);
+                    widths.push(width);
+
+                    const rangeInput = utils.DomHandler.findSingle(header, 'input.p-column-resizer-assistive-text');
+                    if (rangeInput) {
+                        rangeInput.value = width;
+                    }
+                });
 
                 this.destroyStyleElement();
                 this.createStyleElement();
@@ -4394,6 +4461,22 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
                 if (this.documentColumnResizeEndListener) {
                     document.removeEventListener('document', this.documentColumnResizeEndListener);
                     this.documentColumnResizeEndListener = null;
+                }
+            },
+            bindColumnResizeKeyboardEvents() {
+                if (!this.documentColumnResizeKeyboardEndListener) {
+                    this.documentColumnResizeKeyboardEndListener = document.addEventListener('focusout', () => {
+                        if (this.columnResizingKeyboard) {
+                            this.columnResizingKeyboard = false;
+                            this.onColumnResizeKeyboardEnd();
+                        }
+                    });
+                }
+            },
+            unbindColumnResizeKeyboardEvents() {
+                if (this.documentColumnResizeKeyboardEndListener) {
+                    document.removeEventListener('document', this.documentColumnResizeKeyboardEndListener);
+                    this.documentColumnResizeKeyboardEndListener = null;
                 }
             },
             onColumnHeaderMouseDown(e) {
@@ -4780,6 +4863,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
             restoreColumnWidths() {
                 if (this.columnWidthsState) {
                     let widths = this.columnWidthsState.split(',');
+                    let headers = utils.DomHandler.find(this.$el, '.p-datatable-thead > tr > th');
 
                     if (this.columnResizeMode === 'expand' && this.tableWidthState) {
                         this.$refs.table.style.width = this.tableWidthState;
@@ -4794,6 +4878,11 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
 
                         widths.forEach((width, index) => {
                             let style = this.scrollable ? `flex: 1 1 ${width}px !important` : `width: ${width}px !important`;
+
+                            const rangeInput = utils.DomHandler.findSingle(headers[index], 'input.p-column-resizer-assistive-text');
+                            if (rangeInput) {
+                                rangeInput.value = width;
+                            }
 
                             innerHTML += `
                             .p-datatable[${this.attributeSelector}] .p-datatable-thead > tr > th:nth-child(${index + 1}),
@@ -5141,11 +5230,11 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
             }
         },
         components: {
-            DTPaginator: Paginator,
+            DTPaginator: Paginator__default["default"],
             DTTableHeader: script$1,
             DTTableBody: script$7,
             DTTableFooter: script$5,
-            DTVirtualScroller: VirtualScroller
+            DTVirtualScroller: VirtualScroller__default["default"]
         }
     };
 
@@ -5167,12 +5256,21 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
       style: {"display":"none"}
     };
     const _hoisted_5 = {
+      ref: "resizeHelperKeyboard",
+      class: "p-column-resizer-helper-keyboard-line",
+      style: {"display":"none"}
+    };
+    const _hoisted_6 = {
+      ref: "resizeKeyboardIcon",
+      class: "pi pi-arrows-h p-column-resizer-keyboard-icon"
+    };
+    const _hoisted_7 = {
       key: 5,
       ref: "reorderIndicatorUp",
       class: "pi pi-arrow-down p-datatable-reorder-indicator-up",
       style: {"position":"absolute","display":"none"}
     };
-    const _hoisted_6 = {
+    const _hoisted_8 = {
       key: 6,
       ref: "reorderIndicatorDown",
       class: "pi pi-arrow-up p-datatable-reorder-indicator-down",
@@ -5450,11 +5548,13 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
             ]))
           : vue.createCommentVNode("", true),
         vue.createElementVNode("div", _hoisted_4, null, 512),
+        vue.createElementVNode("div", _hoisted_5, null, 512),
+        vue.createElementVNode("i", _hoisted_6, null, 512),
         ($props.reorderableColumns)
-          ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_5, null, 512))
+          ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_7, null, 512))
           : vue.createCommentVNode("", true),
         ($props.reorderableColumns)
-          ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_6, null, 512))
+          ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_8, null, 512))
           : vue.createCommentVNode("", true)
       ], 2))
     }
@@ -5486,7 +5586,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
       }
     }
 
-    var css_248z = "\n.p-datatable {\n    position: relative;\n}\n.p-datatable table {\n    border-collapse: collapse;\n    min-width: 100%;\n    table-layout: fixed;\n}\n.p-datatable .p-sortable-column {\n    cursor: pointer;\n    user-select: none;\n}\n.p-datatable .p-sortable-column .p-column-title,\n.p-datatable .p-sortable-column .p-sortable-column-icon,\n.p-datatable .p-sortable-column .p-sortable-column-badge {\n    vertical-align: middle;\n}\n.p-datatable .p-sortable-column .p-sortable-column-badge {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n}\n.p-datatable-responsive-scroll > .p-datatable-wrapper {\n    overflow-x: auto;\n}\n.p-datatable-responsive-scroll > .p-datatable-wrapper > table,\n.p-datatable-auto-layout > .p-datatable-wrapper > table {\n    table-layout: auto;\n}\n.p-datatable-hoverable-rows .p-selectable-row {\n    cursor: pointer;\n}\n\n/* Scrollable */\n.p-datatable-scrollable .p-datatable-wrapper {\n    position: relative;\n    overflow: auto;\n}\n.p-datatable-scrollable .p-datatable-thead,\n.p-datatable-scrollable .p-datatable-tbody,\n.p-datatable-scrollable .p-datatable-tfoot {\n    display: block;\n}\n.p-datatable-scrollable .p-datatable-thead > tr,\n.p-datatable-scrollable .p-datatable-tbody > tr,\n.p-datatable-scrollable .p-datatable-tfoot > tr {\n    display: flex;\n    flex-wrap: nowrap;\n    width: 100%;\n}\n.p-datatable-scrollable .p-datatable-thead > tr > th,\n.p-datatable-scrollable .p-datatable-tbody > tr > td,\n.p-datatable-scrollable .p-datatable-tfoot > tr > td {\n    display: flex;\n    flex: 1 1 0;\n    align-items: center;\n}\n.p-datatable-scrollable .p-datatable-thead {\n    position: sticky;\n    top: 0;\n    z-index: 1;\n}\n.p-datatable-scrollable .p-datatable-frozen-tbody {\n    position: sticky;\n    z-index: 1;\n}\n.p-datatable-scrollable .p-datatable-tfoot {\n    position: sticky;\n    bottom: 0;\n    z-index: 1;\n}\n.p-datatable-scrollable .p-frozen-column {\n    position: sticky;\n    background: inherit;\n}\n.p-datatable-scrollable th.p-frozen-column {\n    z-index: 1;\n}\n.p-datatable-scrollable-both .p-datatable-thead > tr > th,\n.p-datatable-scrollable-both .p-datatable-tbody > tr > td,\n.p-datatable-scrollable-both .p-datatable-tfoot > tr > td,\n.p-datatable-scrollable-horizontal .p-datatable-thead > tr > th .p-datatable-scrollable-horizontal .p-datatable-tbody > tr > td,\n.p-datatable-scrollable-horizontal .p-datatable-tfoot > tr > td {\n    flex: 1 0 auto;\n}\n.p-datatable-flex-scrollable {\n    display: flex;\n    flex-direction: column;\n    height: 100%;\n}\n.p-datatable-flex-scrollable .p-datatable-wrapper {\n    display: flex;\n    flex-direction: column;\n    flex: 1;\n    height: 100%;\n}\n.p-datatable-scrollable .p-rowgroup-header {\n    position: sticky;\n    z-index: 1;\n}\n.p-datatable-scrollable.p-datatable-grouped-header .p-datatable-thead,\n.p-datatable-scrollable.p-datatable-grouped-footer .p-datatable-tfoot {\n    display: table;\n    border-collapse: collapse;\n    width: 100%;\n    table-layout: fixed;\n}\n.p-datatable-scrollable.p-datatable-grouped-header .p-datatable-thead > tr,\n.p-datatable-scrollable.p-datatable-grouped-footer .p-datatable-tfoot > tr {\n    display: table-row;\n}\n.p-datatable-scrollable.p-datatable-grouped-header .p-datatable-thead > tr > th,\n.p-datatable-scrollable.p-datatable-grouped-footer .p-datatable-tfoot > tr > td {\n    display: table-cell;\n}\n.p-datatable-scrollable .p-virtualscroller > .p-datatable-table {\n    display: inline-block; /* For Safari */\n}\n\n/* Resizable */\n.p-datatable-resizable > .p-datatable-wrapper {\n    overflow-x: auto;\n}\n.p-datatable-resizable .p-datatable-thead > tr > th,\n.p-datatable-resizable .p-datatable-tfoot > tr > td,\n.p-datatable-resizable .p-datatable-tbody > tr > td {\n    overflow: hidden;\n    white-space: nowrap;\n}\n.p-datatable-resizable .p-resizable-column:not(.p-frozen-column) {\n    background-clip: padding-box;\n    position: relative;\n}\n.p-datatable-resizable-fit .p-resizable-column:last-child .p-column-resizer {\n    display: none;\n}\n.p-datatable .p-column-resizer {\n    display: block;\n    position: absolute !important;\n    top: 0;\n    right: 0;\n    margin: 0;\n    width: 0.5rem;\n    height: 100%;\n    padding: 0px;\n    cursor: col-resize;\n    border: 1px solid transparent;\n}\n.p-datatable .p-column-header-content {\n    display: flex;\n    align-items: center;\n}\n.p-datatable .p-column-resizer-helper {\n    width: 1px;\n    position: absolute;\n    z-index: 10;\n    display: none;\n}\n.p-datatable .p-row-editor-init,\n.p-datatable .p-row-editor-save,\n.p-datatable .p-row-editor-cancel {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    overflow: hidden;\n    position: relative;\n}\n\n/* Expand */\n.p-datatable .p-row-toggler {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    overflow: hidden;\n    position: relative;\n}\n\n/* Reorder */\n.p-datatable-reorder-indicator-up,\n.p-datatable-reorder-indicator-down {\n    position: absolute;\n    display: none;\n}\n.p-reorderable-column,\n.p-datatable-reorderablerow-handle {\n    cursor: move;\n}\n\n/* Loader */\n.p-datatable .p-datatable-loading-overlay {\n    position: absolute;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    z-index: 2;\n}\n\n/* Filter */\n.p-column-filter-row {\n    display: flex;\n    align-items: center;\n    width: 100%;\n}\n.p-column-filter-menu {\n    display: inline-flex;\n    margin-left: auto;\n}\n.p-column-filter-row .p-column-filter-element {\n    flex: 1 1 auto;\n    width: 1%;\n}\n.p-column-filter-menu-button,\n.p-column-filter-clear-button {\n    display: inline-flex;\n    justify-content: center;\n    align-items: center;\n    cursor: pointer;\n    text-decoration: none;\n    overflow: hidden;\n    position: relative;\n}\n.p-column-filter-overlay {\n    position: absolute;\n    top: 0;\n    left: 0;\n}\n.p-column-filter-row-items {\n    margin: 0;\n    padding: 0;\n    list-style: none;\n}\n.p-column-filter-row-item {\n    cursor: pointer;\n}\n.p-column-filter-add-button,\n.p-column-filter-remove-button {\n    justify-content: center;\n}\n.p-column-filter-add-button .p-button-label,\n.p-column-filter-remove-button .p-button-label {\n    flex-grow: 0;\n}\n.p-column-filter-buttonbar {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n.p-column-filter-buttonbar .p-button:not(.p-button-icon-only) {\n    width: auto;\n}\n\n/* Responsive */\n.p-datatable .p-datatable-tbody > tr > td > .p-column-title {\n    display: none;\n}\n\n/* VirtualScroller */\n.p-datatable .p-virtualscroller-loading {\n    transform: none !important;\n    min-height: 0;\n    position: sticky;\n    top: 0;\n    left: 0;\n}\n";
+    var css_248z = "\n.p-datatable {\r\n    position: relative;\n}\n.p-datatable table {\r\n    border-collapse: collapse;\r\n    min-width: 100%;\r\n    table-layout: fixed;\n}\n.p-datatable .p-sortable-column {\r\n    cursor: pointer;\r\n    user-select: none;\n}\n.p-datatable .p-sortable-column .p-column-title,\r\n.p-datatable .p-sortable-column .p-sortable-column-icon,\r\n.p-datatable .p-sortable-column .p-sortable-column-badge {\r\n    vertical-align: middle;\n}\n.p-datatable .p-sortable-column .p-sortable-column-badge {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n.p-datatable-responsive-scroll > .p-datatable-wrapper {\r\n    overflow-x: auto;\n}\n.p-datatable-responsive-scroll > .p-datatable-wrapper > table,\r\n.p-datatable-auto-layout > .p-datatable-wrapper > table {\r\n    table-layout: auto;\n}\n.p-datatable-hoverable-rows .p-selectable-row {\r\n    cursor: pointer;\n}\r\n\r\n/* Scrollable */\n.p-datatable-scrollable .p-datatable-wrapper {\r\n    position: relative;\r\n    overflow: auto;\n}\n.p-datatable-scrollable .p-datatable-thead,\r\n.p-datatable-scrollable .p-datatable-tbody,\r\n.p-datatable-scrollable .p-datatable-tfoot {\r\n    display: block;\n}\n.p-datatable-scrollable .p-datatable-thead > tr,\r\n.p-datatable-scrollable .p-datatable-tbody > tr,\r\n.p-datatable-scrollable .p-datatable-tfoot > tr {\r\n    display: flex;\r\n    flex-wrap: nowrap;\r\n    width: 100%;\n}\n.p-datatable-scrollable .p-datatable-thead > tr > th,\r\n.p-datatable-scrollable .p-datatable-tbody > tr > td,\r\n.p-datatable-scrollable .p-datatable-tfoot > tr > td {\r\n    display: flex;\r\n    flex: 1 1 0;\r\n    align-items: center;\n}\n.p-datatable-scrollable .p-datatable-thead {\r\n    position: sticky;\r\n    top: 0;\r\n    z-index: 1;\n}\n.p-datatable-scrollable .p-datatable-frozen-tbody {\r\n    position: sticky;\r\n    z-index: 1;\n}\n.p-datatable-scrollable .p-datatable-tfoot {\r\n    position: sticky;\r\n    bottom: 0;\r\n    z-index: 1;\n}\n.p-datatable-scrollable .p-frozen-column {\r\n    position: sticky;\r\n    background: inherit;\n}\n.p-datatable-scrollable th.p-frozen-column {\r\n    z-index: 1;\n}\n.p-datatable-scrollable-both .p-datatable-thead > tr > th,\r\n.p-datatable-scrollable-both .p-datatable-tbody > tr > td,\r\n.p-datatable-scrollable-both .p-datatable-tfoot > tr > td,\r\n.p-datatable-scrollable-horizontal .p-datatable-thead > tr > th .p-datatable-scrollable-horizontal .p-datatable-tbody > tr > td,\r\n.p-datatable-scrollable-horizontal .p-datatable-tfoot > tr > td {\r\n    flex: 1 0 auto;\n}\n.p-datatable-flex-scrollable {\r\n    display: flex;\r\n    flex-direction: column;\r\n    height: 100%;\n}\n.p-datatable-flex-scrollable .p-datatable-wrapper {\r\n    display: flex;\r\n    flex-direction: column;\r\n    flex: 1;\r\n    height: 100%;\n}\n.p-datatable-scrollable .p-rowgroup-header {\r\n    position: sticky;\r\n    z-index: 1;\n}\n.p-datatable-scrollable.p-datatable-grouped-header .p-datatable-thead,\r\n.p-datatable-scrollable.p-datatable-grouped-footer .p-datatable-tfoot {\r\n    display: table;\r\n    border-collapse: collapse;\r\n    width: 100%;\r\n    table-layout: fixed;\n}\n.p-datatable-scrollable.p-datatable-grouped-header .p-datatable-thead > tr,\r\n.p-datatable-scrollable.p-datatable-grouped-footer .p-datatable-tfoot > tr {\r\n    display: table-row;\n}\n.p-datatable-scrollable.p-datatable-grouped-header .p-datatable-thead > tr > th,\r\n.p-datatable-scrollable.p-datatable-grouped-footer .p-datatable-tfoot > tr > td {\r\n    display: table-cell;\n}\n.p-datatable-scrollable .p-virtualscroller > .p-datatable-table {\r\n    display: inline-block; /* For Safari */\n}\r\n\r\n/* Resizable */\n.p-datatable-resizable > .p-datatable-wrapper {\r\n    overflow-x: auto;\n}\n.p-datatable-resizable .p-datatable-thead > tr > th,\r\n.p-datatable-resizable .p-datatable-tfoot > tr > td,\r\n.p-datatable-resizable .p-datatable-tbody > tr > td {\r\n    overflow: hidden;\r\n    white-space: nowrap;\n}\n.p-datatable-resizable .p-resizable-column:not(.p-frozen-column) {\r\n    background-clip: padding-box;\r\n    position: relative;\n}\n.p-datatable-resizable-fit .p-resizable-column:last-child .p-column-resizer {\r\n    display: none;\n}\n.p-datatable .p-column-resizer {\r\n    display: block;\r\n    position: absolute !important;\r\n    top: 0;\r\n    right: 0;\r\n    margin: 0;\r\n    width: 0.5rem;\r\n    height: 100%;\r\n    padding: 0px;\r\n    cursor: col-resize;\r\n    border: 1px solid transparent;\n}\n.p-datatable .p-column-resizer-assistive-text {\r\n    position: absolute;\r\n    margin: -1px;\r\n    border: 0;\r\n    padding: 0;\r\n    top: 0px;\r\n    right: 0px;\r\n    width: 2px;\r\n    height: 100%;\r\n    overflow: hidden;\r\n    clip: rect(0 0 0 0);\r\n    text-transform: none;\r\n    white-space: nowrap;\n}\n.p-datatable .p-column-resizer-keyboard-helper {\r\n    position: absolute;\r\n    margin: -1px;\r\n    border: 2px solid dodgerblue;\r\n    padding: 0;\r\n    top: 0px;\r\n    right: 0px;\r\n    width: 2px;\r\n    height: 100%;\r\n    overflow: hidden;\r\n    display: none;\r\n    z-index: 10;\n}\n.p-datatable .p-column-resizer-keyboard-icon {\r\n    position: absolute;\r\n    font-size: 1.25rem;\r\n    z-index: 10;\n}\n.p-datatable .p-column-header-content {\r\n    display: flex;\r\n    align-items: center;\n}\n.p-datatable .p-column-resizer-helper {\r\n    width: 1px;\r\n    position: absolute;\r\n    z-index: 10;\r\n    display: none;\n}\n.p-datatable .p-column-resizer-helper-keyboard-line {\r\n    width: 1px;\r\n    position: absolute;\r\n    z-index: 10;\r\n    display: none;\n}\n.p-datatable .p-row-editor-init,\r\n.p-datatable .p-row-editor-save,\r\n.p-datatable .p-row-editor-cancel {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    overflow: hidden;\r\n    position: relative;\n}\r\n\r\n/* Expand */\n.p-datatable .p-row-toggler {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    overflow: hidden;\r\n    position: relative;\n}\r\n\r\n/* Reorder */\n.p-datatable-reorder-indicator-up,\r\n.p-datatable-reorder-indicator-down {\r\n    position: absolute;\r\n    display: none;\n}\n.p-reorderable-column,\r\n.p-datatable-reorderablerow-handle {\r\n    cursor: move;\n}\r\n\r\n/* Loader */\n.p-datatable .p-datatable-loading-overlay {\r\n    position: absolute;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    z-index: 2;\n}\r\n\r\n/* Filter */\n.p-column-filter-row {\r\n    display: flex;\r\n    align-items: center;\r\n    width: 100%;\n}\n.p-column-filter-menu {\r\n    display: inline-flex;\r\n    margin-left: auto;\n}\n.p-column-filter-row .p-column-filter-element {\r\n    flex: 1 1 auto;\r\n    width: 1%;\n}\n.p-column-filter-menu-button,\r\n.p-column-filter-clear-button {\r\n    display: inline-flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    cursor: pointer;\r\n    text-decoration: none;\r\n    overflow: hidden;\r\n    position: relative;\n}\n.p-column-filter-overlay {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\n}\n.p-column-filter-row-items {\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style: none;\n}\n.p-column-filter-row-item {\r\n    cursor: pointer;\n}\n.p-column-filter-add-button,\r\n.p-column-filter-remove-button {\r\n    justify-content: center;\n}\n.p-column-filter-add-button .p-button-label,\r\n.p-column-filter-remove-button .p-button-label {\r\n    flex-grow: 0;\n}\n.p-column-filter-buttonbar {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-between;\n}\n.p-column-filter-buttonbar .p-button:not(.p-button-icon-only) {\r\n    width: auto;\n}\r\n\r\n/* Responsive */\n.p-datatable .p-datatable-tbody > tr > td > .p-column-title {\r\n    display: none;\n}\r\n\r\n/* VirtualScroller */\n.p-datatable .p-virtualscroller-loading {\r\n    transform: none !important;\r\n    min-height: 0;\r\n    position: sticky;\r\n    top: 0;\r\n    left: 0;\n}\r\n";
     styleInject(css_248z);
 
     script.render = render;

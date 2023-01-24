@@ -6,6 +6,12 @@ var utils = require('primevue/utils');
 var Ripple = require('primevue/ripple');
 var vue = require('vue');
 
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var OverlayEventBus__default = /*#__PURE__*/_interopDefaultLegacy(OverlayEventBus);
+var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
+var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
 var script$1 = {
     name: 'Menuitem',
     inheritAttrs: false,
@@ -53,7 +59,7 @@ var script$1 = {
         }
     },
     directives: {
-        ripple: Ripple
+        ripple: Ripple__default["default"]
     }
 };
 
@@ -463,7 +469,7 @@ var script = {
             return ['p-menuitem-separator', item.class];
         },
         onOverlayClick(event) {
-            OverlayEventBus.emit('overlay-click', {
+            OverlayEventBus__default["default"].emit('overlay-click', {
                 originalEvent: event,
                 target: this.target
             });
@@ -495,7 +501,7 @@ var script = {
     },
     components: {
         PVMenuitem: script$1,
-        Portal: Portal
+        Portal: Portal__default["default"]
     }
 };
 

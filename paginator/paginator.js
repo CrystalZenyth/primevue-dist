@@ -2,6 +2,12 @@ this.primevue = this.primevue || {};
 this.primevue.paginator = (function (utils, vue, Ripple, Dropdown, InputNumber) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+    var Dropdown__default = /*#__PURE__*/_interopDefaultLegacy(Dropdown);
+    var InputNumber__default = /*#__PURE__*/_interopDefaultLegacy(InputNumber);
+
     var script$9 = {
         name: 'CurrentPageReport',
         props: {
@@ -70,7 +76,7 @@ this.primevue.paginator = (function (utils, vue, Ripple, Dropdown, InputNumber) 
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -117,7 +123,7 @@ this.primevue.paginator = (function (utils, vue, Ripple, Dropdown, InputNumber) 
             }
         },
         components: {
-            JTPDropdown: Dropdown
+            JTPDropdown: Dropdown__default["default"]
         }
     };
 
@@ -170,7 +176,7 @@ this.primevue.paginator = (function (utils, vue, Ripple, Dropdown, InputNumber) 
             }
         },
         components: {
-            JTPInput: InputNumber
+            JTPInput: InputNumber__default["default"]
         }
     };
 
@@ -202,7 +208,7 @@ this.primevue.paginator = (function (utils, vue, Ripple, Dropdown, InputNumber) 
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -237,7 +243,7 @@ this.primevue.paginator = (function (utils, vue, Ripple, Dropdown, InputNumber) 
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -280,7 +286,7 @@ this.primevue.paginator = (function (utils, vue, Ripple, Dropdown, InputNumber) 
         },
         computed: {},
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -323,7 +329,7 @@ this.primevue.paginator = (function (utils, vue, Ripple, Dropdown, InputNumber) 
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -372,7 +378,7 @@ this.primevue.paginator = (function (utils, vue, Ripple, Dropdown, InputNumber) 
             }
         },
         components: {
-            RPPDropdown: Dropdown
+            RPPDropdown: Dropdown__default["default"]
         }
     };
 

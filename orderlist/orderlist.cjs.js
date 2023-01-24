@@ -5,6 +5,11 @@ var Ripple = require('primevue/ripple');
 var utils = require('primevue/utils');
 var vue = require('vue');
 
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var Button__default = /*#__PURE__*/_interopDefaultLegacy(Button);
+var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
 var script = {
     name: 'OrderList',
     emits: ['update:modelValue', 'reorder', 'update:selection', 'selection-change', 'focus', 'blur'],
@@ -527,10 +532,10 @@ var script = {
         }
     },
     components: {
-        OLButton: Button
+        OLButton: Button__default["default"]
     },
     directives: {
-        ripple: Ripple
+        ripple: Ripple__default["default"]
     }
 };
 

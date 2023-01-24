@@ -4,6 +4,10 @@ var utils = require('primevue/utils');
 var Ripple = require('primevue/ripple');
 var vue = require('vue');
 
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
 var script$2 = {
     name: 'PanelMenuSub',
     emits: ['item-toggle'],
@@ -111,7 +115,7 @@ var script$2 = {
         }
     },
     directives: {
-        ripple: Ripple
+        ripple: Ripple__default["default"]
     }
 };
 

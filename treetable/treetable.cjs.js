@@ -6,6 +6,11 @@ var utils = require('primevue/utils');
 var vue = require('vue');
 var Ripple = require('primevue/ripple');
 
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var Paginator__default = /*#__PURE__*/_interopDefaultLegacy(Paginator);
+var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
 var script$4 = {
     name: 'FooterCell',
     props: {
@@ -457,7 +462,7 @@ var script$2 = {
         }
     },
     directives: {
-        ripple: Ripple
+        ripple: Ripple__default["default"]
     }
 };
 
@@ -1799,7 +1804,7 @@ var script = {
     },
     components: {
         TTRow: script$1,
-        TTPaginator: Paginator,
+        TTPaginator: Paginator__default["default"],
         TTHeaderCell: script$3,
         TTFooterCell: script$4
     }

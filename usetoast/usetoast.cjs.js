@@ -1,5 +1,7 @@
 'use strict';
 
+Object.defineProperty(exports, '__esModule', { value: true });
+
 var vue = require('vue');
 
 const PrimeVueToastSymbol = Symbol();

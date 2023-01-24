@@ -2,6 +2,10 @@ this.primevue = this.primevue || {};
 this.primevue.terminal = (function (TerminalService, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var TerminalService__default = /*#__PURE__*/_interopDefaultLegacy(TerminalService);
+
     var script = {
         name: 'Terminal',
         props: {
@@ -21,14 +25,14 @@ this.primevue.terminal = (function (TerminalService, vue) {
             };
         },
         mounted() {
-            TerminalService.on('response', this.responseListener);
+            TerminalService__default["default"].on('response', this.responseListener);
             this.$refs.input.focus();
         },
         updated() {
             this.$el.scrollTop = this.$el.scrollHeight;
         },
         beforeUnmount() {
-            TerminalService.off('response', this.responseListener);
+            TerminalService__default["default"].off('response', this.responseListener);
         },
         methods: {
             onClick() {
@@ -37,7 +41,7 @@ this.primevue.terminal = (function (TerminalService, vue) {
             onKeydown(event) {
                 if (event.code === 'Enter' && this.commandText) {
                     this.commands.push({ text: this.commandText });
-                    TerminalService.emit('command', this.commandText);
+                    TerminalService__default["default"].emit('command', this.commandText);
                     this.commandText = '';
                 }
             },

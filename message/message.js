@@ -2,6 +2,10 @@ this.primevue = this.primevue || {};
 this.primevue.message = (function (Ripple, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
     var script = {
         name: 'Message',
         emits: ['close'],
@@ -79,7 +83,7 @@ this.primevue.message = (function (Ripple, vue) {
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 

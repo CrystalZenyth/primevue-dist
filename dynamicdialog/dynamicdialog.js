@@ -2,6 +2,11 @@ this.primevue = this.primevue || {};
 this.primevue.dynamicdialog = (function (utils, DynamicDialogEventBus, Dialog, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var DynamicDialogEventBus__default = /*#__PURE__*/_interopDefaultLegacy(DynamicDialogEventBus);
+    var Dialog__default = /*#__PURE__*/_interopDefaultLegacy(Dialog);
+
     var script = {
         name: 'DynamicDialog',
         inheritAttrs: false,
@@ -34,12 +39,12 @@ this.primevue.dynamicdialog = (function (utils, DynamicDialogEventBus, Dialog, v
                 }
             };
 
-            DynamicDialogEventBus.on('open', this.openListener);
-            DynamicDialogEventBus.on('close', this.closeListener);
+            DynamicDialogEventBus__default["default"].on('open', this.openListener);
+            DynamicDialogEventBus__default["default"].on('close', this.closeListener);
         },
         beforeUnmount() {
-            DynamicDialogEventBus.off('open', this.openListener);
-            DynamicDialogEventBus.off('close', this.closeListener);
+            DynamicDialogEventBus__default["default"].off('open', this.openListener);
+            DynamicDialogEventBus__default["default"].off('close', this.closeListener);
         },
         methods: {
             onDialogHide(instance) {
@@ -54,7 +59,7 @@ this.primevue.dynamicdialog = (function (utils, DynamicDialogEventBus, Dialog, v
             }
         },
         components: {
-            DDialog: Dialog
+            DDialog: Dialog__default["default"]
         }
     };
 

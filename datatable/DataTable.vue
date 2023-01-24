@@ -201,6 +201,8 @@
             <slot name="footer"></slot>
         </div>
         <div ref="resizeHelper" class="p-column-resizer-helper" style="display: none"></div>
+        <div ref="resizeHelperKeyboard" class="p-column-resizer-helper-keyboard-line" style="display: none"></div>
+        <i ref="resizeKeyboardIcon" class="pi pi-arrows-h p-column-resizer-keyboard-icon"></i>
         <span v-if="reorderableColumns" ref="reorderIndicatorUp" class="pi pi-arrow-down p-datatable-reorder-indicator-up" style="position: absolute; display: none" />
         <span v-if="reorderableColumns" ref="reorderIndicatorDown" class="pi pi-arrow-up p-datatable-reorder-indicator-down" style="position: absolute; display: none" />
     </div>
@@ -545,9 +547,13 @@ export default {
     rangeRowIndex: null,
     documentColumnResizeListener: null,
     documentColumnResizeEndListener: null,
+    documentColumnResizeKeyboardEndListener: null,
     lastResizeHelperX: null,
     resizeColumnElement: null,
+    resizeKeyboardIcon: null,
     columnResizing: false,
+    columnResizingKeyboard: false,
+    columnResizeKeyboardHelper: null,
     colReorderIconWidth: null,
     colReorderIconHeight: null,
     draggedColumn: null,
@@ -620,6 +626,7 @@ export default {
     },
     beforeUnmount() {
         this.unbindColumnResizeEvents();
+        this.unbindColumnResizeKeyboardEvents();
         this.destroyStyleElement();
         this.destroyResponsiveStyle();
     },
@@ -1397,37 +1404,82 @@ export default {
             let containerLeft = DomHandler.getOffset(this.$el).left;
 
             this.resizeColumnElement = event.target.parentElement;
-            this.columnResizing = true;
+            this.columnResizingKeyboard = true;
             this.lastResizeHelperX = event.target.offsetLeft - containerLeft + this.$el.scrollLeft;
 
             let increment = 0;
+            let matchingEvent = false;
 
             switch (event.code) {
                 case 'ArrowDown':
                 case 'ArrowLeft':
                     increment = -30;
-                    event.preventDefault();
+                    // event.preventDefault();
+                    matchingEvent = true
                     break;
 
                 case 'ArrowUp':
                 case 'ArrowRight':
                     increment = 30;
-                    event.preventDefault();
+                    // event.preventDefault();
+                    matchingEvent = true
                     break;
 
                 default:
                     break;
             }
 
+            this.columnResizeKeyboardHelper = DomHandler.findSingle(event.target.parentNode, '.p-column-resizer-keyboard-helper')
+            if (this.columnResizeKeyboardHelper) {
+                this.columnResizeKeyboardHelper.style.display = 'block';
+            }
+
             this.$refs.resizeHelper.style.height = this.$el.offsetHeight + 'px';
             this.$refs.resizeHelper.style.top = 0 + 'px';
             this.$refs.resizeHelper.style.left = event.target.offsetLeft + increment - containerLeft + this.$el.scrollLeft + 'px';
 
-            this.$refs.resizeHelper.style.display = 'block';
+            this.bindColumnResizeKeyboardEvents();
 
-            nextTick(() => {
-                this.onColumnResizeEnd();
-            })
+            if (this.columnResizeKeyboardHelper) {
+                // this.$refs.resizeHelperKeyboard.style.height = this.$el.offsetHeight + 'px';
+                // this.$refs.resizeHelperKeyboard.style.top = 0 + 'px';
+
+                // const resizerInput = DomHandler.findSingle(event.target.parentNode, '.p-column-resizer-assistive-text');
+                // const inputRect = resizerInput.getBoundingClientRect();
+                // const resizerRect = this.$refs.resizeHelperKeyboard.getBoundingClientRect();
+                // const rect = this.columnResizeKeyboardHelper.getBoundingClientRect();
+
+                // this.$refs.resizeHelperKeyboard.style.left = rect.left + 2 - containerLeft + this.$el.scrollLeft + 'px';
+                // this.$refs.resizeHelperKeyboard.style.display = 'block';
+
+                // this.$refs.resizeKeyboardIcon.style.top = inputRect.y - resizerRect.y + 10 + 'px';
+                // this.$refs.resizeKeyboardIcon.style.left = rect.left + ((rect.right - rect.left) / 2) - 9 - containerLeft + this.$el.scrollLeft + 'px';
+                // this.$refs.resizeKeyboardIcon.style.display = 'block';
+            }
+
+            if (matchingEvent) {
+                nextTick(() => {
+                    this.$refs.resizeHelper.style.display = 'block';
+                    this.onColumnResizeEnd();
+
+                    if (this.columnResizeKeyboardHelper) {
+                        // this.$refs.resizeHelperKeyboard.style.height = this.$el.offsetHeight + 'px';
+                        // this.$refs.resizeHelperKeyboard.style.top = 0 + 'px';
+
+                        // const resizerInput = DomHandler.findSingle(event.target.parentNode, '.p-column-resizer-assistive-text');
+                        // const inputRect = resizerInput.getBoundingClientRect();
+                        // const resizerRect = this.$refs.resizeHelperKeyboard.getBoundingClientRect();
+                        // const rect = this.columnResizeKeyboardHelper.getBoundingClientRect();
+
+                        // this.$refs.resizeHelperKeyboard.style.left = rect.left + 2 - containerLeft + this.$el.scrollLeft + 'px';
+                        // this.$refs.resizeHelperKeyboard.style.display = 'block';
+
+                        // this.$refs.resizeKeyboardIcon.style.top = inputRect.y - resizerRect.y + 10 + 'px';
+                        // this.$refs.resizeKeyboardIcon.style.left = rect.left + ((rect.right - rect.left) / 2) - 9 - containerLeft + this.$el.scrollLeft + 'px';
+                        // this.$refs.resizeKeyboardIcon.style.display = 'block';
+                    }
+                })
+            }
         },
         onColumnResize(event) {
             let containerLeft = DomHandler.getOffset(this.$el).left;
@@ -1489,12 +1541,30 @@ export default {
                 this.saveState();
             }
         },
+        onColumnResizeKeyboardEnd() {
+            this.unbindColumnResizeKeyboardEvents();
+            if (this.columnResizeKeyboardHelper) {
+                this.columnResizeKeyboardHelper.style.display = 'none';
+            }
+            if (this.$refs.resizeHelperKeyboard) {
+                this.$refs.resizeHelperKeyboard.style.display = 'none';
+            }
+            this.$refs.resizeKeyboardIcon.style.display = 'none';
+        },
         resizeTableCells(newColumnWidth, nextColumnWidth) {
             let colIndex = DomHandler.index(this.resizeColumnElement);
             let widths = [];
             let headers = DomHandler.find(this.$refs.table, '.p-datatable-thead > tr > th');
 
-            headers.forEach((header) => widths.push(DomHandler.getOuterWidth(header)));
+            headers.forEach((header) => {
+                const width = DomHandler.getOuterWidth(header)
+                widths.push(width)
+
+                const rangeInput = DomHandler.findSingle(header, 'input.p-column-resizer-assistive-text')
+                if (rangeInput) {
+                    rangeInput.value = width
+                }
+            });
 
             this.destroyStyleElement();
             this.createStyleElement();
@@ -1543,6 +1613,22 @@ export default {
             if (this.documentColumnResizeEndListener) {
                 document.removeEventListener('document', this.documentColumnResizeEndListener);
                 this.documentColumnResizeEndListener = null;
+            }
+        },
+        bindColumnResizeKeyboardEvents() {
+            if (!this.documentColumnResizeKeyboardEndListener) {
+                this.documentColumnResizeKeyboardEndListener = document.addEventListener('focusout', () => {
+                    if (this.columnResizingKeyboard) {
+                        this.columnResizingKeyboard = false;
+                        this.onColumnResizeKeyboardEnd();
+                    }
+                });
+            }
+        },
+        unbindColumnResizeKeyboardEvents() {
+            if (this.documentColumnResizeKeyboardEndListener) {
+                document.removeEventListener('document', this.documentColumnResizeKeyboardEndListener);
+                this.documentColumnResizeKeyboardEndListener = null;
             }
         },
         onColumnHeaderMouseDown(e) {
@@ -1929,6 +2015,7 @@ export default {
         restoreColumnWidths() {
             if (this.columnWidthsState) {
                 let widths = this.columnWidthsState.split(',');
+                let headers = DomHandler.find(this.$el, '.p-datatable-thead > tr > th');
 
                 if (this.columnResizeMode === 'expand' && this.tableWidthState) {
                     this.$refs.table.style.width = this.tableWidthState;
@@ -1943,6 +2030,11 @@ export default {
 
                     widths.forEach((width, index) => {
                         let style = this.scrollable ? `flex: 1 1 ${width}px !important` : `width: ${width}px !important`;
+
+                        const rangeInput = DomHandler.findSingle(headers[index], 'input.p-column-resizer-assistive-text')
+                        if (rangeInput) {
+                            rangeInput.value = width
+                        }
 
                         innerHTML += `
                             .p-datatable[${this.attributeSelector}] .p-datatable-thead > tr > th:nth-child(${index + 1}),
@@ -2476,12 +2568,54 @@ export default {
     border: 1px solid transparent;
 }
 
+.p-datatable .p-column-resizer-assistive-text {
+    position: absolute;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    top: 0px;
+    right: 0px;
+    width: 2px;
+    height: 100%;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    text-transform: none;
+    white-space: nowrap;
+}
+
+.p-datatable .p-column-resizer-keyboard-helper {
+    position: absolute;
+    margin: -1px;
+    border: 2px solid dodgerblue;
+    padding: 0;
+    top: 0px;
+    right: 0px;
+    width: 2px;
+    height: 100%;
+    overflow: hidden;
+    display: none;
+    z-index: 10;
+}
+
+.p-datatable .p-column-resizer-keyboard-icon {
+    position: absolute;
+    font-size: 1.25rem;
+    z-index: 10;
+}
+
 .p-datatable .p-column-header-content {
     display: flex;
     align-items: center;
 }
 
 .p-datatable .p-column-resizer-helper {
+    width: 1px;
+    position: absolute;
+    z-index: 10;
+    display: none;
+}
+
+.p-datatable .p-column-resizer-helper-keyboard-line {
     width: 1px;
     position: absolute;
     z-index: 10;

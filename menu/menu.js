@@ -2,6 +2,12 @@ this.primevue = this.primevue || {};
 this.primevue.menu = (function (OverlayEventBus, Portal, utils, Ripple, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var OverlayEventBus__default = /*#__PURE__*/_interopDefaultLegacy(OverlayEventBus);
+    var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
     var script$1 = {
         name: 'Menuitem',
         inheritAttrs: false,
@@ -49,7 +55,7 @@ this.primevue.menu = (function (OverlayEventBus, Portal, utils, Ripple, vue) {
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -459,7 +465,7 @@ this.primevue.menu = (function (OverlayEventBus, Portal, utils, Ripple, vue) {
                 return ['p-menuitem-separator', item.class];
             },
             onOverlayClick(event) {
-                OverlayEventBus.emit('overlay-click', {
+                OverlayEventBus__default["default"].emit('overlay-click', {
                     originalEvent: event,
                     target: this.target
                 });
@@ -491,7 +497,7 @@ this.primevue.menu = (function (OverlayEventBus, Portal, utils, Ripple, vue) {
         },
         components: {
             PVMenuitem: script$1,
-            Portal: Portal
+            Portal: Portal__default["default"]
         }
     };
 

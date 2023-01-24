@@ -4,6 +4,10 @@ var vue = require('vue');
 var usedialog = require('primevue/usedialog');
 var DynamicDialogEventBus = require('primevue/dynamicdialogeventbus');
 
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var DynamicDialogEventBus__default = /*#__PURE__*/_interopDefaultLegacy(DynamicDialogEventBus);
+
 var DialogService = {
     install: (app) => {
         const DialogService = {
@@ -13,11 +17,11 @@ var DialogService = {
                     options: options || {},
                     data: options && options.data,
                     close: (params) => {
-                        DynamicDialogEventBus.emit('close', { instance, params });
+                        DynamicDialogEventBus__default["default"].emit('close', { instance, params });
                     }
                 };
 
-                DynamicDialogEventBus.emit('open', { instance });
+                DynamicDialogEventBus__default["default"].emit('open', { instance });
 
                 return instance;
             }

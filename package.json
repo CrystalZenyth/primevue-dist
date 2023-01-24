@@ -4,7 +4,7 @@
     "homepage": "https://www.primefaces.org/primevue",
     "repository": {
       "type": "git",
-      "url": "https://github.com/nathanhennig/primevue-dist.git"
+      "url": "https://github.com/primefaces/primevue.git"
     },
     "license": "MIT",
     "bugs": {

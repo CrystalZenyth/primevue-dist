@@ -15,7 +15,19 @@
         @dragleave="onDragLeave"
         @drop="onDrop"
     >
-        <span v-if="resizableColumns && !columnProp('frozen')" class="p-column-resizer" tabindex="0" @keydown="onResizeStartKeyboard" @mousedown="onResizeStart"></span>
+        <span v-if="resizableColumns && !columnProp('frozen')" class="p-column-resizer" @mousedown="onResizeStart"></span>
+        <input
+            v-if="resizableColumns && !columnProp('frozen')"
+            class="p-column-resizer-assistive-text"
+            max="3000"
+            tabindex="0"
+            @focusin="onResizeStartKeyboard"
+            @keydown="onResizeStartKeyboard"
+            type="range"
+            :aria-label="columnProp('header') ? `resize width of ${columnProp('header')}` : 'resize width of unlabeled column'"
+        >
+        <span v-if="resizableColumns && !columnProp('frozen')" class="p-column-resizer-keyboard-helper"></span>
+
         <div class="p-column-header-content">
             <component v-if="column.children && column.children.header" :is="column.children.header" :column="column" />
             <span v-if="columnProp('header')" class="p-column-title">{{ columnProp('header') }}</span>

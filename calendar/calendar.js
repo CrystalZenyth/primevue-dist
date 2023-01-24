@@ -2,6 +2,13 @@ this.primevue = this.primevue || {};
 this.primevue.calendar = (function (Button, OverlayEventBus, Portal, Ripple, utils, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Button__default = /*#__PURE__*/_interopDefaultLegacy(Button);
+    var OverlayEventBus__default = /*#__PURE__*/_interopDefaultLegacy(OverlayEventBus);
+    var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
     var script = {
         name: 'Calendar',
         emits: ['show', 'hide', 'input', 'month-change', 'year-change', 'date-select', 'update:modelValue', 'today-click', 'clear-click', 'focus', 'blur', 'keydown'],
@@ -2299,7 +2306,7 @@ this.primevue.calendar = (function (Button, OverlayEventBus, Portal, Ripple, uti
             },
             onOverlayClick(event) {
                 if (!this.inline) {
-                    OverlayEventBus.emit('overlay-click', {
+                    OverlayEventBus__default["default"].emit('overlay-click', {
                         originalEvent: event,
                         target: this.$el
                     });
@@ -2592,11 +2599,11 @@ this.primevue.calendar = (function (Button, OverlayEventBus, Portal, Ripple, uti
             }
         },
         components: {
-            CalendarButton: Button,
-            Portal: Portal
+            CalendarButton: Button__default["default"],
+            Portal: Portal__default["default"]
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 

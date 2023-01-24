@@ -6,6 +6,12 @@ var utils = require('primevue/utils');
 var Ripple = require('primevue/ripple');
 var vue = require('vue');
 
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
+var ToastEventBus__default = /*#__PURE__*/_interopDefaultLegacy(ToastEventBus);
+var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
 var script$1 = {
     name: 'ToastMessage',
     emits: ['close'],
@@ -98,7 +104,7 @@ var script$1 = {
         }
     },
     directives: {
-        ripple: Ripple
+        ripple: Ripple__default["default"]
     }
 };
 
@@ -215,9 +221,9 @@ var script = {
     },
     styleElement: null,
     mounted() {
-        ToastEventBus.on('add', this.onAdd);
-        ToastEventBus.on('remove-group', this.onRemoveGroup);
-        ToastEventBus.on('remove-all-groups', this.onRemoveAllGroups);
+        ToastEventBus__default["default"].on('add', this.onAdd);
+        ToastEventBus__default["default"].on('remove-group', this.onRemoveGroup);
+        ToastEventBus__default["default"].on('remove-all-groups', this.onRemoveAllGroups);
 
         if (this.breakpoints) {
             this.createStyle();
@@ -230,9 +236,9 @@ var script = {
             utils.ZIndexUtils.clear(this.$refs.container);
         }
 
-        ToastEventBus.off('add', this.onAdd);
-        ToastEventBus.off('remove-group', this.onRemoveGroup);
-        ToastEventBus.off('remove-all-groups', this.onRemoveAllGroups);
+        ToastEventBus__default["default"].off('add', this.onAdd);
+        ToastEventBus__default["default"].off('remove-group', this.onRemoveGroup);
+        ToastEventBus__default["default"].off('remove-all-groups', this.onRemoveAllGroups);
     },
     methods: {
         add(message) {
@@ -331,7 +337,7 @@ var script = {
     },
     components: {
         ToastMessage: script$1,
-        Portal: Portal
+        Portal: Portal__default["default"]
     }
 };
 

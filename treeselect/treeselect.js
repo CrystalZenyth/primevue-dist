@@ -2,6 +2,13 @@ this.primevue = this.primevue || {};
 this.primevue.treeselect = (function (OverlayEventBus, Portal, Ripple, Tree, utils, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var OverlayEventBus__default = /*#__PURE__*/_interopDefaultLegacy(OverlayEventBus);
+    var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+    var Tree__default = /*#__PURE__*/_interopDefaultLegacy(Tree);
+
     var script = {
         name: 'TreeSelect',
         emits: ['update:modelValue', 'before-show', 'before-hide', 'change', 'show', 'hide', 'node-select', 'node-unselect', 'node-expand', 'node-collapse', 'focus', 'blur'],
@@ -295,7 +302,7 @@ this.primevue.treeselect = (function (OverlayEventBus, Portal, Ripple, Tree, uti
                 this.overlay = el;
             },
             onOverlayClick(event) {
-                OverlayEventBus.emit('overlay-click', {
+                OverlayEventBus__default["default"].emit('overlay-click', {
                     originalEvent: event,
                     target: this.$el
                 });
@@ -431,11 +438,11 @@ this.primevue.treeselect = (function (OverlayEventBus, Portal, Ripple, Tree, uti
             }
         },
         components: {
-            TSTree: Tree,
-            Portal: Portal
+            TSTree: Tree__default["default"],
+            Portal: Portal__default["default"]
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 

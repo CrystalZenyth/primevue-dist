@@ -2,6 +2,13 @@ this.primevue = this.primevue || {};
 this.primevue.overlaypanel = (function (FocusTrap, OverlayEventBus, Portal, Ripple, utils, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var FocusTrap__default = /*#__PURE__*/_interopDefaultLegacy(FocusTrap);
+    var OverlayEventBus__default = /*#__PURE__*/_interopDefaultLegacy(OverlayEventBus);
+    var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
     var script = {
         name: 'OverlayPanel',
         inheritAttrs: false,
@@ -77,7 +84,7 @@ this.primevue.overlaypanel = (function (FocusTrap, OverlayEventBus, Portal, Ripp
             }
 
             if (this.overlayEventListener) {
-                OverlayEventBus.off('overlay-click', this.overlayEventListener);
+                OverlayEventBus__default["default"].off('overlay-click', this.overlayEventListener);
                 this.overlayEventListener = null;
             }
 
@@ -127,14 +134,14 @@ this.primevue.overlaypanel = (function (FocusTrap, OverlayEventBus, Portal, Ripp
                 };
 
                 this.focus();
-                OverlayEventBus.on('overlay-click', this.overlayEventListener);
+                OverlayEventBus__default["default"].on('overlay-click', this.overlayEventListener);
                 this.$emit('show');
             },
             onLeave() {
                 this.unbindOutsideClickListener();
                 this.unbindScrollListener();
                 this.unbindResizeListener();
-                OverlayEventBus.off('overlay-click', this.overlayEventListener);
+                OverlayEventBus__default["default"].off('overlay-click', this.overlayEventListener);
                 this.overlayEventListener = null;
                 this.$emit('hide');
             },
@@ -266,7 +273,7 @@ this.primevue.overlaypanel = (function (FocusTrap, OverlayEventBus, Portal, Ripp
                 }
             },
             onOverlayClick(event) {
-                OverlayEventBus.emit('overlay-click', {
+                OverlayEventBus__default["default"].emit('overlay-click', {
                     originalEvent: event,
                     target: this.target
                 });
@@ -290,11 +297,11 @@ this.primevue.overlaypanel = (function (FocusTrap, OverlayEventBus, Portal, Ripp
             }
         },
         directives: {
-            focustrap: FocusTrap,
-            ripple: Ripple
+            focustrap: FocusTrap__default["default"],
+            ripple: Ripple__default["default"]
         },
         components: {
-            Portal: Portal
+            Portal: Portal__default["default"]
         }
     };
 

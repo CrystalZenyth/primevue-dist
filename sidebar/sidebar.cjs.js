@@ -6,6 +6,12 @@ var Ripple = require('primevue/ripple');
 var utils = require('primevue/utils');
 var vue = require('vue');
 
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var FocusTrap__default = /*#__PURE__*/_interopDefaultLegacy(FocusTrap);
+var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
+var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
 var script = {
     name: 'Sidebar',
     inheritAttrs: false,
@@ -222,11 +228,11 @@ var script = {
         }
     },
     directives: {
-        focustrap: FocusTrap,
-        ripple: Ripple
+        focustrap: FocusTrap__default["default"],
+        ripple: Ripple__default["default"]
     },
     components: {
-        Portal: Portal
+        Portal: Portal__default["default"]
     }
 };
 

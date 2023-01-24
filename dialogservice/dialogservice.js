@@ -2,6 +2,10 @@ this.primevue = this.primevue || {};
 this.primevue.dialogservice = (function (vue, usedialog, DynamicDialogEventBus) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var DynamicDialogEventBus__default = /*#__PURE__*/_interopDefaultLegacy(DynamicDialogEventBus);
+
     var DialogService = {
         install: (app) => {
             const DialogService = {
@@ -11,11 +15,11 @@ this.primevue.dialogservice = (function (vue, usedialog, DynamicDialogEventBus) 
                         options: options || {},
                         data: options && options.data,
                         close: (params) => {
-                            DynamicDialogEventBus.emit('close', { instance, params });
+                            DynamicDialogEventBus__default["default"].emit('close', { instance, params });
                         }
                     };
 
-                    DynamicDialogEventBus.emit('open', { instance });
+                    DynamicDialogEventBus__default["default"].emit('open', { instance });
 
                     return instance;
                 }

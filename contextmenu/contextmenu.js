@@ -2,6 +2,11 @@ this.primevue = this.primevue || {};
 this.primevue.contextmenu = (function (Portal, utils, Ripple, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
     var script$1 = {
         name: 'ContextMenuSub',
         emits: ['item-click', 'item-mouseenter'],
@@ -133,7 +138,7 @@ this.primevue.contextmenu = (function (Portal, utils, Ripple, vue) {
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -868,7 +873,7 @@ this.primevue.contextmenu = (function (Portal, utils, Ripple, vue) {
         },
         components: {
             ContextMenuSub: script$1,
-            Portal: Portal
+            Portal: Portal__default["default"]
         }
     };
 

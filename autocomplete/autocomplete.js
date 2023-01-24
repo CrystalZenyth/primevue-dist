@@ -2,6 +2,14 @@ this.primevue = this.primevue || {};
 this.primevue.autocomplete = (function (Button, OverlayEventBus, Portal, Ripple, utils, VirtualScroller, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Button__default = /*#__PURE__*/_interopDefaultLegacy(Button);
+    var OverlayEventBus__default = /*#__PURE__*/_interopDefaultLegacy(OverlayEventBus);
+    var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+    var VirtualScroller__default = /*#__PURE__*/_interopDefaultLegacy(VirtualScroller);
+
     var script = {
         name: 'AutoComplete',
         emits: ['update:modelValue', 'change', 'focus', 'blur', 'item-select', 'item-unselect', 'dropdown-click', 'clear', 'complete', 'before-show', 'before-hide', 'show', 'hide'],
@@ -467,7 +475,7 @@ this.primevue.autocomplete = (function (Button, OverlayEventBus, Portal, Ripple,
                 }
             },
             onOverlayClick(event) {
-                OverlayEventBus.emit('overlay-click', {
+                OverlayEventBus__default["default"].emit('overlay-click', {
                     originalEvent: event,
                     target: this.$el
                 });
@@ -915,12 +923,12 @@ this.primevue.autocomplete = (function (Button, OverlayEventBus, Portal, Ripple,
             }
         },
         components: {
-            Button: Button,
-            VirtualScroller: VirtualScroller,
-            Portal: Portal
+            Button: Button__default["default"],
+            VirtualScroller: VirtualScroller__default["default"],
+            Portal: Portal__default["default"]
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 

@@ -2,6 +2,10 @@ this.primevue = this.primevue || {};
 this.primevue.tabmenu = (function (Ripple, utils, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
     var script = {
         name: 'TabMenu',
         emits: ['update:activeIndex', 'tab-change'],
@@ -227,7 +231,7 @@ this.primevue.tabmenu = (function (Ripple, utils, vue) {
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 

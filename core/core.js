@@ -1032,6 +1032,8 @@ this.primevue.utils = (function (exports) {
     exports.UniqueComponentId = UniqueComponentId;
     exports.ZIndexUtils = ZIndexUtils;
 
+    Object.defineProperty(exports, '__esModule', { value: true });
+
     return exports;
 
 })({});
@@ -1561,6 +1563,8 @@ this.primevue.api = (function (exports, utils) {
     exports.PrimeIcons = PrimeIcons;
     exports.ToastSeverity = ToastSeverities;
 
+    Object.defineProperty(exports, '__esModule', { value: true });
+
     return exports;
 
 })({}, primevue.utils);
@@ -1726,7 +1730,7 @@ this.primevue.config = (function (exports, api, vue) {
         }
     };
 
-    exports.default = PrimeVue;
+    exports["default"] = PrimeVue;
     exports.usePrimeVue = usePrimeVue;
 
     Object.defineProperty(exports, '__esModule', { value: true });
@@ -3125,6 +3129,8 @@ this.primevue.useconfirm = (function (exports, vue) {
     exports.PrimeVueConfirmSymbol = PrimeVueConfirmSymbol;
     exports.useConfirm = useConfirm;
 
+    Object.defineProperty(exports, '__esModule', { value: true });
+
     return exports;
 
 })({}, Vue);
@@ -3147,6 +3153,8 @@ this.primevue.usetoast = (function (exports, vue) {
 
     exports.PrimeVueToastSymbol = PrimeVueToastSymbol;
     exports.useToast = useToast;
+
+    Object.defineProperty(exports, '__esModule', { value: true });
 
     return exports;
 
@@ -3171,6 +3179,8 @@ this.primevue.usedialog = (function (exports, vue) {
     exports.PrimeVueDialogSymbol = PrimeVueDialogSymbol;
     exports.useDialog = useDialog;
 
+    Object.defineProperty(exports, '__esModule', { value: true });
+
     return exports;
 
 })({}, Vue);
@@ -3178,6 +3188,10 @@ this.primevue.usedialog = (function (exports, vue) {
 this.primevue = this.primevue || {};
 this.primevue.button = (function (Ripple, vue) {
     'use strict';
+
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
 
     var script = {
         name: 'Button',
@@ -3256,7 +3270,7 @@ this.primevue.button = (function (Ripple, vue) {
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -3345,6 +3359,11 @@ this.primevue.inputtext = (function (vue) {
 this.primevue = this.primevue || {};
 this.primevue.inputnumber = (function (Button, InputText, utils, vue) {
     'use strict';
+
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Button__default = /*#__PURE__*/_interopDefaultLegacy(Button);
+    var InputText__default = /*#__PURE__*/_interopDefaultLegacy(InputText);
 
     var script = {
         name: 'InputNumber',
@@ -4400,8 +4419,8 @@ this.primevue.inputnumber = (function (Button, InputText, utils, vue) {
             }
         },
         components: {
-            INInputText: InputText,
-            INButton: Button
+            INInputText: InputText__default["default"],
+            INButton: Button__default["default"]
         }
     };
 
@@ -4525,6 +4544,10 @@ this.primevue = this.primevue || {};
 this.primevue.message = (function (Ripple, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
     var script = {
         name: 'Message',
         emits: ['close'],
@@ -4602,7 +4625,7 @@ this.primevue.message = (function (Ripple, vue) {
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -4818,6 +4841,13 @@ this.primevue.progressbar = (function (vue) {
 this.primevue = this.primevue || {};
 this.primevue.dropdown = (function (api, OverlayEventBus, Portal, Ripple, utils, VirtualScroller, vue) {
     'use strict';
+
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var OverlayEventBus__default = /*#__PURE__*/_interopDefaultLegacy(OverlayEventBus);
+    var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+    var VirtualScroller__default = /*#__PURE__*/_interopDefaultLegacy(VirtualScroller);
 
     var script = {
         name: 'Dropdown',
@@ -5262,7 +5292,7 @@ this.primevue.dropdown = (function (api, OverlayEventBus, Portal, Ripple, utils,
                 }
             },
             onOverlayClick(event) {
-                OverlayEventBus.emit('overlay-click', {
+                OverlayEventBus__default["default"].emit('overlay-click', {
                     originalEvent: event,
                     target: this.$el
                 });
@@ -5709,11 +5739,11 @@ this.primevue.dropdown = (function (api, OverlayEventBus, Portal, Ripple, utils,
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         },
         components: {
-            VirtualScroller: VirtualScroller,
-            Portal: Portal
+            VirtualScroller: VirtualScroller__default["default"],
+            Portal: Portal__default["default"]
         }
     };
 
@@ -6046,6 +6076,12 @@ this.primevue.dropdown = (function (api, OverlayEventBus, Portal, Ripple, utils,
 this.primevue = this.primevue || {};
 this.primevue.dialog = (function (FocusTrap, Portal, Ripple, utils, vue) {
     'use strict';
+
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var FocusTrap__default = /*#__PURE__*/_interopDefaultLegacy(FocusTrap);
+    var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
 
     var script = {
         name: 'Dialog',
@@ -6496,11 +6532,11 @@ this.primevue.dialog = (function (FocusTrap, Portal, Ripple, utils, vue) {
             }
         },
         directives: {
-            ripple: Ripple,
-            focustrap: FocusTrap
+            ripple: Ripple__default["default"],
+            focustrap: FocusTrap__default["default"]
         },
         components: {
-            Portal: Portal
+            Portal: Portal__default["default"]
         }
     };
 
@@ -6669,6 +6705,12 @@ this.primevue = this.primevue || {};
 this.primevue.paginator = (function (utils, vue, Ripple, Dropdown, InputNumber) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+    var Dropdown__default = /*#__PURE__*/_interopDefaultLegacy(Dropdown);
+    var InputNumber__default = /*#__PURE__*/_interopDefaultLegacy(InputNumber);
+
     var script$9 = {
         name: 'CurrentPageReport',
         props: {
@@ -6737,7 +6779,7 @@ this.primevue.paginator = (function (utils, vue, Ripple, Dropdown, InputNumber) 
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -6784,7 +6826,7 @@ this.primevue.paginator = (function (utils, vue, Ripple, Dropdown, InputNumber) 
             }
         },
         components: {
-            JTPDropdown: Dropdown
+            JTPDropdown: Dropdown__default["default"]
         }
     };
 
@@ -6837,7 +6879,7 @@ this.primevue.paginator = (function (utils, vue, Ripple, Dropdown, InputNumber) 
             }
         },
         components: {
-            JTPInput: InputNumber
+            JTPInput: InputNumber__default["default"]
         }
     };
 
@@ -6869,7 +6911,7 @@ this.primevue.paginator = (function (utils, vue, Ripple, Dropdown, InputNumber) 
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -6904,7 +6946,7 @@ this.primevue.paginator = (function (utils, vue, Ripple, Dropdown, InputNumber) 
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -6947,7 +6989,7 @@ this.primevue.paginator = (function (utils, vue, Ripple, Dropdown, InputNumber) 
         },
         computed: {},
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -6990,7 +7032,7 @@ this.primevue.paginator = (function (utils, vue, Ripple, Dropdown, InputNumber) 
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -7039,7 +7081,7 @@ this.primevue.paginator = (function (utils, vue, Ripple, Dropdown, InputNumber) 
             }
         },
         components: {
-            RPPDropdown: Dropdown
+            RPPDropdown: Dropdown__default["default"]
         }
     };
 
@@ -7497,6 +7539,10 @@ this.primevue = this.primevue || {};
 this.primevue.tree = (function (utils, Ripple, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
     var script$1 = {
         name: 'TreeNode',
         emits: ['node-toggle', 'node-click', 'checkbox-change'],
@@ -7878,7 +7924,7 @@ this.primevue.tree = (function (utils, Ripple, vue) {
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -8365,6 +8411,12 @@ this.primevue = this.primevue || {};
 this.primevue.menu = (function (OverlayEventBus, Portal, utils, Ripple, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var OverlayEventBus__default = /*#__PURE__*/_interopDefaultLegacy(OverlayEventBus);
+    var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
     var script$1 = {
         name: 'Menuitem',
         inheritAttrs: false,
@@ -8412,7 +8464,7 @@ this.primevue.menu = (function (OverlayEventBus, Portal, utils, Ripple, vue) {
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -8822,7 +8874,7 @@ this.primevue.menu = (function (OverlayEventBus, Portal, utils, Ripple, vue) {
                 return ['p-menuitem-separator', item.class];
             },
             onOverlayClick(event) {
-                OverlayEventBus.emit('overlay-click', {
+                OverlayEventBus__default["default"].emit('overlay-click', {
                     originalEvent: event,
                     target: this.target
                 });
@@ -8854,7 +8906,7 @@ this.primevue.menu = (function (OverlayEventBus, Portal, utils, Ripple, vue) {
         },
         components: {
             PVMenuitem: script$1,
-            Portal: Portal
+            Portal: Portal__default["default"]
         }
     };
 
@@ -9012,6 +9064,12 @@ this.primevue = this.primevue || {};
 this.primevue.tieredmenu = (function (OverlayEventBus, Portal, utils, Ripple, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var OverlayEventBus__default = /*#__PURE__*/_interopDefaultLegacy(OverlayEventBus);
+    var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
     var script$1 = {
         name: 'TieredMenuSub',
         emits: ['item-click', 'item-mouseenter'],
@@ -9117,7 +9175,7 @@ this.primevue.tieredmenu = (function (OverlayEventBus, Portal, utils, Ripple, vu
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -9493,7 +9551,7 @@ this.primevue.tieredmenu = (function (OverlayEventBus, Portal, utils, Ripple, vu
                 isFocus && utils.DomHandler.focus(this.menubar);
             },
             onOverlayClick(event) {
-                OverlayEventBus.emit('overlay-click', {
+                OverlayEventBus__default["default"].emit('overlay-click', {
                     originalEvent: event,
                     target: this.target
                 });
@@ -9858,7 +9916,7 @@ this.primevue.tieredmenu = (function (OverlayEventBus, Portal, utils, Ripple, vu
         },
         components: {
             TieredMenuSub: script$1,
-            Portal: Portal
+            Portal: Portal__default["default"]
         }
     };
 

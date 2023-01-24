@@ -2,6 +2,11 @@ this.primevue = this.primevue || {};
 this.primevue.orderlist = (function (Button, Ripple, utils, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Button__default = /*#__PURE__*/_interopDefaultLegacy(Button);
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
     var script = {
         name: 'OrderList',
         emits: ['update:modelValue', 'reorder', 'update:selection', 'selection-change', 'focus', 'blur'],
@@ -524,10 +529,10 @@ this.primevue.orderlist = (function (Button, Ripple, utils, vue) {
             }
         },
         components: {
-            OLButton: Button
+            OLButton: Button__default["default"]
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 

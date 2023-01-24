@@ -5,6 +5,11 @@ var TieredMenu = require('primevue/tieredmenu');
 var utils = require('primevue/utils');
 var vue = require('vue');
 
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var Button__default = /*#__PURE__*/_interopDefaultLegacy(Button);
+var TieredMenu__default = /*#__PURE__*/_interopDefaultLegacy(TieredMenu);
+
 var script = {
     name: 'SplitButton',
     emits: ['click'],
@@ -89,8 +94,8 @@ var script = {
         }
     },
     components: {
-        PVSButton: Button,
-        PVSMenu: TieredMenu
+        PVSButton: Button__default["default"],
+        PVSMenu: TieredMenu__default["default"]
     }
 };
 

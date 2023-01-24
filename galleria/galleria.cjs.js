@@ -6,6 +6,12 @@ var utils = require('primevue/utils');
 var Ripple = require('primevue/ripple');
 var vue = require('vue');
 
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var FocusTrap__default = /*#__PURE__*/_interopDefaultLegacy(FocusTrap);
+var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
+var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
 var script$3 = {
     name: 'GalleriaItem',
     emits: ['start-slideshow', 'stop-slideshow', 'update:activeIndex'],
@@ -158,7 +164,7 @@ var script$3 = {
         }
     },
     directives: {
-        ripple: Ripple
+        ripple: Ripple__default["default"]
     }
 };
 
@@ -759,7 +765,7 @@ var script$2 = {
         }
     },
     directives: {
-        ripple: Ripple
+        ripple: Ripple__default["default"]
     }
 };
 
@@ -951,7 +957,7 @@ var script$1 = {
         GalleriaThumbnails: script$2
     },
     directives: {
-        ripple: Ripple
+        ripple: Ripple__default["default"]
     }
 };
 
@@ -1244,10 +1250,10 @@ var script = {
     },
     components: {
         GalleriaContent: script$1,
-        Portal: Portal
+        Portal: Portal__default["default"]
     },
     directives: {
-        focustrap: FocusTrap
+        focustrap: FocusTrap__default["default"]
     }
 };
 

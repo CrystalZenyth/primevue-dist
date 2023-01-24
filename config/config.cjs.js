@@ -162,5 +162,5 @@ var PrimeVue = {
     }
 };
 
-exports.default = PrimeVue;
+exports["default"] = PrimeVue;
 exports.usePrimeVue = usePrimeVue;
