@@ -5169,7 +5169,8 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
             processedData() {
                 let data = this.value || [];
 
-                if (!this.lazy) {
+                // Prevent sorting/filtering while rows are being edited
+                if (!this.lazy && (!this.editingRows || !this.editingRows.length)) {
                     if (data && data.length) {
                         if (this.hasFilters) {
                             data = this.filter(data);
