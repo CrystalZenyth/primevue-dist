@@ -2674,19 +2674,19 @@ var script$2 = {
 };
 
 const _hoisted_1$2 = ["tabindex", "colspan", "rowspan", "aria-sort"];
-const _hoisted_2$2 = ["aria-label"];
+const _hoisted_2$2 = { class: "p-column-header-content" };
 const _hoisted_3$2 = {
-  key: 2,
-  class: "p-column-resizer-keyboard-helper"
-};
-const _hoisted_4$1 = { class: "p-column-header-content" };
-const _hoisted_5$1 = {
   key: 1,
   class: "p-column-title"
 };
-const _hoisted_6$1 = {
+const _hoisted_4$1 = {
   key: 3,
   class: "p-sortable-column-badge"
+};
+const _hoisted_5$1 = ["aria-label"];
+const _hoisted_6$1 = {
+  key: 2,
+  class: "p-column-resizer-keyboard-helper"
 };
 
 function render$2(_ctx, _cache, $props, $setup, $data, $options) {
@@ -2716,22 +2716,7 @@ function render$2(_ctx, _cache, $props, $setup, $data, $options) {
           onMousedown: _cache[0] || (_cache[0] = (...args) => ($options.onResizeStart && $options.onResizeStart(...args)))
         }, null, 32))
       : vue.createCommentVNode("", true),
-    ($props.resizableColumns && !$options.columnProp('frozen'))
-      ? (vue.openBlock(), vue.createElementBlock("input", {
-          key: 1,
-          class: "p-column-resizer-assistive-text",
-          max: "3000",
-          tabindex: "0",
-          onFocusin: _cache[1] || (_cache[1] = (...args) => ($options.onResizeStartKeyboard && $options.onResizeStartKeyboard(...args))),
-          onKeydown: _cache[2] || (_cache[2] = (...args) => ($options.onResizeStartKeyboard && $options.onResizeStartKeyboard(...args))),
-          type: "range",
-          "aria-label": $options.columnProp('header') ? `resize width of ${$options.columnProp('header')}` : 'resize width of unlabeled column'
-        }, null, 40, _hoisted_2$2))
-      : vue.createCommentVNode("", true),
-    ($props.resizableColumns && !$options.columnProp('frozen'))
-      ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_3$2))
-      : vue.createCommentVNode("", true),
-    vue.createElementVNode("div", _hoisted_4$1, [
+    vue.createElementVNode("div", _hoisted_2$2, [
       ($props.column.children && $props.column.children.header)
         ? (vue.openBlock(), vue.createBlock(vue.resolveDynamicComponent($props.column.children.header), {
             key: 0,
@@ -2739,7 +2724,7 @@ function render$2(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8, ["column"]))
         : vue.createCommentVNode("", true),
       ($options.columnProp('header'))
-        ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_5$1, vue.toDisplayString($options.columnProp('header')), 1))
+        ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_3$2, vue.toDisplayString($options.columnProp('header')), 1))
         : vue.createCommentVNode("", true),
       ($options.columnProp('sortable'))
         ? (vue.openBlock(), vue.createElementBlock("span", {
@@ -2748,7 +2733,7 @@ function render$2(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 2))
         : vue.createCommentVNode("", true),
       ($options.isMultiSorted())
-        ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_6$1, vue.toDisplayString($options.getBadgeValue()), 1))
+        ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_4$1, vue.toDisplayString($options.getBadgeValue()), 1))
         : vue.createCommentVNode("", true),
       ($options.columnProp('selectionMode') === 'multiple' && $props.filterDisplay !== 'row')
         ? (vue.openBlock(), vue.createBlock(_component_DTHeaderCheckbox, {
@@ -2773,8 +2758,8 @@ function render$2(_ctx, _cache, $props, $setup, $data, $options) {
             filters: $props.filters,
             filtersStore: $props.filtersStore,
             filterInputProps: $props.filterInputProps,
-            onFilterChange: _cache[3] || (_cache[3] = $event => (_ctx.$emit('filter-change', $event))),
-            onFilterApply: _cache[4] || (_cache[4] = $event => (_ctx.$emit('filter-apply'))),
+            onFilterChange: _cache[1] || (_cache[1] = $event => (_ctx.$emit('filter-change', $event))),
+            onFilterApply: _cache[2] || (_cache[2] = $event => (_ctx.$emit('filter-apply'))),
             filterMenuStyle: $options.columnProp('filterMenuStyle'),
             filterMenuClass: $options.columnProp('filterMenuClass'),
             showOperator: $options.columnProp('showFilterOperator'),
@@ -2784,14 +2769,29 @@ function render$2(_ctx, _cache, $props, $setup, $data, $options) {
             showAddButton: $options.columnProp('showAddButton'),
             matchModeOptions: $options.columnProp('filterMatchModeOptions'),
             maxConstraints: $options.columnProp('maxConstraints'),
-            onOperatorChange: _cache[5] || (_cache[5] = $event => (_ctx.$emit('operator-change', $event))),
-            onMatchmodeChange: _cache[6] || (_cache[6] = $event => (_ctx.$emit('matchmode-change', $event))),
-            onConstraintAdd: _cache[7] || (_cache[7] = $event => (_ctx.$emit('constraint-add', $event))),
-            onConstraintRemove: _cache[8] || (_cache[8] = $event => (_ctx.$emit('constraint-remove', $event))),
-            onApplyClick: _cache[9] || (_cache[9] = $event => (_ctx.$emit('apply-click', $event)))
+            onOperatorChange: _cache[3] || (_cache[3] = $event => (_ctx.$emit('operator-change', $event))),
+            onMatchmodeChange: _cache[4] || (_cache[4] = $event => (_ctx.$emit('matchmode-change', $event))),
+            onConstraintAdd: _cache[5] || (_cache[5] = $event => (_ctx.$emit('constraint-add', $event))),
+            onConstraintRemove: _cache[6] || (_cache[6] = $event => (_ctx.$emit('constraint-remove', $event))),
+            onApplyClick: _cache[7] || (_cache[7] = $event => (_ctx.$emit('apply-click', $event)))
           }, null, 8, ["field", "type", "showMenu", "filterElement", "filterHeaderTemplate", "filterFooterTemplate", "filterClearTemplate", "filterApplyTemplate", "filters", "filtersStore", "filterInputProps", "filterMenuStyle", "filterMenuClass", "showOperator", "showClearButton", "showApplyButton", "showMatchModes", "showAddButton", "matchModeOptions", "maxConstraints"]))
         : vue.createCommentVNode("", true)
-    ])
+    ]),
+    ($props.resizableColumns && !$options.columnProp('frozen'))
+      ? (vue.openBlock(), vue.createElementBlock("input", {
+          key: 1,
+          class: "p-column-resizer-assistive-text",
+          max: "3000",
+          tabindex: "0",
+          onFocusin: _cache[8] || (_cache[8] = (...args) => ($options.onResizeStartKeyboard && $options.onResizeStartKeyboard(...args))),
+          onKeydown: _cache[9] || (_cache[9] = (...args) => ($options.onResizeStartKeyboard && $options.onResizeStartKeyboard(...args))),
+          type: "range",
+          "aria-label": $options.columnProp('header') ? `resize width of ${$options.columnProp('header')}` : 'resize width of unlabeled column'
+        }, null, 40, _hoisted_5$1))
+      : vue.createCommentVNode("", true),
+    ($props.resizableColumns && !$options.columnProp('frozen'))
+      ? (vue.openBlock(), vue.createElementBlock("span", _hoisted_6$1))
+      : vue.createCommentVNode("", true)
   ], 46, _hoisted_1$2))
 }
 

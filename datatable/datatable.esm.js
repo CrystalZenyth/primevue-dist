@@ -2661,19 +2661,19 @@ var script$2 = {
 };
 
 const _hoisted_1$2 = ["tabindex", "colspan", "rowspan", "aria-sort"];
-const _hoisted_2$2 = ["aria-label"];
+const _hoisted_2$2 = { class: "p-column-header-content" };
 const _hoisted_3$2 = {
-  key: 2,
-  class: "p-column-resizer-keyboard-helper"
-};
-const _hoisted_4$1 = { class: "p-column-header-content" };
-const _hoisted_5$1 = {
   key: 1,
   class: "p-column-title"
 };
-const _hoisted_6$1 = {
+const _hoisted_4$1 = {
   key: 3,
   class: "p-sortable-column-badge"
+};
+const _hoisted_5$1 = ["aria-label"];
+const _hoisted_6$1 = {
+  key: 2,
+  class: "p-column-resizer-keyboard-helper"
 };
 
 function render$2(_ctx, _cache, $props, $setup, $data, $options) {
@@ -2703,22 +2703,7 @@ function render$2(_ctx, _cache, $props, $setup, $data, $options) {
           onMousedown: _cache[0] || (_cache[0] = (...args) => ($options.onResizeStart && $options.onResizeStart(...args)))
         }, null, 32))
       : createCommentVNode("", true),
-    ($props.resizableColumns && !$options.columnProp('frozen'))
-      ? (openBlock(), createElementBlock("input", {
-          key: 1,
-          class: "p-column-resizer-assistive-text",
-          max: "3000",
-          tabindex: "0",
-          onFocusin: _cache[1] || (_cache[1] = (...args) => ($options.onResizeStartKeyboard && $options.onResizeStartKeyboard(...args))),
-          onKeydown: _cache[2] || (_cache[2] = (...args) => ($options.onResizeStartKeyboard && $options.onResizeStartKeyboard(...args))),
-          type: "range",
-          "aria-label": $options.columnProp('header') ? `resize width of ${$options.columnProp('header')}` : 'resize width of unlabeled column'
-        }, null, 40, _hoisted_2$2))
-      : createCommentVNode("", true),
-    ($props.resizableColumns && !$options.columnProp('frozen'))
-      ? (openBlock(), createElementBlock("span", _hoisted_3$2))
-      : createCommentVNode("", true),
-    createElementVNode("div", _hoisted_4$1, [
+    createElementVNode("div", _hoisted_2$2, [
       ($props.column.children && $props.column.children.header)
         ? (openBlock(), createBlock(resolveDynamicComponent($props.column.children.header), {
             key: 0,
@@ -2726,7 +2711,7 @@ function render$2(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 8, ["column"]))
         : createCommentVNode("", true),
       ($options.columnProp('header'))
-        ? (openBlock(), createElementBlock("span", _hoisted_5$1, toDisplayString($options.columnProp('header')), 1))
+        ? (openBlock(), createElementBlock("span", _hoisted_3$2, toDisplayString($options.columnProp('header')), 1))
         : createCommentVNode("", true),
       ($options.columnProp('sortable'))
         ? (openBlock(), createElementBlock("span", {
@@ -2735,7 +2720,7 @@ function render$2(_ctx, _cache, $props, $setup, $data, $options) {
           }, null, 2))
         : createCommentVNode("", true),
       ($options.isMultiSorted())
-        ? (openBlock(), createElementBlock("span", _hoisted_6$1, toDisplayString($options.getBadgeValue()), 1))
+        ? (openBlock(), createElementBlock("span", _hoisted_4$1, toDisplayString($options.getBadgeValue()), 1))
         : createCommentVNode("", true),
       ($options.columnProp('selectionMode') === 'multiple' && $props.filterDisplay !== 'row')
         ? (openBlock(), createBlock(_component_DTHeaderCheckbox, {
@@ -2760,8 +2745,8 @@ function render$2(_ctx, _cache, $props, $setup, $data, $options) {
             filters: $props.filters,
             filtersStore: $props.filtersStore,
             filterInputProps: $props.filterInputProps,
-            onFilterChange: _cache[3] || (_cache[3] = $event => (_ctx.$emit('filter-change', $event))),
-            onFilterApply: _cache[4] || (_cache[4] = $event => (_ctx.$emit('filter-apply'))),
+            onFilterChange: _cache[1] || (_cache[1] = $event => (_ctx.$emit('filter-change', $event))),
+            onFilterApply: _cache[2] || (_cache[2] = $event => (_ctx.$emit('filter-apply'))),
             filterMenuStyle: $options.columnProp('filterMenuStyle'),
             filterMenuClass: $options.columnProp('filterMenuClass'),
             showOperator: $options.columnProp('showFilterOperator'),
@@ -2771,14 +2756,29 @@ function render$2(_ctx, _cache, $props, $setup, $data, $options) {
             showAddButton: $options.columnProp('showAddButton'),
             matchModeOptions: $options.columnProp('filterMatchModeOptions'),
             maxConstraints: $options.columnProp('maxConstraints'),
-            onOperatorChange: _cache[5] || (_cache[5] = $event => (_ctx.$emit('operator-change', $event))),
-            onMatchmodeChange: _cache[6] || (_cache[6] = $event => (_ctx.$emit('matchmode-change', $event))),
-            onConstraintAdd: _cache[7] || (_cache[7] = $event => (_ctx.$emit('constraint-add', $event))),
-            onConstraintRemove: _cache[8] || (_cache[8] = $event => (_ctx.$emit('constraint-remove', $event))),
-            onApplyClick: _cache[9] || (_cache[9] = $event => (_ctx.$emit('apply-click', $event)))
+            onOperatorChange: _cache[3] || (_cache[3] = $event => (_ctx.$emit('operator-change', $event))),
+            onMatchmodeChange: _cache[4] || (_cache[4] = $event => (_ctx.$emit('matchmode-change', $event))),
+            onConstraintAdd: _cache[5] || (_cache[5] = $event => (_ctx.$emit('constraint-add', $event))),
+            onConstraintRemove: _cache[6] || (_cache[6] = $event => (_ctx.$emit('constraint-remove', $event))),
+            onApplyClick: _cache[7] || (_cache[7] = $event => (_ctx.$emit('apply-click', $event)))
           }, null, 8, ["field", "type", "showMenu", "filterElement", "filterHeaderTemplate", "filterFooterTemplate", "filterClearTemplate", "filterApplyTemplate", "filters", "filtersStore", "filterInputProps", "filterMenuStyle", "filterMenuClass", "showOperator", "showClearButton", "showApplyButton", "showMatchModes", "showAddButton", "matchModeOptions", "maxConstraints"]))
         : createCommentVNode("", true)
-    ])
+    ]),
+    ($props.resizableColumns && !$options.columnProp('frozen'))
+      ? (openBlock(), createElementBlock("input", {
+          key: 1,
+          class: "p-column-resizer-assistive-text",
+          max: "3000",
+          tabindex: "0",
+          onFocusin: _cache[8] || (_cache[8] = (...args) => ($options.onResizeStartKeyboard && $options.onResizeStartKeyboard(...args))),
+          onKeydown: _cache[9] || (_cache[9] = (...args) => ($options.onResizeStartKeyboard && $options.onResizeStartKeyboard(...args))),
+          type: "range",
+          "aria-label": $options.columnProp('header') ? `resize width of ${$options.columnProp('header')}` : 'resize width of unlabeled column'
+        }, null, 40, _hoisted_5$1))
+      : createCommentVNode("", true),
+    ($props.resizableColumns && !$options.columnProp('frozen'))
+      ? (openBlock(), createElementBlock("span", _hoisted_6$1))
+      : createCommentVNode("", true)
   ], 46, _hoisted_1$2))
 }
 
