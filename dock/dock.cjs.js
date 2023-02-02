@@ -5,11 +5,6 @@ var Tooltip = require('primevue/tooltip');
 var utils = require('primevue/utils');
 var vue = require('vue');
 
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
-var Tooltip__default = /*#__PURE__*/_interopDefaultLegacy(Tooltip);
-
 var script$1 = {
     name: 'DockSub',
     emits: ['focus', 'blur'],
@@ -215,8 +210,8 @@ var script$1 = {
         }
     },
     directives: {
-        ripple: Ripple__default["default"],
-        tooltip: Tooltip__default["default"]
+        ripple: Ripple,
+        tooltip: Tooltip
     }
 };
 

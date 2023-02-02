@@ -2,12 +2,6 @@ this.primevue = this.primevue || {};
 this.primevue.toast = (function (Portal, ToastEventBus, utils, Ripple, vue) {
     'use strict';
 
-    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-    var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
-    var ToastEventBus__default = /*#__PURE__*/_interopDefaultLegacy(ToastEventBus);
-    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
-
     var script$1 = {
         name: 'ToastMessage',
         emits: ['close'],
@@ -100,7 +94,7 @@ this.primevue.toast = (function (Portal, ToastEventBus, utils, Ripple, vue) {
             }
         },
         directives: {
-            ripple: Ripple__default["default"]
+            ripple: Ripple
         }
     };
 
@@ -217,9 +211,9 @@ this.primevue.toast = (function (Portal, ToastEventBus, utils, Ripple, vue) {
         },
         styleElement: null,
         mounted() {
-            ToastEventBus__default["default"].on('add', this.onAdd);
-            ToastEventBus__default["default"].on('remove-group', this.onRemoveGroup);
-            ToastEventBus__default["default"].on('remove-all-groups', this.onRemoveAllGroups);
+            ToastEventBus.on('add', this.onAdd);
+            ToastEventBus.on('remove-group', this.onRemoveGroup);
+            ToastEventBus.on('remove-all-groups', this.onRemoveAllGroups);
 
             if (this.breakpoints) {
                 this.createStyle();
@@ -232,9 +226,9 @@ this.primevue.toast = (function (Portal, ToastEventBus, utils, Ripple, vue) {
                 utils.ZIndexUtils.clear(this.$refs.container);
             }
 
-            ToastEventBus__default["default"].off('add', this.onAdd);
-            ToastEventBus__default["default"].off('remove-group', this.onRemoveGroup);
-            ToastEventBus__default["default"].off('remove-all-groups', this.onRemoveAllGroups);
+            ToastEventBus.off('add', this.onAdd);
+            ToastEventBus.off('remove-group', this.onRemoveGroup);
+            ToastEventBus.off('remove-all-groups', this.onRemoveAllGroups);
         },
         methods: {
             add(message) {
@@ -333,7 +327,7 @@ this.primevue.toast = (function (Portal, ToastEventBus, utils, Ripple, vue) {
         },
         components: {
             ToastMessage: script$1,
-            Portal: Portal__default["default"]
+            Portal: Portal
         }
     };
 

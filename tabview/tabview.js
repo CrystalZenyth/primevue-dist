@@ -2,10 +2,6 @@ this.primevue = this.primevue || {};
 this.primevue.tabview = (function (Ripple, utils, vue) {
     'use strict';
 
-    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
-
     var script = {
         name: 'TabView',
         emits: ['update:activeIndex', 'tab-change', 'tab-click'],
@@ -294,7 +290,7 @@ this.primevue.tabview = (function (Ripple, utils, vue) {
             }
         },
         directives: {
-            ripple: Ripple__default["default"]
+            ripple: Ripple
         }
     };
 

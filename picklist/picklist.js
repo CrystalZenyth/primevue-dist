@@ -2,11 +2,6 @@ this.primevue = this.primevue || {};
 this.primevue.picklist = (function (Button, Ripple, utils, vue) {
     'use strict';
 
-    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-    var Button__default = /*#__PURE__*/_interopDefaultLegacy(Button);
-    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
-
     var script = {
         name: 'PickList',
         emits: ['update:modelValue', 'reorder', 'update:selection', 'selection-change', 'move-to-target', 'move-to-source', 'move-all-to-target', 'move-all-to-source', 'focus', 'blur'],
@@ -742,10 +737,10 @@ this.primevue.picklist = (function (Button, Ripple, utils, vue) {
             }
         },
         components: {
-            PLButton: Button__default["default"]
+            PLButton: Button
         },
         directives: {
-            ripple: Ripple__default["default"]
+            ripple: Ripple
         }
     };
 

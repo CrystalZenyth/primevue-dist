@@ -1032,8 +1032,6 @@ this.primevue.utils = (function (exports) {
     exports.UniqueComponentId = UniqueComponentId;
     exports.ZIndexUtils = ZIndexUtils;
 
-    Object.defineProperty(exports, '__esModule', { value: true });
-
     return exports;
 
 })({});

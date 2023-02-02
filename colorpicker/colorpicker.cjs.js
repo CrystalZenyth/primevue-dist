@@ -5,11 +5,6 @@ var Portal = require('primevue/portal');
 var utils = require('primevue/utils');
 var vue = require('vue');
 
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var OverlayEventBus__default = /*#__PURE__*/_interopDefaultLegacy(OverlayEventBus);
-var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
-
 var script = {
     name: 'ColorPicker',
     emits: ['update:modelValue', 'change', 'show', 'hide'],
@@ -561,7 +556,7 @@ var script = {
             this.hueHandle = null;
         },
         onOverlayClick(event) {
-            OverlayEventBus__default["default"].emit('overlay-click', {
+            OverlayEventBus.emit('overlay-click', {
                 originalEvent: event,
                 target: this.$el
             });
@@ -588,7 +583,7 @@ var script = {
         }
     },
     components: {
-        Portal: Portal__default["default"]
+        Portal: Portal
     }
 };
 

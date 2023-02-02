@@ -8,14 +8,6 @@ var Portal = require('primevue/portal');
 var utils = require('primevue/utils');
 var vue = require('vue');
 
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var Button__default = /*#__PURE__*/_interopDefaultLegacy(Button);
-var ConfirmationEventBus__default = /*#__PURE__*/_interopDefaultLegacy(ConfirmationEventBus);
-var FocusTrap__default = /*#__PURE__*/_interopDefaultLegacy(FocusTrap);
-var OverlayEventBus__default = /*#__PURE__*/_interopDefaultLegacy(OverlayEventBus);
-var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
-
 var script = {
     name: 'ConfirmPopup',
     inheritAttrs: false,
@@ -60,12 +52,12 @@ var script = {
             this.confirmation = null;
         };
 
-        ConfirmationEventBus__default["default"].on('confirm', this.confirmListener);
-        ConfirmationEventBus__default["default"].on('close', this.closeListener);
+        ConfirmationEventBus.on('confirm', this.confirmListener);
+        ConfirmationEventBus.on('close', this.closeListener);
     },
     beforeUnmount() {
-        ConfirmationEventBus__default["default"].off('confirm', this.confirmListener);
-        ConfirmationEventBus__default["default"].off('close', this.closeListener);
+        ConfirmationEventBus.off('confirm', this.confirmListener);
+        ConfirmationEventBus.off('close', this.closeListener);
 
         this.unbindOutsideClickListener();
 
@@ -228,14 +220,14 @@ var script = {
             this.container = el;
         },
         onOverlayClick(event) {
-            OverlayEventBus__default["default"].emit('overlay-click', {
+            OverlayEventBus.emit('overlay-click', {
                 originalEvent: event,
                 target: this.target
             });
         },
         onOverlayKeydown(event) {
             if (event.code === 'Escape') {
-                ConfirmationEventBus__default["default"].emit('close', this.closeListener);
+                ConfirmationEventBus.emit('close', this.closeListener);
                 utils.DomHandler.focus(this.target);
             }
         }
@@ -276,11 +268,11 @@ var script = {
         }
     },
     components: {
-        CPButton: Button__default["default"],
-        Portal: Portal__default["default"]
+        CPButton: Button,
+        Portal: Portal
     },
     directives: {
-        focustrap: FocusTrap__default["default"]
+        focustrap: FocusTrap
     }
 };
 

@@ -663,7 +663,7 @@ export default {
             const event = e.originalEvent;
             const column = e.column;
 
-            if (this.columnProp(column, 'sortable')) {
+            if (this.columnProp(column, 'sortable') && (!this.editingRows || !this.editingRows.length)) {
                 const targetNode = event.target;
                 const columnField = this.columnProp(column, 'sortField') || this.columnProp(column, 'field');
 

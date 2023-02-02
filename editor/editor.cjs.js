@@ -3,24 +3,6 @@
 var utils = require('primevue/utils');
 var vue = require('vue');
 
-function _interopNamespace(e) {
-    if (e && e.__esModule) return e;
-    var n = Object.create(null);
-    if (e) {
-        Object.keys(e).forEach(function (k) {
-            if (k !== 'default') {
-                var d = Object.getOwnPropertyDescriptor(e, k);
-                Object.defineProperty(n, k, d.get ? d : {
-                    enumerable: true,
-                    get: function () { return e[k]; }
-                });
-            }
-        });
-    }
-    n["default"] = e;
-    return Object.freeze(n);
-}
-
 const QuillJS = (function () {
     try {
         return window.Quill;
@@ -72,7 +54,7 @@ var script = {
             this.initQuill();
             this.handleLoad();
         } else {
-            Promise.resolve().then(function () { return /*#__PURE__*/_interopNamespace(require('quill')); })
+            import('quill')
                 .then((module) => {
                     if (module && utils.DomHandler.isExist(this.$refs.editorElement)) {
                         if (module.default) {

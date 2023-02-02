@@ -159,7 +159,7 @@ this.primevue.config = (function (exports, api, vue) {
         }
     };
 
-    exports["default"] = PrimeVue;
+    exports.default = PrimeVue;
     exports.usePrimeVue = usePrimeVue;
 
     Object.defineProperty(exports, '__esModule', { value: true });

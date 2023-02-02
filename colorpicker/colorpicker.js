@@ -2,11 +2,6 @@ this.primevue = this.primevue || {};
 this.primevue.colorpicker = (function (OverlayEventBus, Portal, utils, vue) {
     'use strict';
 
-    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-    var OverlayEventBus__default = /*#__PURE__*/_interopDefaultLegacy(OverlayEventBus);
-    var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
-
     var script = {
         name: 'ColorPicker',
         emits: ['update:modelValue', 'change', 'show', 'hide'],
@@ -558,7 +553,7 @@ this.primevue.colorpicker = (function (OverlayEventBus, Portal, utils, vue) {
                 this.hueHandle = null;
             },
             onOverlayClick(event) {
-                OverlayEventBus__default["default"].emit('overlay-click', {
+                OverlayEventBus.emit('overlay-click', {
                     originalEvent: event,
                     target: this.$el
                 });
@@ -585,7 +580,7 @@ this.primevue.colorpicker = (function (OverlayEventBus, Portal, utils, vue) {
             }
         },
         components: {
-            Portal: Portal__default["default"]
+            Portal: Portal
         }
     };
 

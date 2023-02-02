@@ -2,12 +2,6 @@ this.primevue = this.primevue || {};
 this.primevue.galleria = (function (FocusTrap, Portal, utils, Ripple, vue) {
     'use strict';
 
-    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-    var FocusTrap__default = /*#__PURE__*/_interopDefaultLegacy(FocusTrap);
-    var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
-    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
-
     var script$3 = {
         name: 'GalleriaItem',
         emits: ['start-slideshow', 'stop-slideshow', 'update:activeIndex'],
@@ -160,7 +154,7 @@ this.primevue.galleria = (function (FocusTrap, Portal, utils, Ripple, vue) {
             }
         },
         directives: {
-            ripple: Ripple__default["default"]
+            ripple: Ripple
         }
     };
 
@@ -761,7 +755,7 @@ this.primevue.galleria = (function (FocusTrap, Portal, utils, Ripple, vue) {
             }
         },
         directives: {
-            ripple: Ripple__default["default"]
+            ripple: Ripple
         }
     };
 
@@ -953,7 +947,7 @@ this.primevue.galleria = (function (FocusTrap, Portal, utils, Ripple, vue) {
             GalleriaThumbnails: script$2
         },
         directives: {
-            ripple: Ripple__default["default"]
+            ripple: Ripple
         }
     };
 
@@ -1246,10 +1240,10 @@ this.primevue.galleria = (function (FocusTrap, Portal, utils, Ripple, vue) {
         },
         components: {
             GalleriaContent: script$1,
-            Portal: Portal__default["default"]
+            Portal: Portal
         },
         directives: {
-            focustrap: FocusTrap__default["default"]
+            focustrap: FocusTrap
         }
     };
 

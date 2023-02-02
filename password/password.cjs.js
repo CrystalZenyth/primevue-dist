@@ -6,12 +6,6 @@ var Portal = require('primevue/portal');
 var utils = require('primevue/utils');
 var vue = require('vue');
 
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var InputText__default = /*#__PURE__*/_interopDefaultLegacy(InputText);
-var OverlayEventBus__default = /*#__PURE__*/_interopDefaultLegacy(OverlayEventBus);
-var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
-
 var script = {
     name: 'Password',
     emits: ['update:modelValue', 'change', 'focus', 'blur', 'invalid'],
@@ -311,7 +305,7 @@ var script = {
             this.unmasked = !this.unmasked;
         },
         onOverlayClick(event) {
-            OverlayEventBus__default["default"].emit('overlay-click', {
+            OverlayEventBus.emit('overlay-click', {
                 originalEvent: event,
                 target: this.$el
             });
@@ -376,8 +370,8 @@ var script = {
         }
     },
     components: {
-        PInputText: InputText__default["default"],
-        Portal: Portal__default["default"]
+        PInputText: InputText,
+        Portal: Portal
     }
 };
 

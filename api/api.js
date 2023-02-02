@@ -523,8 +523,6 @@ this.primevue.api = (function (exports, utils) {
     exports.PrimeIcons = PrimeIcons;
     exports.ToastSeverity = ToastSeverities;
 
-    Object.defineProperty(exports, '__esModule', { value: true });
-
     return exports;
 
 })({}, primevue.utils);

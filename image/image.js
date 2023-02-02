@@ -2,11 +2,6 @@ this.primevue = this.primevue || {};
 this.primevue.image = (function (FocusTrap, Portal, utils, vue) {
     'use strict';
 
-    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-    var FocusTrap__default = /*#__PURE__*/_interopDefaultLegacy(FocusTrap);
-    var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
-
     var script = {
         name: 'Image',
         inheritAttrs: false,
@@ -173,10 +168,10 @@ this.primevue.image = (function (FocusTrap, Portal, utils, vue) {
             }
         },
         components: {
-            Portal: Portal__default["default"]
+            Portal: Portal
         },
         directives: {
-            focustrap: FocusTrap__default["default"]
+            focustrap: FocusTrap
         }
     };
 

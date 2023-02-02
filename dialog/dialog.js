@@ -2,12 +2,6 @@ this.primevue = this.primevue || {};
 this.primevue.dialog = (function (FocusTrap, Portal, Ripple, utils, vue) {
     'use strict';
 
-    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-    var FocusTrap__default = /*#__PURE__*/_interopDefaultLegacy(FocusTrap);
-    var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
-    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
-
     var script = {
         name: 'Dialog',
         inheritAttrs: false,
@@ -457,11 +451,11 @@ this.primevue.dialog = (function (FocusTrap, Portal, Ripple, utils, vue) {
             }
         },
         directives: {
-            ripple: Ripple__default["default"],
-            focustrap: FocusTrap__default["default"]
+            ripple: Ripple,
+            focustrap: FocusTrap
         },
         components: {
-            Portal: Portal__default["default"]
+            Portal: Portal
         }
     };
 

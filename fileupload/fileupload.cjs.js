@@ -8,14 +8,6 @@ var utils = require('primevue/utils');
 var Badge = require('primevue/badge');
 var vue = require('vue');
 
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var Button__default = /*#__PURE__*/_interopDefaultLegacy(Button);
-var Message__default = /*#__PURE__*/_interopDefaultLegacy(Message);
-var ProgressBar__default = /*#__PURE__*/_interopDefaultLegacy(ProgressBar);
-var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
-var Badge__default = /*#__PURE__*/_interopDefaultLegacy(Badge);
-
 var script$1 = {
     emits: ['remove'],
     props: {
@@ -51,8 +43,8 @@ var script$1 = {
         }
     },
     components: {
-        FileUploadButton: Button__default["default"],
-        FileUploadBadge: Badge__default["default"]
+        FileUploadButton: Button,
+        FileUploadBadge: Badge
     }
 };
 
@@ -550,13 +542,13 @@ var script = {
         }
     },
     components: {
-        FileUploadButton: Button__default["default"],
-        FileUploadProgressBar: ProgressBar__default["default"],
-        FileUploadMessage: Message__default["default"],
+        FileUploadButton: Button,
+        FileUploadProgressBar: ProgressBar,
+        FileUploadMessage: Message,
         FileContent: script$1
     },
     directives: {
-        ripple: Ripple__default["default"]
+        ripple: Ripple
     }
 };
 

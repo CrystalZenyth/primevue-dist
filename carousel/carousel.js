@@ -2,10 +2,6 @@ this.primevue = this.primevue || {};
 this.primevue.carousel = (function (Ripple, utils, vue) {
     'use strict';
 
-    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
-
     var script = {
         name: 'Carousel',
         emits: ['update:page'],
@@ -574,7 +570,7 @@ this.primevue.carousel = (function (Ripple, utils, vue) {
             }
         },
         directives: {
-            ripple: Ripple__default["default"]
+            ripple: Ripple
         }
     };
 

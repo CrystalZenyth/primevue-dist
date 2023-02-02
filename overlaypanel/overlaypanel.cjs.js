@@ -7,13 +7,6 @@ var Ripple = require('primevue/ripple');
 var utils = require('primevue/utils');
 var vue = require('vue');
 
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var FocusTrap__default = /*#__PURE__*/_interopDefaultLegacy(FocusTrap);
-var OverlayEventBus__default = /*#__PURE__*/_interopDefaultLegacy(OverlayEventBus);
-var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
-var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
-
 var script = {
     name: 'OverlayPanel',
     inheritAttrs: false,
@@ -89,7 +82,7 @@ var script = {
         }
 
         if (this.overlayEventListener) {
-            OverlayEventBus__default["default"].off('overlay-click', this.overlayEventListener);
+            OverlayEventBus.off('overlay-click', this.overlayEventListener);
             this.overlayEventListener = null;
         }
 
@@ -139,14 +132,14 @@ var script = {
             };
 
             this.focus();
-            OverlayEventBus__default["default"].on('overlay-click', this.overlayEventListener);
+            OverlayEventBus.on('overlay-click', this.overlayEventListener);
             this.$emit('show');
         },
         onLeave() {
             this.unbindOutsideClickListener();
             this.unbindScrollListener();
             this.unbindResizeListener();
-            OverlayEventBus__default["default"].off('overlay-click', this.overlayEventListener);
+            OverlayEventBus.off('overlay-click', this.overlayEventListener);
             this.overlayEventListener = null;
             this.$emit('hide');
         },
@@ -278,7 +271,7 @@ var script = {
             }
         },
         onOverlayClick(event) {
-            OverlayEventBus__default["default"].emit('overlay-click', {
+            OverlayEventBus.emit('overlay-click', {
                 originalEvent: event,
                 target: this.target
             });
@@ -302,11 +295,11 @@ var script = {
         }
     },
     directives: {
-        focustrap: FocusTrap__default["default"],
-        ripple: Ripple__default["default"]
+        focustrap: FocusTrap,
+        ripple: Ripple
     },
     components: {
-        Portal: Portal__default["default"]
+        Portal: Portal
     }
 };
 

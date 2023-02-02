@@ -5,11 +5,6 @@ var Portal = require('primevue/portal');
 var utils = require('primevue/utils');
 var vue = require('vue');
 
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var FocusTrap__default = /*#__PURE__*/_interopDefaultLegacy(FocusTrap);
-var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
-
 var script = {
     name: 'Image',
     inheritAttrs: false,
@@ -176,10 +171,10 @@ var script = {
         }
     },
     components: {
-        Portal: Portal__default["default"]
+        Portal: Portal
     },
     directives: {
-        focustrap: FocusTrap__default["default"]
+        focustrap: FocusTrap
     }
 };
 

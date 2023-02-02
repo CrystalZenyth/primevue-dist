@@ -2,10 +2,6 @@ this.primevue = this.primevue || {};
 this.primevue.button = (function (Ripple, vue) {
     'use strict';
 
-    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
-
     var script = {
         name: 'Button',
         props: {
@@ -83,7 +79,7 @@ this.primevue.button = (function (Ripple, vue) {
             }
         },
         directives: {
-            ripple: Ripple__default["default"]
+            ripple: Ripple
         }
     };
 

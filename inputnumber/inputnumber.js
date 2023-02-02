@@ -2,11 +2,6 @@ this.primevue = this.primevue || {};
 this.primevue.inputnumber = (function (Button, InputText, utils, vue) {
     'use strict';
 
-    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-    var Button__default = /*#__PURE__*/_interopDefaultLegacy(Button);
-    var InputText__default = /*#__PURE__*/_interopDefaultLegacy(InputText);
-
     var script = {
         name: 'InputNumber',
         emits: ['update:modelValue', 'input', 'focus', 'blur'],
@@ -1061,8 +1056,8 @@ this.primevue.inputnumber = (function (Button, InputText, utils, vue) {
             }
         },
         components: {
-            INInputText: InputText__default["default"],
-            INButton: Button__default["default"]
+            INInputText: InputText,
+            INButton: Button
         }
     };
 

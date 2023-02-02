@@ -2,12 +2,6 @@ this.primevue = this.primevue || {};
 this.primevue.tieredmenu = (function (OverlayEventBus, Portal, utils, Ripple, vue) {
     'use strict';
 
-    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-    var OverlayEventBus__default = /*#__PURE__*/_interopDefaultLegacy(OverlayEventBus);
-    var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
-    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
-
     var script$1 = {
         name: 'TieredMenuSub',
         emits: ['item-click', 'item-mouseenter'],
@@ -113,7 +107,7 @@ this.primevue.tieredmenu = (function (OverlayEventBus, Portal, utils, Ripple, vu
             }
         },
         directives: {
-            ripple: Ripple__default["default"]
+            ripple: Ripple
         }
     };
 
@@ -489,7 +483,7 @@ this.primevue.tieredmenu = (function (OverlayEventBus, Portal, utils, Ripple, vu
                 isFocus && utils.DomHandler.focus(this.menubar);
             },
             onOverlayClick(event) {
-                OverlayEventBus__default["default"].emit('overlay-click', {
+                OverlayEventBus.emit('overlay-click', {
                     originalEvent: event,
                     target: this.target
                 });
@@ -854,7 +848,7 @@ this.primevue.tieredmenu = (function (OverlayEventBus, Portal, utils, Ripple, vu
         },
         components: {
             TieredMenuSub: script$1,
-            Portal: Portal__default["default"]
+            Portal: Portal
         }
     };
 

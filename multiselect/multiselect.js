@@ -2,13 +2,6 @@ this.primevue = this.primevue || {};
 this.primevue.multiselect = (function (api, OverlayEventBus, Portal, Ripple, utils, VirtualScroller, vue) {
     'use strict';
 
-    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-    var OverlayEventBus__default = /*#__PURE__*/_interopDefaultLegacy(OverlayEventBus);
-    var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
-    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
-    var VirtualScroller__default = /*#__PURE__*/_interopDefaultLegacy(VirtualScroller);
-
     var script = {
         name: 'MultiSelect',
         emits: ['update:modelValue', 'change', 'focus', 'blur', 'before-show', 'before-hide', 'show', 'hide', 'filter', 'selectall-change'],
@@ -472,7 +465,7 @@ this.primevue.multiselect = (function (api, OverlayEventBus, Portal, Ripple, uti
                 }
             },
             onOverlayClick(event) {
-                OverlayEventBus__default["default"].emit('overlay-click', {
+                OverlayEventBus.emit('overlay-click', {
                     originalEvent: event,
                     target: this.$el
                 });
@@ -1033,11 +1026,11 @@ this.primevue.multiselect = (function (api, OverlayEventBus, Portal, Ripple, uti
             }
         },
         directives: {
-            ripple: Ripple__default["default"]
+            ripple: Ripple
         },
         components: {
-            VirtualScroller: VirtualScroller__default["default"],
-            Portal: Portal__default["default"]
+            VirtualScroller: VirtualScroller,
+            Portal: Portal
         }
     };
 
