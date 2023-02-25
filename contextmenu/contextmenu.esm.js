@@ -1,5 +1,5 @@
 import Portal from 'primevue/portal';
-import { ObjectUtils, DomHandler, ZIndexUtils, UniqueComponentId } from 'primevue/utils';
+import { ObjectUtils, DomHandler, UniqueComponentId, ZIndexUtils } from 'primevue/utils';
 import Ripple from 'primevue/ripple';
 import { resolveComponent, resolveDirective, openBlock, createBlock, Transition, withCtx, createElementBlock, Fragment, renderList, normalizeStyle, normalizeClass, createElementVNode, withDirectives, createCommentVNode, toDisplayString, resolveDynamicComponent, createVNode, mergeProps } from 'vue';
 
@@ -338,6 +338,7 @@ var script = {
     list: null,
     data() {
         return {
+            id: this.$attrs.id,
             focused: false,
             focusedItemInfo: { index: -1, level: 0, parentKey: '' },
             activeItemPath: [],
@@ -346,6 +347,9 @@ var script = {
         };
     },
     watch: {
+        '$attrs.id': function (newValue) {
+            this.id = newValue || UniqueComponentId();
+        },
         activeItemPath(newPath) {
             if (ObjectUtils.isNotEmpty(newPath)) {
                 this.bindOutsideClickListener();
@@ -371,6 +375,8 @@ var script = {
         this.container = null;
     },
     mounted() {
+        this.id = this.id || UniqueComponentId();
+
         if (this.global) {
             this.bindDocumentContextMenuListener();
         }
@@ -860,9 +866,6 @@ var script = {
 
             return processedItem ? processedItem.items : this.processedItems;
         },
-        id() {
-            return this.$attrs.id || UniqueComponentId();
-        },
         focusedItemId() {
             return this.focusedItemInfo.index !== -1 ? `${this.id}${ObjectUtils.isNotEmpty(this.focusedItemInfo.parentKey) ? '_' + this.focusedItemInfo.parentKey : ''}_${this.focusedItemInfo.index}` : null;
         }
@@ -895,14 +898,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               }, _ctx.$attrs), [
                 createVNode(_component_ContextMenuSub, {
                   ref: $options.listRef,
-                  id: $options.id + '_list',
+                  id: $data.id + '_list',
                   class: "p-contextmenu-root-list",
                   role: "menubar",
                   root: true,
                   tabindex: $props.tabindex,
                   "aria-orientation": "vertical",
                   "aria-activedescendant": $data.focused ? $options.focusedItemId : undefined,
-                  menuId: $options.id,
+                  menuId: $data.id,
                   focusedItemId: $data.focused ? $options.focusedItemId : undefined,
                   items: $options.processedItems,
                   template: _ctx.$slots.item,
@@ -955,7 +958,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = "\n.p-contextmenu {\n    position: absolute;\n}\n.p-contextmenu ul {\n    margin: 0;\n    padding: 0;\n    list-style: none;\n}\n.p-contextmenu .p-submenu-list {\n    position: absolute;\n    min-width: 100%;\n    z-index: 1;\n}\n.p-contextmenu .p-menuitem-link {\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    text-decoration: none;\n    overflow: hidden;\n    position: relative;\n}\n.p-contextmenu .p-menuitem-text {\n    line-height: 1;\n}\n.p-contextmenu .p-menuitem {\n    position: relative;\n}\n.p-contextmenu .p-menuitem-link .p-submenu-icon {\n    margin-left: auto;\n}\n.p-contextmenu-enter-from {\n    opacity: 0;\n}\n.p-contextmenu-enter-active {\n    transition: opacity 250ms;\n}\n";
+var css_248z = "\n.p-contextmenu {\r\n    position: absolute;\n}\n.p-contextmenu ul {\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style: none;\n}\n.p-contextmenu .p-submenu-list {\r\n    position: absolute;\r\n    min-width: 100%;\r\n    z-index: 1;\n}\n.p-contextmenu .p-menuitem-link {\r\n    cursor: pointer;\r\n    display: flex;\r\n    align-items: center;\r\n    text-decoration: none;\r\n    overflow: hidden;\r\n    position: relative;\n}\n.p-contextmenu .p-menuitem-text {\r\n    line-height: 1;\n}\n.p-contextmenu .p-menuitem {\r\n    position: relative;\n}\n.p-contextmenu .p-menuitem-link .p-submenu-icon {\r\n    margin-left: auto;\n}\n.p-contextmenu-enter-from {\r\n    opacity: 0;\n}\n.p-contextmenu-enter-active {\r\n    transition: opacity 250ms;\n}\r\n";
 styleInject(css_248z);
 
 script.render = render;

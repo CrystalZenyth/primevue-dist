@@ -6,6 +6,12 @@ var Tooltip = require('primevue/tooltip');
 var utils = require('primevue/utils');
 var vue = require('vue');
 
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var Button__default = /*#__PURE__*/_interopDefaultLegacy(Button);
+var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+var Tooltip__default = /*#__PURE__*/_interopDefaultLegacy(Tooltip);
+
 var script = {
     name: 'SpeedDial',
     emits: ['click', 'show', 'hide', 'focus', 'blur'],
@@ -72,6 +78,7 @@ var script = {
     list: null,
     data() {
         return {
+            id: this.$attrs.id,
             d_visible: this.visible,
             isItemClicked: false,
             focused: false,
@@ -79,11 +86,16 @@ var script = {
         };
     },
     watch: {
+        '$attrs.id': function (newValue) {
+            this.id = newValue || utils.UniqueComponentId();
+        },
         visible(newValue) {
             this.d_visible = newValue;
         }
     },
     mounted() {
+        this.id = this.id || utils.UniqueComponentId();
+
         if (this.type !== 'linear') {
             const button = utils.DomHandler.findSingle(this.container, '.p-speeddial-button');
             const firstItem = utils.DomHandler.findSingle(this.list, '.p-speeddial-item');
@@ -466,19 +478,16 @@ var script = {
                 this.maskClass
             ];
         },
-        id() {
-            return this.$attrs.id || utils.UniqueComponentId();
-        },
         focusedOptionId() {
             return this.focusedOptionIndex !== -1 ? this.focusedOptionIndex : null;
         }
     },
     components: {
-        SDButton: Button
+        SDButton: Button__default["default"]
     },
     directives: {
-        ripple: Ripple,
-        tooltip: Tooltip
+        ripple: Ripple__default["default"],
+        tooltip: Tooltip__default["default"]
     }
 };
 
@@ -507,14 +516,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           onKeydown: $options.onTogglerKeydown,
           "aria-expanded": $data.d_visible,
           "aria-haspopup": true,
-          "aria-controls": $options.id + '_list',
+          "aria-controls": $data.id + '_list',
           "aria-label": _ctx.ariaLabel,
           "aria-labelledby": _ctx.ariaLabelledby
         }, null, 8, ["class", "icon", "disabled", "onKeydown", "aria-expanded", "aria-controls", "aria-label", "aria-labelledby"])
       ]),
       vue.createElementVNode("ul", {
         ref: $options.listRef,
-        id: $options.id + '_list',
+        id: $data.id + '_list',
         class: "p-speeddial-list",
         role: "menu",
         onFocus: _cache[1] || (_cache[1] = (...args) => ($options.onFocus && $options.onFocus(...args))),
@@ -528,9 +537,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             ($options.isItemVisible(item))
               ? (vue.openBlock(), vue.createElementBlock("li", {
                   key: 0,
-                  id: `${$options.id}_${index}`,
-                  "aria-controls": `${$options.id}_item`,
-                  class: vue.normalizeClass(["p-speeddial-item", $options.itemClass(`${$options.id}_${index}`)]),
+                  id: `${$data.id}_${index}`,
+                  "aria-controls": `${$data.id}_item`,
+                  class: vue.normalizeClass(["p-speeddial-item", $options.itemClass(`${$data.id}_${index}`)]),
                   style: vue.normalizeStyle($options.getItemStyle(index)),
                   role: "menuitem"
                 }, [
@@ -602,7 +611,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = "\n.p-speeddial {\n    position: absolute;\n    display: flex;\n}\n.p-speeddial-button {\n    z-index: 1;\n}\n.p-speeddial-list {\n    margin: 0;\n    padding: 0;\n    list-style: none;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: top 0s linear 0.2s;\n    pointer-events: none;\n    z-index: 2;\n}\n.p-speeddial-item {\n    transform: scale(0);\n    opacity: 0;\n    transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, opacity 0.8s;\n    will-change: transform;\n}\n.p-speeddial-action {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    border-radius: 50%;\n    position: relative;\n    overflow: hidden;\n}\n.p-speeddial-circle .p-speeddial-item,\n.p-speeddial-semi-circle .p-speeddial-item,\n.p-speeddial-quarter-circle .p-speeddial-item {\n    position: absolute;\n}\n.p-speeddial-rotate {\n    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;\n    will-change: transform;\n}\n.p-speeddial-mask {\n    position: absolute;\n    left: 0;\n    top: 0;\n    width: 100%;\n    height: 100%;\n    opacity: 0;\n    transition: opacity 250ms cubic-bezier(0.25, 0.8, 0.25, 1);\n}\n.p-speeddial-mask-visible {\n    pointer-events: none;\n    opacity: 1;\n    transition: opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1);\n}\n.p-speeddial-opened .p-speeddial-list {\n    pointer-events: auto;\n}\n.p-speeddial-opened .p-speeddial-item {\n    transform: scale(1);\n    opacity: 1;\n}\n.p-speeddial-opened .p-speeddial-rotate {\n    transform: rotate(45deg);\n}\n\n/* Direction */\n.p-speeddial-direction-up {\n    align-items: center;\n    flex-direction: column-reverse;\n}\n.p-speeddial-direction-up .p-speeddial-list {\n    flex-direction: column-reverse;\n}\n.p-speeddial-direction-down {\n    align-items: center;\n    flex-direction: column;\n}\n.p-speeddial-direction-down .p-speeddial-list {\n    flex-direction: column;\n}\n.p-speeddial-direction-left {\n    justify-content: center;\n    flex-direction: row-reverse;\n}\n.p-speeddial-direction-left .p-speeddial-list {\n    flex-direction: row-reverse;\n}\n.p-speeddial-direction-right {\n    justify-content: center;\n    flex-direction: row;\n}\n.p-speeddial-direction-right .p-speeddial-list {\n    flex-direction: row;\n}\n";
+var css_248z = "\n.p-speeddial {\r\n    position: absolute;\r\n    display: flex;\n}\n.p-speeddial-button {\r\n    z-index: 1;\n}\n.p-speeddial-list {\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style: none;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    transition: top 0s linear 0.2s;\r\n    pointer-events: none;\r\n    z-index: 2;\n}\n.p-speeddial-item {\r\n    transform: scale(0);\r\n    opacity: 0;\r\n    transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, opacity 0.8s;\r\n    will-change: transform;\n}\n.p-speeddial-action {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    border-radius: 50%;\r\n    position: relative;\r\n    overflow: hidden;\n}\n.p-speeddial-circle .p-speeddial-item,\r\n.p-speeddial-semi-circle .p-speeddial-item,\r\n.p-speeddial-quarter-circle .p-speeddial-item {\r\n    position: absolute;\n}\n.p-speeddial-rotate {\r\n    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;\r\n    will-change: transform;\n}\n.p-speeddial-mask {\r\n    position: absolute;\r\n    left: 0;\r\n    top: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    opacity: 0;\r\n    transition: opacity 250ms cubic-bezier(0.25, 0.8, 0.25, 1);\n}\n.p-speeddial-mask-visible {\r\n    pointer-events: none;\r\n    opacity: 1;\r\n    transition: opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1);\n}\n.p-speeddial-opened .p-speeddial-list {\r\n    pointer-events: auto;\n}\n.p-speeddial-opened .p-speeddial-item {\r\n    transform: scale(1);\r\n    opacity: 1;\n}\n.p-speeddial-opened .p-speeddial-rotate {\r\n    transform: rotate(45deg);\n}\r\n\r\n/* Direction */\n.p-speeddial-direction-up {\r\n    align-items: center;\r\n    flex-direction: column-reverse;\n}\n.p-speeddial-direction-up .p-speeddial-list {\r\n    flex-direction: column-reverse;\n}\n.p-speeddial-direction-down {\r\n    align-items: center;\r\n    flex-direction: column;\n}\n.p-speeddial-direction-down .p-speeddial-list {\r\n    flex-direction: column;\n}\n.p-speeddial-direction-left {\r\n    justify-content: center;\r\n    flex-direction: row-reverse;\n}\n.p-speeddial-direction-left .p-speeddial-list {\r\n    flex-direction: row-reverse;\n}\n.p-speeddial-direction-right {\r\n    justify-content: center;\r\n    flex-direction: row;\n}\n.p-speeddial-direction-right .p-speeddial-list {\r\n    flex-direction: row;\n}\r\n";
 styleInject(css_248z);
 
 script.render = render;

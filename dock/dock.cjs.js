@@ -5,6 +5,11 @@ var Tooltip = require('primevue/tooltip');
 var utils = require('primevue/utils');
 var vue = require('vue');
 
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+var Tooltip__default = /*#__PURE__*/_interopDefaultLegacy(Tooltip);
+
 var script$1 = {
     name: 'DockSub',
     emits: ['focus', 'blur'],
@@ -45,10 +50,19 @@ var script$1 = {
     },
     data() {
         return {
+            id: this.menuId,
             currentIndex: -3,
             focused: false,
             focusedOptionIndex: -1
         };
+    },
+    watch: {
+        menuId(newValue) {
+            this.id = newValue || utils.UniqueComponentId();
+        }
+    },
+    mounted() {
+        this.id = this.id || utils.UniqueComponentId();
     },
     methods: {
         getItemId(index) {
@@ -202,16 +216,13 @@ var script$1 = {
         }
     },
     computed: {
-        id() {
-            return this.menuId || utils.UniqueComponentId();
-        },
         focusedOptionId() {
             return this.focusedOptionIndex !== -1 ? this.focusedOptionIndex : null;
         }
     },
     directives: {
-        ripple: Ripple,
-        tooltip: Tooltip
+        ripple: Ripple__default["default"],
+        tooltip: Tooltip__default["default"]
     }
 };
 
@@ -230,7 +241,7 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
   return (vue.openBlock(), vue.createElementBlock("div", _hoisted_1, [
     vue.createElementVNode("ul", {
       ref: "list",
-      id: $options.id,
+      id: $data.id,
       class: "p-dock-list",
       role: "menu",
       "aria-orientation": $props.position === 'bottom' || $props.position === 'top' ? 'horizontal' : 'vertical',

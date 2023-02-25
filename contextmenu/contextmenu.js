@@ -2,6 +2,11 @@ this.primevue = this.primevue || {};
 this.primevue.contextmenu = (function (Portal, utils, Ripple, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
     var script$1 = {
         name: 'ContextMenuSub',
         emits: ['item-click', 'item-mouseenter'],
@@ -133,7 +138,7 @@ this.primevue.contextmenu = (function (Portal, utils, Ripple, vue) {
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -337,6 +342,7 @@ this.primevue.contextmenu = (function (Portal, utils, Ripple, vue) {
         list: null,
         data() {
             return {
+                id: this.$attrs.id,
                 focused: false,
                 focusedItemInfo: { index: -1, level: 0, parentKey: '' },
                 activeItemPath: [],
@@ -345,6 +351,9 @@ this.primevue.contextmenu = (function (Portal, utils, Ripple, vue) {
             };
         },
         watch: {
+            '$attrs.id': function (newValue) {
+                this.id = newValue || utils.UniqueComponentId();
+            },
             activeItemPath(newPath) {
                 if (utils.ObjectUtils.isNotEmpty(newPath)) {
                     this.bindOutsideClickListener();
@@ -370,6 +379,8 @@ this.primevue.contextmenu = (function (Portal, utils, Ripple, vue) {
             this.container = null;
         },
         mounted() {
+            this.id = this.id || utils.UniqueComponentId();
+
             if (this.global) {
                 this.bindDocumentContextMenuListener();
             }
@@ -859,16 +870,13 @@ this.primevue.contextmenu = (function (Portal, utils, Ripple, vue) {
 
                 return processedItem ? processedItem.items : this.processedItems;
             },
-            id() {
-                return this.$attrs.id || utils.UniqueComponentId();
-            },
             focusedItemId() {
                 return this.focusedItemInfo.index !== -1 ? `${this.id}${utils.ObjectUtils.isNotEmpty(this.focusedItemInfo.parentKey) ? '_' + this.focusedItemInfo.parentKey : ''}_${this.focusedItemInfo.index}` : null;
             }
         },
         components: {
             ContextMenuSub: script$1,
-            Portal: Portal
+            Portal: Portal__default["default"]
         }
     };
 
@@ -894,14 +902,14 @@ this.primevue.contextmenu = (function (Portal, utils, Ripple, vue) {
                   }, _ctx.$attrs), [
                     vue.createVNode(_component_ContextMenuSub, {
                       ref: $options.listRef,
-                      id: $options.id + '_list',
+                      id: $data.id + '_list',
                       class: "p-contextmenu-root-list",
                       role: "menubar",
                       root: true,
                       tabindex: $props.tabindex,
                       "aria-orientation": "vertical",
                       "aria-activedescendant": $data.focused ? $options.focusedItemId : undefined,
-                      menuId: $options.id,
+                      menuId: $data.id,
                       focusedItemId: $data.focused ? $options.focusedItemId : undefined,
                       items: $options.processedItems,
                       template: _ctx.$slots.item,
@@ -954,7 +962,7 @@ this.primevue.contextmenu = (function (Portal, utils, Ripple, vue) {
       }
     }
 
-    var css_248z = "\n.p-contextmenu {\n    position: absolute;\n}\n.p-contextmenu ul {\n    margin: 0;\n    padding: 0;\n    list-style: none;\n}\n.p-contextmenu .p-submenu-list {\n    position: absolute;\n    min-width: 100%;\n    z-index: 1;\n}\n.p-contextmenu .p-menuitem-link {\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    text-decoration: none;\n    overflow: hidden;\n    position: relative;\n}\n.p-contextmenu .p-menuitem-text {\n    line-height: 1;\n}\n.p-contextmenu .p-menuitem {\n    position: relative;\n}\n.p-contextmenu .p-menuitem-link .p-submenu-icon {\n    margin-left: auto;\n}\n.p-contextmenu-enter-from {\n    opacity: 0;\n}\n.p-contextmenu-enter-active {\n    transition: opacity 250ms;\n}\n";
+    var css_248z = "\n.p-contextmenu {\r\n    position: absolute;\n}\n.p-contextmenu ul {\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style: none;\n}\n.p-contextmenu .p-submenu-list {\r\n    position: absolute;\r\n    min-width: 100%;\r\n    z-index: 1;\n}\n.p-contextmenu .p-menuitem-link {\r\n    cursor: pointer;\r\n    display: flex;\r\n    align-items: center;\r\n    text-decoration: none;\r\n    overflow: hidden;\r\n    position: relative;\n}\n.p-contextmenu .p-menuitem-text {\r\n    line-height: 1;\n}\n.p-contextmenu .p-menuitem {\r\n    position: relative;\n}\n.p-contextmenu .p-menuitem-link .p-submenu-icon {\r\n    margin-left: auto;\n}\n.p-contextmenu-enter-from {\r\n    opacity: 0;\n}\n.p-contextmenu-enter-active {\r\n    transition: opacity 250ms;\n}\r\n";
     styleInject(css_248z);
 
     script.render = render;

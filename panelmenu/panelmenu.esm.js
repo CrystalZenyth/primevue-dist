@@ -427,7 +427,7 @@ var script$1 = {
         onEnterKey(event) {
             if (ObjectUtils.isNotEmpty(this.focusedItem)) {
                 const element = DomHandler.findSingle(this.$el, `li[id="${`${this.focusedItemId}`}"]`);
-                const anchorElement = element && DomHandler.findSingle(element, '.p-menuitem-link');
+                const anchorElement = element && (DomHandler.findSingle(element, '.p-menuitem-link') || DomHandler.findSingle(element, 'a,button'));
 
                 anchorElement ? anchorElement.click() : element && element.click();
             }
@@ -663,10 +663,18 @@ var script = {
     },
     data() {
         return {
+            id: this.$attrs.id,
             activeItem: null
         };
     },
-
+    watch: {
+        '$attrs.id': function (newValue) {
+            this.id = newValue || UniqueComponentId();
+        }
+    },
+    mounted() {
+        this.id = this.id || UniqueComponentId();
+    },
     methods: {
         getItemProp(item, name) {
             return item ? ObjectUtils.getItemValue(item[name]) : undefined;
@@ -840,11 +848,6 @@ var script = {
             return ['p-submenu-icon', this.isItemActive(item) ? 'pi pi-chevron-down' : 'pi pi-chevron-right'];
         }
     },
-    computed: {
-        id() {
-            return this.$attrs.id || UniqueComponentId();
-        }
-    },
     components: {
         PanelMenuList: script$1
     }
@@ -868,7 +871,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_PanelMenuList = resolveComponent("PanelMenuList");
 
   return (openBlock(), createElementBlock("div", {
-    id: $options.id,
+    id: $data.id,
     class: "p-panelmenu p-component"
   }, [
     (openBlock(true), createElementBlock(Fragment, null, renderList($props.model, (item, index) => {
@@ -1008,7 +1011,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = "\n.p-panelmenu .p-panelmenu-header-action {\n    display: flex;\n    align-items: center;\n    user-select: none;\n    cursor: pointer;\n    position: relative;\n    text-decoration: none;\n}\n.p-panelmenu .p-panelmenu-header-action:focus {\n    z-index: 1;\n}\n.p-panelmenu .p-submenu-list {\n    margin: 0;\n    padding: 0;\n    list-style: none;\n}\n.p-panelmenu .p-menuitem-link {\n    display: flex;\n    align-items: center;\n    user-select: none;\n    cursor: pointer;\n    text-decoration: none;\n    position: relative;\n    overflow: hidden;\n}\n.p-panelmenu .p-menuitem-text {\n    line-height: 1;\n}\n";
+var css_248z = "\n.p-panelmenu .p-panelmenu-header-action {\r\n    display: flex;\r\n    align-items: center;\r\n    user-select: none;\r\n    cursor: pointer;\r\n    position: relative;\r\n    text-decoration: none;\n}\n.p-panelmenu .p-panelmenu-header-action:focus {\r\n    z-index: 1;\n}\n.p-panelmenu .p-submenu-list {\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style: none;\n}\n.p-panelmenu .p-menuitem-link {\r\n    display: flex;\r\n    align-items: center;\r\n    user-select: none;\r\n    cursor: pointer;\r\n    text-decoration: none;\r\n    position: relative;\r\n    overflow: hidden;\n}\n.p-panelmenu .p-menuitem-text {\r\n    line-height: 1;\n}\r\n";
 styleInject(css_248z);
 
 script.render = render;

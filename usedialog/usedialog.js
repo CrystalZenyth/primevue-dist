@@ -17,6 +17,8 @@ this.primevue.usedialog = (function (exports, vue) {
     exports.PrimeVueDialogSymbol = PrimeVueDialogSymbol;
     exports.useDialog = useDialog;
 
+    Object.defineProperty(exports, '__esModule', { value: true });
+
     return exports;
 
 })({}, Vue);

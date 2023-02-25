@@ -32,7 +32,9 @@ this.primevue.tag = (function (vue) {
     const _hoisted_1 = { class: "p-tag-value" };
 
     function render(_ctx, _cache, $props, $setup, $data, $options) {
-      return (vue.openBlock(), vue.createElementBlock("span", vue.mergeProps({ class: $options.containerClass }, _ctx.$attrs), [
+      return (vue.openBlock(), vue.createElementBlock("span", {
+        class: vue.normalizeClass($options.containerClass)
+      }, [
         ($props.icon)
           ? (vue.openBlock(), vue.createElementBlock("span", {
               key: 0,
@@ -42,7 +44,7 @@ this.primevue.tag = (function (vue) {
         vue.renderSlot(_ctx.$slots, "default", {}, () => [
           vue.createElementVNode("span", _hoisted_1, vue.toDisplayString($props.value), 1)
         ])
-      ], 16))
+      ], 2))
     }
 
     function styleInject(css, ref) {
@@ -72,7 +74,7 @@ this.primevue.tag = (function (vue) {
       }
     }
 
-    var css_248z = "\n.p-tag {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n}\n.p-tag-icon,\n.p-tag-value,\n.p-tag-icon.pi {\n    line-height: 1.5;\n}\n.p-tag.p-tag-rounded {\n    border-radius: 10rem;\n}\n";
+    var css_248z = "\n.p-tag {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n.p-tag-icon,\r\n.p-tag-value,\r\n.p-tag-icon.pi {\r\n    line-height: 1.5;\n}\n.p-tag.p-tag-rounded {\r\n    border-radius: 10rem;\n}\r\n";
     styleInject(css_248z);
 
     script.render = render;

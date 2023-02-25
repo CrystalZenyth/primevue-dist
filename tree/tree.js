@@ -2,6 +2,10 @@ this.primevue = this.primevue || {};
 this.primevue.tree = (function (utils, Ripple, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
     var script$1 = {
         name: 'TreeNode',
         emits: ['node-toggle', 'node-click', 'checkbox-change'],
@@ -383,7 +387,7 @@ this.primevue.tree = (function (utils, Ripple, vue) {
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 

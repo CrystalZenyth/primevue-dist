@@ -2,6 +2,10 @@ this.primevue = this.primevue || {};
 this.primevue.tabview = (function (Ripple, utils, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
     var script = {
         name: 'TabView',
         emits: ['update:activeIndex', 'tab-change', 'tab-click'],
@@ -37,12 +41,16 @@ this.primevue.tabview = (function (Ripple, utils, vue) {
         },
         data() {
             return {
+                id: this.$attrs.id,
                 d_activeIndex: this.activeIndex,
                 isPrevButtonDisabled: true,
                 isNextButtonDisabled: false
             };
         },
         watch: {
+            '$attrs.id': function (newValue) {
+                this.id = newValue || utils.UniqueComponentId();
+            },
             activeIndex(newValue) {
                 this.d_activeIndex = newValue;
 
@@ -50,6 +58,8 @@ this.primevue.tabview = (function (Ripple, utils, vue) {
             }
         },
         mounted() {
+            this.id = this.id || utils.UniqueComponentId();
+
             this.updateInkBar();
             this.scrollable && this.updateButtonState();
         },
@@ -284,13 +294,10 @@ this.primevue.tabview = (function (Ripple, utils, vue) {
             },
             nextButtonAriaLabel() {
                 return this.$primevue.config.locale.aria ? this.$primevue.config.locale.aria.next : undefined;
-            },
-            id() {
-                return this.$attrs.id || utils.UniqueComponentId();
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -455,7 +462,7 @@ this.primevue.tabview = (function (Ripple, utils, vue) {
       }
     }
 
-    var css_248z = "\n.p-tabview-nav-container {\n    position: relative;\n}\n.p-tabview-scrollable .p-tabview-nav-container {\n    overflow: hidden;\n}\n.p-tabview-nav-content {\n    overflow-x: auto;\n    overflow-y: hidden;\n    scroll-behavior: smooth;\n    scrollbar-width: none;\n    overscroll-behavior: contain auto;\n}\n.p-tabview-nav {\n    display: flex;\n    margin: 0;\n    padding: 0;\n    list-style-type: none;\n    flex: 1 1 auto;\n}\n.p-tabview-header-action {\n    cursor: pointer;\n    user-select: none;\n    display: flex;\n    align-items: center;\n    position: relative;\n    text-decoration: none;\n    overflow: hidden;\n}\n.p-tabview-ink-bar {\n    display: none;\n    z-index: 1;\n}\n.p-tabview-header-action:focus {\n    z-index: 1;\n}\n.p-tabview-title {\n    line-height: 1;\n    white-space: nowrap;\n}\n.p-tabview-nav-btn {\n    position: absolute;\n    top: 0;\n    z-index: 2;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n.p-tabview-nav-prev {\n    left: 0;\n}\n.p-tabview-nav-next {\n    right: 0;\n}\n.p-tabview-nav-content::-webkit-scrollbar {\n    display: none;\n}\n";
+    var css_248z = "\n.p-tabview-nav-container {\r\n    position: relative;\n}\n.p-tabview-scrollable .p-tabview-nav-container {\r\n    overflow: hidden;\n}\n.p-tabview-nav-content {\r\n    overflow-x: auto;\r\n    overflow-y: hidden;\r\n    scroll-behavior: smooth;\r\n    scrollbar-width: none;\r\n    overscroll-behavior: contain auto;\n}\n.p-tabview-nav {\r\n    display: flex;\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style-type: none;\r\n    flex: 1 1 auto;\n}\n.p-tabview-header-action {\r\n    cursor: pointer;\r\n    user-select: none;\r\n    display: flex;\r\n    align-items: center;\r\n    position: relative;\r\n    text-decoration: none;\r\n    overflow: hidden;\n}\n.p-tabview-ink-bar {\r\n    display: none;\r\n    z-index: 1;\n}\n.p-tabview-header-action:focus {\r\n    z-index: 1;\n}\n.p-tabview-title {\r\n    line-height: 1;\r\n    white-space: nowrap;\n}\n.p-tabview-nav-btn {\r\n    position: absolute;\r\n    top: 0;\r\n    z-index: 2;\r\n    height: 100%;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n.p-tabview-nav-prev {\r\n    left: 0;\n}\n.p-tabview-nav-next {\r\n    right: 0;\n}\n.p-tabview-nav-content::-webkit-scrollbar {\r\n    display: none;\n}\r\n";
     styleInject(css_248z);
 
     script.render = render;

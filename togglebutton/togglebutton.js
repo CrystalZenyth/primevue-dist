@@ -2,6 +2,10 @@ this.primevue = this.primevue || {};
 this.primevue.togglebutton = (function (Ripple, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
     var script = {
         name: 'ToggleButton',
         emits: ['update:modelValue', 'change', 'click', 'focus', 'blur'],
@@ -134,7 +138,7 @@ this.primevue.togglebutton = (function (Ripple, vue) {
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 

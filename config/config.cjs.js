@@ -100,7 +100,6 @@ const defaultOptions = {
             nextPageLabel: 'Next Page',
             prevPageLabel: 'Previous Page',
             rowsPerPageLabel: 'Rows per page',
-            previousPageLabel: 'Previous Page',
             jumpToPageDropdownLabel: 'Jump to Page Dropdown',
             jumpToPageInputLabel: 'Jump to Page Input',
             selectRow: 'Row Selected',
@@ -162,5 +161,5 @@ var PrimeVue = {
     }
 };
 
-exports.default = PrimeVue;
+exports["default"] = PrimeVue;
 exports.usePrimeVue = usePrimeVue;

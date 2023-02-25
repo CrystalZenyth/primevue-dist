@@ -2,6 +2,13 @@ this.primevue = this.primevue || {};
 this.primevue.calendar = (function (Button, OverlayEventBus, Portal, Ripple, utils, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Button__default = /*#__PURE__*/_interopDefaultLegacy(Button);
+    var OverlayEventBus__default = /*#__PURE__*/_interopDefaultLegacy(OverlayEventBus);
+    var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
     var script = {
         name: 'Calendar',
         emits: ['show', 'hide', 'input', 'month-change', 'year-change', 'date-select', 'update:modelValue', 'today-click', 'clear-click', 'focus', 'blur', 'keydown'],
@@ -1229,7 +1236,7 @@ this.primevue.calendar = (function (Button, OverlayEventBus, Portal, Ripple, uti
             incrementMinute(event) {
                 let newMinute = this.currentMinute + this.stepMinute;
 
-                if (this.validateTime(this.currentHour, newMinute, this.currentSecond, true)) {
+                if (this.validateTime(this.currentHour, newMinute, this.currentSecond, this.pm)) {
                     this.currentMinute = newMinute > 59 ? newMinute - 60 : newMinute;
                 }
 
@@ -1240,7 +1247,7 @@ this.primevue.calendar = (function (Button, OverlayEventBus, Portal, Ripple, uti
 
                 newMinute = newMinute < 0 ? 60 + newMinute : newMinute;
 
-                if (this.validateTime(this.currentHour, newMinute, this.currentSecond, true)) {
+                if (this.validateTime(this.currentHour, newMinute, this.currentSecond, this.pm)) {
                     this.currentMinute = newMinute;
                 }
 
@@ -1249,7 +1256,7 @@ this.primevue.calendar = (function (Button, OverlayEventBus, Portal, Ripple, uti
             incrementSecond(event) {
                 let newSecond = this.currentSecond + this.stepSecond;
 
-                if (this.validateTime(this.currentHour, this.currentMinute, newSecond, true)) {
+                if (this.validateTime(this.currentHour, this.currentMinute, newSecond, this.pm)) {
                     this.currentSecond = newSecond > 59 ? newSecond - 60 : newSecond;
                 }
 
@@ -1260,7 +1267,7 @@ this.primevue.calendar = (function (Button, OverlayEventBus, Portal, Ripple, uti
 
                 newSecond = newSecond < 0 ? 60 + newSecond : newSecond;
 
-                if (this.validateTime(this.currentHour, this.currentMinute, newSecond, true)) {
+                if (this.validateTime(this.currentHour, this.currentMinute, newSecond, this.pm)) {
                     this.currentSecond = newSecond;
                 }
 
@@ -2299,7 +2306,7 @@ this.primevue.calendar = (function (Button, OverlayEventBus, Portal, Ripple, uti
             },
             onOverlayClick(event) {
                 if (!this.inline) {
-                    OverlayEventBus.emit('overlay-click', {
+                    OverlayEventBus__default["default"].emit('overlay-click', {
                         originalEvent: event,
                         target: this.$el
                     });
@@ -2592,11 +2599,11 @@ this.primevue.calendar = (function (Button, OverlayEventBus, Portal, Ripple, uti
             }
         },
         components: {
-            CalendarButton: Button,
-            Portal: Portal
+            CalendarButton: Button__default["default"],
+            Portal: Portal__default["default"]
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -3218,7 +3225,7 @@ this.primevue.calendar = (function (Button, OverlayEventBus, Portal, Ripple, uti
       }
     }
 
-    var css_248z = "\n.p-calendar {\n    position: relative;\n    display: inline-flex;\n    max-width: 100%;\n}\n.p-calendar .p-inputtext {\n    flex: 1 1 auto;\n    width: 1%;\n}\n.p-calendar-w-btn .p-inputtext {\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0;\n}\n.p-calendar-w-btn .p-datepicker-trigger {\n    border-top-left-radius: 0;\n    border-bottom-left-radius: 0;\n}\n\n/* Fluid */\n.p-fluid .p-calendar {\n    display: flex;\n}\n.p-fluid .p-calendar .p-inputtext {\n    width: 1%;\n}\n\n/* Datepicker */\n.p-calendar .p-datepicker {\n    min-width: 100%;\n}\n.p-datepicker {\n    width: auto;\n    position: absolute;\n    top: 0;\n    left: 0;\n}\n.p-datepicker-inline {\n    display: inline-block;\n    position: static;\n    overflow-x: auto;\n}\n\n/* Header */\n.p-datepicker-header {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n.p-datepicker-header .p-datepicker-title {\n    margin: 0 auto;\n}\n.p-datepicker-prev,\n.p-datepicker-next {\n    cursor: pointer;\n    display: inline-flex;\n    justify-content: center;\n    align-items: center;\n    overflow: hidden;\n    position: relative;\n}\n\n/* Multiple Month DatePicker */\n.p-datepicker-multiple-month .p-datepicker-group-container {\n    display: flex;\n}\n.p-datepicker-multiple-month .p-datepicker-group-container .p-datepicker-group {\n    flex: 1 1 auto;\n}\n\n/* DatePicker Table */\n.p-datepicker table {\n    width: 100%;\n    border-collapse: collapse;\n}\n.p-datepicker td > span {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    cursor: pointer;\n    margin: 0 auto;\n    overflow: hidden;\n    position: relative;\n}\n\n/* Month Picker */\n.p-monthpicker-month {\n    width: 33.3%;\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    overflow: hidden;\n    position: relative;\n}\n\n/* Year Picker */\n.p-yearpicker-year {\n    width: 50%;\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    overflow: hidden;\n    position: relative;\n}\n\n/*  Button Bar */\n.p-datepicker-buttonbar {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n}\n\n/* Time Picker */\n.p-timepicker {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.p-timepicker button {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    cursor: pointer;\n    overflow: hidden;\n    position: relative;\n}\n.p-timepicker > div {\n    display: flex;\n    align-items: center;\n    flex-direction: column;\n}\n\n/* Touch UI */\n.p-datepicker-touch-ui,\n.p-calendar .p-datepicker-touch-ui {\n    position: fixed;\n    top: 50%;\n    left: 50%;\n    min-width: 80vw;\n    transform: translate(-50%, -50%);\n}\n";
+    var css_248z = "\n.p-calendar {\r\n    position: relative;\r\n    display: inline-flex;\r\n    max-width: 100%;\n}\n.p-calendar .p-inputtext {\r\n    flex: 1 1 auto;\r\n    width: 1%;\n}\n.p-calendar-w-btn .p-inputtext {\r\n    border-top-right-radius: 0;\r\n    border-bottom-right-radius: 0;\n}\n.p-calendar-w-btn .p-datepicker-trigger {\r\n    border-top-left-radius: 0;\r\n    border-bottom-left-radius: 0;\n}\r\n\r\n/* Fluid */\n.p-fluid .p-calendar {\r\n    display: flex;\n}\n.p-fluid .p-calendar .p-inputtext {\r\n    width: 1%;\n}\r\n\r\n/* Datepicker */\n.p-calendar .p-datepicker {\r\n    min-width: 100%;\n}\n.p-datepicker {\r\n    width: auto;\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\n}\n.p-datepicker-inline {\r\n    display: inline-block;\r\n    position: static;\r\n    overflow-x: auto;\n}\r\n\r\n/* Header */\n.p-datepicker-header {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-between;\n}\n.p-datepicker-header .p-datepicker-title {\r\n    margin: 0 auto;\n}\n.p-datepicker-prev,\r\n.p-datepicker-next {\r\n    cursor: pointer;\r\n    display: inline-flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    overflow: hidden;\r\n    position: relative;\n}\r\n\r\n/* Multiple Month DatePicker */\n.p-datepicker-multiple-month .p-datepicker-group-container {\r\n    display: flex;\n}\n.p-datepicker-multiple-month .p-datepicker-group-container .p-datepicker-group {\r\n    flex: 1 1 auto;\n}\r\n\r\n/* DatePicker Table */\n.p-datepicker table {\r\n    width: 100%;\r\n    border-collapse: collapse;\n}\n.p-datepicker td > span {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    cursor: pointer;\r\n    margin: 0 auto;\r\n    overflow: hidden;\r\n    position: relative;\n}\r\n\r\n/* Month Picker */\n.p-monthpicker-month {\r\n    width: 33.3%;\r\n    display: inline-flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    cursor: pointer;\r\n    overflow: hidden;\r\n    position: relative;\n}\r\n\r\n/* Year Picker */\n.p-yearpicker-year {\r\n    width: 50%;\r\n    display: inline-flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    cursor: pointer;\r\n    overflow: hidden;\r\n    position: relative;\n}\r\n\r\n/*  Button Bar */\n.p-datepicker-buttonbar {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\n}\r\n\r\n/* Time Picker */\n.p-timepicker {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.p-timepicker button {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    cursor: pointer;\r\n    overflow: hidden;\r\n    position: relative;\n}\n.p-timepicker > div {\r\n    display: flex;\r\n    align-items: center;\r\n    flex-direction: column;\n}\r\n\r\n/* Touch UI */\n.p-datepicker-touch-ui,\r\n.p-calendar .p-datepicker-touch-ui {\r\n    position: fixed;\r\n    top: 50%;\r\n    left: 50%;\r\n    min-width: 80vw;\r\n    transform: translate(-50%, -50%);\n}\r\n";
     styleInject(css_248z);
 
     script.render = render;

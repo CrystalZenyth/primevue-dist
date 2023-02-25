@@ -1,6 +1,6 @@
 import Button from 'primevue/button';
 import Ripple from 'primevue/ripple';
-import { ObjectUtils, DomHandler, UniqueComponentId } from 'primevue/utils';
+import { UniqueComponentId, ObjectUtils, DomHandler } from 'primevue/utils';
 import { resolveComponent, resolveDirective, openBlock, createElementBlock, normalizeClass, createElementVNode, renderSlot, createVNode, mergeProps, createCommentVNode, TransitionGroup, withCtx, Fragment, renderList, withDirectives } from 'vue';
 
 var script = {
@@ -78,10 +78,16 @@ var script = {
     list: null,
     data() {
         return {
+            id: this.$attrs.id,
             d_selection: this.selection,
             focused: false,
             focusedOptionIndex: -1
         };
+    },
+    watch: {
+        '$attrs.id': function (newValue) {
+            this.id = newValue || UniqueComponentId();
+        }
     },
     beforeUnmount() {
         this.destroyStyle();
@@ -93,6 +99,8 @@ var script = {
         }
     },
     mounted() {
+        this.id = this.id || UniqueComponentId();
+
         if (this.responsive) {
             this.createStyle();
         }
@@ -502,9 +510,6 @@ var script = {
                 }
             ];
         },
-        id() {
-            return this.$attrs.id || UniqueComponentId();
-        },
         attributeSelector() {
             return UniqueComponentId();
         },
@@ -587,7 +592,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         : createCommentVNode("", true),
       createVNode(TransitionGroup, mergeProps({
         ref: $options.listRef,
-        id: $options.id + '_list',
+        id: $data.id + '_list',
         name: "p-orderlist-flip",
         tag: "ul",
         class: "p-orderlist-list",
@@ -606,9 +611,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           (openBlock(true), createElementBlock(Fragment, null, renderList($props.modelValue, (item, i) => {
             return withDirectives((openBlock(), createElementBlock("li", {
               key: $options.getItemKey(item, i),
-              id: $options.id + '_' + i,
+              id: $data.id + '_' + i,
               role: "option",
-              class: normalizeClass($options.itemClass(item, `${$options.id}_${i}`)),
+              class: normalizeClass($options.itemClass(item, `${$data.id}_${i}`)),
               onClick: $event => ($options.onItemClick($event, item, i)),
               onTouchend: _cache[0] || (_cache[0] = (...args) => ($options.onItemTouchEnd && $options.onItemTouchEnd(...args))),
               "aria-selected": $options.isSelected(item),
@@ -656,7 +661,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = "\n.p-orderlist {\n    display: flex;\n}\n.p-orderlist-controls {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n}\n.p-orderlist-list-container {\n    flex: 1 1 auto;\n}\n.p-orderlist-list {\n    list-style-type: none;\n    margin: 0;\n    padding: 0;\n    overflow: auto;\n    min-height: 12rem;\n    max-height: 24rem;\n}\n.p-orderlist-item {\n    cursor: pointer;\n    overflow: hidden;\n    position: relative;\n}\n.p-orderlist.p-state-disabled .p-orderlist-item,\n.p-orderlist.p-state-disabled .p-button {\n    cursor: default;\n}\n.p-orderlist.p-state-disabled .p-orderlist-list {\n    overflow: hidden;\n}\n";
+var css_248z = "\n.p-orderlist {\r\n    display: flex;\n}\n.p-orderlist-controls {\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\n}\n.p-orderlist-list-container {\r\n    flex: 1 1 auto;\n}\n.p-orderlist-list {\r\n    list-style-type: none;\r\n    margin: 0;\r\n    padding: 0;\r\n    overflow: auto;\r\n    min-height: 12rem;\r\n    max-height: 24rem;\n}\n.p-orderlist-item {\r\n    cursor: pointer;\r\n    overflow: hidden;\r\n    position: relative;\n}\n.p-orderlist.p-state-disabled .p-orderlist-item,\r\n.p-orderlist.p-state-disabled .p-button {\r\n    cursor: default;\n}\n.p-orderlist.p-state-disabled .p-orderlist-list {\r\n    overflow: hidden;\n}\r\n";
 styleInject(css_248z);
 
 script.render = render;

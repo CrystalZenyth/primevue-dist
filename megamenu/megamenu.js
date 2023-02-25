@@ -2,6 +2,10 @@ this.primevue = this.primevue || {};
 this.primevue.megamenu = (function (utils, Ripple, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
     var script$1 = {
         name: 'MegaMenuSub',
         emits: ['item-click', 'item-mouseenter'],
@@ -161,7 +165,7 @@ this.primevue.megamenu = (function (utils, Ripple, vue) {
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -364,6 +368,7 @@ this.primevue.megamenu = (function (utils, Ripple, vue) {
         searchValue: null,
         data() {
             return {
+                id: this.$attrs.id,
                 focused: false,
                 focusedItemInfo: { index: -1, key: '', parentKey: '' },
                 activeItem: null,
@@ -371,6 +376,9 @@ this.primevue.megamenu = (function (utils, Ripple, vue) {
             };
         },
         watch: {
+            '$attrs.id': function (newValue) {
+                this.id = newValue || utils.UniqueComponentId();
+            },
             activeItem(newItem) {
                 if (utils.ObjectUtils.isNotEmpty(newItem)) {
                     this.bindOutsideClickListener();
@@ -380,6 +388,9 @@ this.primevue.megamenu = (function (utils, Ripple, vue) {
                     this.unbindResizeListener();
                 }
             }
+        },
+        mounted() {
+            this.id = this.id || utils.UniqueComponentId();
         },
         beforeUnmount() {
             this.unbindOutsideClickListener();
@@ -888,9 +899,6 @@ this.primevue.megamenu = (function (utils, Ripple, vue) {
             vertical() {
                 return this.orientation === 'vertical';
             },
-            id() {
-                return this.$attrs.id || utils.UniqueComponentId();
-            },
             focusedItemId() {
                 return utils.ObjectUtils.isNotEmpty(this.focusedItemInfo.key) ? `${this.id}_${this.focusedItemInfo.key}` : null;
             }
@@ -915,7 +923,7 @@ this.primevue.megamenu = (function (utils, Ripple, vue) {
 
       return (vue.openBlock(), vue.createElementBlock("div", {
         ref: $options.containerRef,
-        id: $options.id,
+        id: $data.id,
         class: vue.normalizeClass($options.containerClass)
       }, [
         (_ctx.$slots.start)
@@ -925,7 +933,7 @@ this.primevue.megamenu = (function (utils, Ripple, vue) {
           : vue.createCommentVNode("", true),
         vue.createVNode(_component_MegaMenuSub, {
           ref: $options.menubarRef,
-          id: $options.id + '_list',
+          id: $data.id + '_list',
           class: "p-megamenu-root-list",
           tabindex: !$props.disabled ? $props.tabindex : -1,
           role: "menubar",
@@ -934,7 +942,7 @@ this.primevue.megamenu = (function (utils, Ripple, vue) {
           "aria-disabled": $props.disabled || undefined,
           "aria-orientation": $props.orientation,
           "aria-activedescendant": $data.focused ? $options.focusedItemId : undefined,
-          menuId: $options.id,
+          menuId: $data.id,
           focusedItemId: $data.focused ? $options.focusedItemId : undefined,
           items: $options.processedItems,
           horizontal: $options.horizontal,
@@ -983,7 +991,7 @@ this.primevue.megamenu = (function (utils, Ripple, vue) {
       }
     }
 
-    var css_248z = "\n.p-megamenu-root-list {\n    margin: 0;\n    padding: 0;\n    list-style: none;\n}\n.p-megamenu-root-list > .p-menuitem {\n    position: relative;\n}\n.p-megamenu .p-menuitem-link {\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    text-decoration: none;\n    overflow: hidden;\n    position: relative;\n}\n.p-megamenu .p-menuitem-text {\n    line-height: 1;\n}\n.p-megamenu-panel {\n    display: none;\n    position: absolute;\n    width: auto;\n    z-index: 1;\n}\n.p-megamenu-root-list > .p-menuitem-active > .p-megamenu-panel {\n    display: block;\n}\n.p-megamenu-submenu {\n    margin: 0;\n    padding: 0;\n    list-style: none;\n}\n\n/* Horizontal */\n.p-megamenu-horizontal .p-megamenu-root-list {\n    display: flex;\n    align-items: center;\n    flex-wrap: wrap;\n}\n\n/* Vertical */\n.p-megamenu-vertical .p-megamenu-root-list {\n    flex-direction: column;\n}\n.p-megamenu-vertical .p-megamenu-root-list > .p-menuitem-active > .p-megamenu-panel {\n    left: 100%;\n    top: 0;\n}\n.p-megamenu-vertical .p-megamenu-root-list > .p-menuitem > .p-menuitem-content > .p-menuitem-link > .p-submenu-icon {\n    margin-left: auto;\n}\n.p-megamenu-grid {\n    display: flex;\n}\n.p-megamenu-col-2,\n.p-megamenu-col-3,\n.p-megamenu-col-4,\n.p-megamenu-col-6,\n.p-megamenu-col-12 {\n    flex: 0 0 auto;\n    padding: 0.5rem;\n}\n.p-megamenu-col-2 {\n    width: 16.6667%;\n}\n.p-megamenu-col-3 {\n    width: 25%;\n}\n.p-megamenu-col-4 {\n    width: 33.3333%;\n}\n.p-megamenu-col-6 {\n    width: 50%;\n}\n.p-megamenu-col-12 {\n    width: 100%;\n}\n";
+    var css_248z = "\n.p-megamenu-root-list {\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style: none;\n}\n.p-megamenu-root-list > .p-menuitem {\r\n    position: relative;\n}\n.p-megamenu .p-menuitem-link {\r\n    cursor: pointer;\r\n    display: flex;\r\n    align-items: center;\r\n    text-decoration: none;\r\n    overflow: hidden;\r\n    position: relative;\n}\n.p-megamenu .p-menuitem-text {\r\n    line-height: 1;\n}\n.p-megamenu-panel {\r\n    display: none;\r\n    position: absolute;\r\n    width: auto;\r\n    z-index: 1;\n}\n.p-megamenu-root-list > .p-menuitem-active > .p-megamenu-panel {\r\n    display: block;\n}\n.p-megamenu-submenu {\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style: none;\n}\r\n\r\n/* Horizontal */\n.p-megamenu-horizontal .p-megamenu-root-list {\r\n    display: flex;\r\n    align-items: center;\r\n    flex-wrap: wrap;\n}\r\n\r\n/* Vertical */\n.p-megamenu-vertical .p-megamenu-root-list {\r\n    flex-direction: column;\n}\n.p-megamenu-vertical .p-megamenu-root-list > .p-menuitem-active > .p-megamenu-panel {\r\n    left: 100%;\r\n    top: 0;\n}\n.p-megamenu-vertical .p-megamenu-root-list > .p-menuitem > .p-menuitem-content > .p-menuitem-link > .p-submenu-icon {\r\n    margin-left: auto;\n}\n.p-megamenu-grid {\r\n    display: flex;\n}\n.p-megamenu-col-2,\r\n.p-megamenu-col-3,\r\n.p-megamenu-col-4,\r\n.p-megamenu-col-6,\r\n.p-megamenu-col-12 {\r\n    flex: 0 0 auto;\r\n    padding: 0.5rem;\n}\n.p-megamenu-col-2 {\r\n    width: 16.6667%;\n}\n.p-megamenu-col-3 {\r\n    width: 25%;\n}\n.p-megamenu-col-4 {\r\n    width: 33.3333%;\n}\n.p-megamenu-col-6 {\r\n    width: 50%;\n}\n.p-megamenu-col-12 {\r\n    width: 100%;\n}\r\n";
     styleInject(css_248z);
 
     script.render = render;

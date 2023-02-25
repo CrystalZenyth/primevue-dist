@@ -2,7 +2,7 @@ import { FilterService } from 'primevue/api';
 import OverlayEventBus from 'primevue/overlayeventbus';
 import Portal from 'primevue/portal';
 import Ripple from 'primevue/ripple';
-import { ZIndexUtils, ObjectUtils, DomHandler, ConnectedOverlayScrollHandler, UniqueComponentId } from 'primevue/utils';
+import { UniqueComponentId, ZIndexUtils, ObjectUtils, DomHandler, ConnectedOverlayScrollHandler } from 'primevue/utils';
 import VirtualScroller from 'primevue/virtualscroller';
 import { resolveComponent, resolveDirective, openBlock, createElementBlock, normalizeClass, createElementVNode, mergeProps, renderSlot, Fragment, createTextVNode, toDisplayString, renderList, withModifiers, createCommentVNode, createVNode, withCtx, Transition, withDirectives, normalizeStyle, createSlots } from 'vue';
 
@@ -181,6 +181,7 @@ var script = {
     focusOnHover: false,
     data() {
         return {
+            id: this.$attrs.id,
             focused: false,
             focusedOptionIndex: -1,
             headerCheckboxFocused: false,
@@ -189,11 +190,16 @@ var script = {
         };
     },
     watch: {
+        '$attrs.id': function (newValue) {
+            this.id = newValue || UniqueComponentId();
+        },
         options() {
             this.autoUpdateModel();
         }
     },
     mounted() {
+        this.id = this.id || UniqueComponentId();
+
         this.autoUpdateModel();
     },
     beforeUnmount() {
@@ -1010,9 +1016,6 @@ var script = {
         selectedMessageText() {
             return this.hasSelectedOption ? this.selectionMessageText.replaceAll('{0}', this.modelValue.length) : this.emptySelectionMessageText;
         },
-        id() {
-            return this.$attrs.id || UniqueComponentId();
-        },
         focusedOptionId() {
             return this.focusedOptionIndex !== -1 ? `${this.id}_${this.focusedOptionIndex}` : null;
         },
@@ -1112,7 +1115,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "aria-labelledby": _ctx.ariaLabelledby,
         "aria-haspopup": "listbox",
         "aria-expanded": $data.overlayVisible,
-        "aria-controls": $options.id + '_list',
+        "aria-controls": $data.id + '_list',
         "aria-activedescendant": $data.focused ? $options.focusedOptionId : undefined,
         onFocus: _cache[0] || (_cache[0] = (...args) => ($options.onFocus && $options.onFocus(...args))),
         onBlur: _cache[1] || (_cache[1] = (...args) => ($options.onBlur && $options.onBlur(...args))),
@@ -1237,7 +1240,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                                 placeholder: $props.filterPlaceholder,
                                 role: "searchbox",
                                 autocomplete: "off",
-                                "aria-owns": $options.id + '_list',
+                                "aria-owns": $data.id + '_list',
                                 "aria-activedescendant": $options.focusedOptionId,
                                 onKeydown: _cache[8] || (_cache[8] = (...args) => ($options.onFilterKeyDown && $options.onFilterKeyDown(...args))),
                                 onBlur: _cache[9] || (_cache[9] = (...args) => ($options.onFilterBlur && $options.onFilterBlur(...args))),
@@ -1278,7 +1281,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                       content: withCtx(({ styleClass, contentRef, items, getItemOptions, contentStyle, itemSize }) => [
                         createElementVNode("ul", {
                           ref: (el) => $options.listRef(el, contentRef),
-                          id: $options.id + '_list',
+                          id: $data.id + '_list',
                           class: normalizeClass(['p-multiselect-items p-component', styleClass]),
                           style: normalizeStyle(contentStyle),
                           role: "listbox",
@@ -1291,7 +1294,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                               ($options.isOptionGroup(option))
                                 ? (openBlock(), createElementBlock("li", {
                                     key: 0,
-                                    id: $options.id + '_' + $options.getOptionIndex(i, getItemOptions),
+                                    id: $data.id + '_' + $options.getOptionIndex(i, getItemOptions),
                                     style: normalizeStyle({ height: itemSize ? itemSize + 'px' : undefined }),
                                     class: "p-multiselect-item-group",
                                     role: "option"
@@ -1305,7 +1308,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                                   ], 12, _hoisted_15))
                                 : withDirectives((openBlock(), createElementBlock("li", {
                                     key: 1,
-                                    id: $options.id + '_' + $options.getOptionIndex(i, getItemOptions),
+                                    id: $data.id + '_' + $options.getOptionIndex(i, getItemOptions),
                                     style: normalizeStyle({ height: itemSize ? itemSize + 'px' : undefined }),
                                     class: normalizeClass(['p-multiselect-item', { 'p-highlight': $options.isSelected(option), 'p-focus': $data.focusedOptionIndex === $options.getOptionIndex(i, getItemOptions), 'p-disabled': $options.isOptionDisabled(option) }]),
                                     role: "option",
@@ -1419,7 +1422,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = "\n.p-multiselect {\n    display: inline-flex;\n    cursor: pointer;\n    position: relative;\n    user-select: none;\n}\n.p-multiselect-trigger {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-shrink: 0;\n}\n.p-multiselect-label-container {\n    overflow: hidden;\n    flex: 1 1 auto;\n    cursor: pointer;\n}\n.p-multiselect-label {\n    display: block;\n    white-space: nowrap;\n    cursor: pointer;\n    overflow: hidden;\n    text-overflow: ellipsis;\n}\n.p-multiselect-label-empty {\n    overflow: hidden;\n    visibility: hidden;\n}\n.p-multiselect-token {\n    cursor: default;\n    display: inline-flex;\n    align-items: center;\n    flex: 0 0 auto;\n}\n.p-multiselect-token-icon {\n    cursor: pointer;\n}\n.p-multiselect .p-multiselect-panel {\n    min-width: 100%;\n}\n.p-multiselect-panel {\n    position: absolute;\n    top: 0;\n    left: 0;\n}\n.p-multiselect-items-wrapper {\n    overflow: auto;\n}\n.p-multiselect-items {\n    margin: 0;\n    padding: 0;\n    list-style-type: none;\n}\n.p-multiselect-item {\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    font-weight: normal;\n    white-space: nowrap;\n    position: relative;\n    overflow: hidden;\n}\n.p-multiselect-item-group {\n    cursor: auto;\n}\n.p-multiselect-header {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n.p-multiselect-filter-container {\n    position: relative;\n    flex: 1 1 auto;\n}\n.p-multiselect-filter-icon {\n    position: absolute;\n    top: 50%;\n    margin-top: -0.5rem;\n}\n.p-multiselect-filter-container .p-inputtext {\n    width: 100%;\n}\n.p-multiselect-close {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-shrink: 0;\n    overflow: hidden;\n    position: relative;\n    margin-left: auto;\n}\n.p-fluid .p-multiselect {\n    display: flex;\n}\n";
+var css_248z = "\n.p-multiselect {\r\n    display: inline-flex;\r\n    cursor: pointer;\r\n    position: relative;\r\n    user-select: none;\n}\n.p-multiselect-trigger {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    flex-shrink: 0;\n}\n.p-multiselect-label-container {\r\n    overflow: hidden;\r\n    flex: 1 1 auto;\r\n    cursor: pointer;\n}\n.p-multiselect-label {\r\n    display: block;\r\n    white-space: nowrap;\r\n    cursor: pointer;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\n}\n.p-multiselect-label-empty {\r\n    overflow: hidden;\r\n    visibility: hidden;\n}\n.p-multiselect-token {\r\n    cursor: default;\r\n    display: inline-flex;\r\n    align-items: center;\r\n    flex: 0 0 auto;\n}\n.p-multiselect-token-icon {\r\n    cursor: pointer;\n}\n.p-multiselect .p-multiselect-panel {\r\n    min-width: 100%;\n}\n.p-multiselect-panel {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\n}\n.p-multiselect-items-wrapper {\r\n    overflow: auto;\n}\n.p-multiselect-items {\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style-type: none;\n}\n.p-multiselect-item {\r\n    cursor: pointer;\r\n    display: flex;\r\n    align-items: center;\r\n    font-weight: normal;\r\n    white-space: nowrap;\r\n    position: relative;\r\n    overflow: hidden;\n}\n.p-multiselect-item-group {\r\n    cursor: auto;\n}\n.p-multiselect-header {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-between;\n}\n.p-multiselect-filter-container {\r\n    position: relative;\r\n    flex: 1 1 auto;\n}\n.p-multiselect-filter-icon {\r\n    position: absolute;\r\n    top: 50%;\r\n    margin-top: -0.5rem;\n}\n.p-multiselect-filter-container .p-inputtext {\r\n    width: 100%;\n}\n.p-multiselect-close {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    flex-shrink: 0;\r\n    overflow: hidden;\r\n    position: relative;\r\n    margin-left: auto;\n}\n.p-fluid .p-multiselect {\r\n    display: flex;\n}\r\n";
 styleInject(css_248z);
 
 script.render = render;

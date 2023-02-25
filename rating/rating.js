@@ -41,8 +41,17 @@ this.primevue.rating = (function (utils, vue) {
         },
         data() {
             return {
+                name: this.$attrs.name,
                 focusedOptionIndex: -1
             };
+        },
+        watch: {
+            '$attrs.name': function (newValue) {
+                this.name = newValue || utils.UniqueComponentId();
+            }
+        },
+        mounted() {
+            this.name = this.name || utils.UniqueComponentId();
         },
         methods: {
             onOptionClick(event, value) {
@@ -97,9 +106,6 @@ this.primevue.rating = (function (utils, vue) {
             },
             offIconClass() {
                 return ['p-rating-icon', this.offIcon];
-            },
-            name() {
-                return this.$attrs.name || utils.UniqueComponentId();
             }
         }
     };
@@ -124,7 +130,7 @@ this.primevue.rating = (function (utils, vue) {
                 vue.createElementVNode("input", {
                   type: "radio",
                   value: "0",
-                  name: $options.name,
+                  name: $data.name,
                   checked: $props.modelValue === 0,
                   disabled: $props.disabled,
                   readonly: $props.readonly,
@@ -151,7 +157,7 @@ this.primevue.rating = (function (utils, vue) {
               vue.createElementVNode("input", {
                 type: "radio",
                 value: value,
-                name: $options.name,
+                name: $data.name,
                 checked: $props.modelValue === value,
                 disabled: $props.disabled,
                 readonly: $props.readonly,
@@ -210,7 +216,7 @@ this.primevue.rating = (function (utils, vue) {
       }
     }
 
-    var css_248z = "\n.p-rating {\n    position: relative;\n    display: flex;\n    align-items: center;\n}\n.p-rating-item {\n    display: inline-flex;\n    align-items: center;\n    cursor: pointer;\n}\n.p-rating.p-readonly .p-rating-item {\n    cursor: default;\n}\n";
+    var css_248z = "\n.p-rating {\r\n    position: relative;\r\n    display: flex;\r\n    align-items: center;\n}\n.p-rating-item {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    cursor: pointer;\n}\n.p-rating.p-readonly .p-rating-item {\r\n    cursor: default;\n}\r\n";
     styleInject(css_248z);
 
     script.render = render;

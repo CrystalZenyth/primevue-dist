@@ -517,7 +517,7 @@ this.primevue.utils = (function (exports) {
         },
 
         isExist(element) {
-            return element !== null && typeof element !== 'undefined' && element.nodeName && element.parentNode;
+            return !!(element !== null && typeof element !== 'undefined' && element.nodeName && element.parentNode);
         },
 
         isClient() {
@@ -817,15 +817,10 @@ this.primevue.utils = (function (exports) {
         },
 
         reorderArray(value, from, to) {
-            let target;
-
             if (value && from !== to) {
                 if (to >= value.length) {
-                    target = to - value.length;
-
-                    while (target-- + 1) {
-                        value.push(undefined);
-                    }
+                    to %= value.length;
+                    from %= value.length;
                 }
 
                 value.splice(to, 0, value.splice(from, 1)[0]);
@@ -1031,6 +1026,8 @@ this.primevue.utils = (function (exports) {
     exports.ObjectUtils = ObjectUtils;
     exports.UniqueComponentId = UniqueComponentId;
     exports.ZIndexUtils = ZIndexUtils;
+
+    Object.defineProperty(exports, '__esModule', { value: true });
 
     return exports;
 

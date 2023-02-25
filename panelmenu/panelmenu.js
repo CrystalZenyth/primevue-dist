@@ -2,6 +2,10 @@ this.primevue = this.primevue || {};
 this.primevue.panelmenu = (function (utils, Ripple, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
     var script$2 = {
         name: 'PanelMenuSub',
         emits: ['item-toggle'],
@@ -109,7 +113,7 @@ this.primevue.panelmenu = (function (utils, Ripple, vue) {
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -427,7 +431,7 @@ this.primevue.panelmenu = (function (utils, Ripple, vue) {
             onEnterKey(event) {
                 if (utils.ObjectUtils.isNotEmpty(this.focusedItem)) {
                     const element = utils.DomHandler.findSingle(this.$el, `li[id="${`${this.focusedItemId}`}"]`);
-                    const anchorElement = element && utils.DomHandler.findSingle(element, '.p-menuitem-link');
+                    const anchorElement = element && (utils.DomHandler.findSingle(element, '.p-menuitem-link') || utils.DomHandler.findSingle(element, 'a,button'));
 
                     anchorElement ? anchorElement.click() : element && element.click();
                 }
@@ -663,10 +667,18 @@ this.primevue.panelmenu = (function (utils, Ripple, vue) {
         },
         data() {
             return {
+                id: this.$attrs.id,
                 activeItem: null
             };
         },
-
+        watch: {
+            '$attrs.id': function (newValue) {
+                this.id = newValue || utils.UniqueComponentId();
+            }
+        },
+        mounted() {
+            this.id = this.id || utils.UniqueComponentId();
+        },
         methods: {
             getItemProp(item, name) {
                 return item ? utils.ObjectUtils.getItemValue(item[name]) : undefined;
@@ -840,11 +852,6 @@ this.primevue.panelmenu = (function (utils, Ripple, vue) {
                 return ['p-submenu-icon', this.isItemActive(item) ? 'pi pi-chevron-down' : 'pi pi-chevron-right'];
             }
         },
-        computed: {
-            id() {
-                return this.$attrs.id || utils.UniqueComponentId();
-            }
-        },
         components: {
             PanelMenuList: script$1
         }
@@ -868,7 +875,7 @@ this.primevue.panelmenu = (function (utils, Ripple, vue) {
       const _component_PanelMenuList = vue.resolveComponent("PanelMenuList");
 
       return (vue.openBlock(), vue.createElementBlock("div", {
-        id: $options.id,
+        id: $data.id,
         class: "p-panelmenu p-component"
       }, [
         (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($props.model, (item, index) => {
@@ -1008,7 +1015,7 @@ this.primevue.panelmenu = (function (utils, Ripple, vue) {
       }
     }
 
-    var css_248z = "\n.p-panelmenu .p-panelmenu-header-action {\n    display: flex;\n    align-items: center;\n    user-select: none;\n    cursor: pointer;\n    position: relative;\n    text-decoration: none;\n}\n.p-panelmenu .p-panelmenu-header-action:focus {\n    z-index: 1;\n}\n.p-panelmenu .p-submenu-list {\n    margin: 0;\n    padding: 0;\n    list-style: none;\n}\n.p-panelmenu .p-menuitem-link {\n    display: flex;\n    align-items: center;\n    user-select: none;\n    cursor: pointer;\n    text-decoration: none;\n    position: relative;\n    overflow: hidden;\n}\n.p-panelmenu .p-menuitem-text {\n    line-height: 1;\n}\n";
+    var css_248z = "\n.p-panelmenu .p-panelmenu-header-action {\r\n    display: flex;\r\n    align-items: center;\r\n    user-select: none;\r\n    cursor: pointer;\r\n    position: relative;\r\n    text-decoration: none;\n}\n.p-panelmenu .p-panelmenu-header-action:focus {\r\n    z-index: 1;\n}\n.p-panelmenu .p-submenu-list {\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style: none;\n}\n.p-panelmenu .p-menuitem-link {\r\n    display: flex;\r\n    align-items: center;\r\n    user-select: none;\r\n    cursor: pointer;\r\n    text-decoration: none;\r\n    position: relative;\r\n    overflow: hidden;\n}\n.p-panelmenu .p-menuitem-text {\r\n    line-height: 1;\n}\r\n";
     styleInject(css_248z);
 
     script.render = render;

@@ -2,6 +2,14 @@ this.primevue = this.primevue || {};
 this.primevue.fileupload = (function (Button, Message, ProgressBar, Ripple, utils, Badge, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Button__default = /*#__PURE__*/_interopDefaultLegacy(Button);
+    var Message__default = /*#__PURE__*/_interopDefaultLegacy(Message);
+    var ProgressBar__default = /*#__PURE__*/_interopDefaultLegacy(ProgressBar);
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+    var Badge__default = /*#__PURE__*/_interopDefaultLegacy(Badge);
+
     var script$1 = {
         emits: ['remove'],
         props: {
@@ -37,8 +45,8 @@ this.primevue.fileupload = (function (Button, Message, ProgressBar, Ripple, util
             }
         },
         components: {
-            FileUploadButton: Button,
-            FileUploadBadge: Badge
+            FileUploadButton: Button__default["default"],
+            FileUploadBadge: Badge__default["default"]
         }
     };
 
@@ -536,13 +544,13 @@ this.primevue.fileupload = (function (Button, Message, ProgressBar, Ripple, util
             }
         },
         components: {
-            FileUploadButton: Button,
-            FileUploadProgressBar: ProgressBar,
-            FileUploadMessage: Message,
+            FileUploadButton: Button__default["default"],
+            FileUploadProgressBar: ProgressBar__default["default"],
+            FileUploadMessage: Message__default["default"],
             FileContent: script$1
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 

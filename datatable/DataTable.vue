@@ -177,6 +177,9 @@
                 </template>
             </DTVirtualScroller>
         </div>
+        <div v-if="$slots.footer" class="p-datatable-footer">
+            <slot name="footer"></slot>
+        </div>
         <DTPaginator
             v-if="paginatorBottom"
             :rows="d_rows"
@@ -197,9 +200,6 @@
                 <slot name="paginatorend"></slot>
             </template>
         </DTPaginator>
-        <div v-if="$slots.footer" class="p-datatable-footer">
-            <slot name="footer"></slot>
-        </div>
         <div ref="resizeHelper" class="p-column-resizer-helper" style="display: none"></div>
         <div ref="resizeHelperKeyboard" class="p-column-resizer-helper-keyboard-line" style="display: none"></div>
         <i ref="resizeKeyboardIcon" class="pi pi-arrows-h p-column-resizer-keyboard-icon"></i>
@@ -1126,7 +1126,7 @@ export default {
 
                 if (firstSelectedRow) {
                     firstSelectedRow.tabIndex = '0';
-                    focusedItem !== firstSelectedRow && (focusedItem.tabIndex = '-1');
+                    focusedItem && focusedItem !== firstSelectedRow && (focusedItem.tabIndex = '-1');
                 } else {
                     rows[0].tabIndex = '0';
                     focusedItem !== rows[0] && (rows[rowIndex].tabIndex = '-1');
@@ -1377,7 +1377,7 @@ export default {
 
                 if (i === 0) csv += '\n';
 
-                if (this.columnProp(column, 'exportable') !== false && this.columnProp(column, 'field')) {
+                if (this.columnProp(column, 'exportable') !== false && this.columnProp(column, 'exportFooter')) {
                     if (footerInitiated) csv += this.csvSeparator;
                     else footerInitiated = true;
 
@@ -1809,7 +1809,7 @@ export default {
                 let dropIndex = this.draggedRowIndex > this.droppedRowIndex ? this.droppedRowIndex : this.droppedRowIndex === 0 ? 0 : this.droppedRowIndex - 1;
                 let processedData = [...this.processedData];
 
-                ObjectUtils.reorderArray(processedData, this.draggedRowIndex, dropIndex);
+                ObjectUtils.reorderArray(processedData, this.draggedRowIndex + this.d_first, dropIndex + this.d_first);
 
                 this.$emit('row-reorder', {
                     originalEvent: event,

@@ -4,6 +4,10 @@ var utils = require('primevue/utils');
 var Paginator = require('primevue/paginator');
 var vue = require('vue');
 
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var Paginator__default = /*#__PURE__*/_interopDefaultLegacy(Paginator);
+
 var script = {
     name: 'DataView',
     emits: ['update:first', 'update:rows', 'page'],
@@ -177,7 +181,7 @@ var script = {
         }
     },
     components: {
-        DVPaginator: Paginator
+        DVPaginator: Paginator__default["default"]
     }
 };
 

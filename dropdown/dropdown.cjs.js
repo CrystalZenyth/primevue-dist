@@ -8,6 +8,13 @@ var utils = require('primevue/utils');
 var VirtualScroller = require('primevue/virtualscroller');
 var vue = require('vue');
 
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var OverlayEventBus__default = /*#__PURE__*/_interopDefaultLegacy(OverlayEventBus);
+var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
+var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+var VirtualScroller__default = /*#__PURE__*/_interopDefaultLegacy(VirtualScroller);
+
 var script = {
     name: 'Dropdown',
     emits: ['update:modelValue', 'change', 'focus', 'blur', 'before-show', 'before-hide', 'show', 'hide', 'filter'],
@@ -173,6 +180,7 @@ var script = {
     focusOnHover: false,
     data() {
         return {
+            id: this.$attrs.id,
             focused: false,
             focusedOptionIndex: -1,
             filterValue: null,
@@ -180,6 +188,9 @@ var script = {
         };
     },
     watch: {
+        '$attrs.id': function (newValue) {
+            this.id = newValue || utils.UniqueComponentId();
+        },
         modelValue() {
             this.isModelValueChanged = true;
         },
@@ -188,6 +199,8 @@ var script = {
         }
     },
     mounted() {
+        this.id = this.id || utils.UniqueComponentId();
+
         this.autoUpdateModel();
     },
     updated() {
@@ -451,7 +464,7 @@ var script = {
             }
         },
         onOverlayClick(event) {
-            OverlayEventBus.emit('overlay-click', {
+            OverlayEventBus__default["default"].emit('overlay-click', {
                 originalEvent: event,
                 target: this.$el
             });
@@ -884,9 +897,6 @@ var script = {
         selectedMessageText() {
             return this.hasSelectedOption ? this.selectionMessageText.replaceAll('{0}', '1') : this.emptySelectionMessageText;
         },
-        id() {
-            return this.$attrs.id || utils.UniqueComponentId();
-        },
         focusedOptionId() {
             return this.focusedOptionIndex !== -1 ? `${this.id}_${this.focusedOptionIndex}` : null;
         },
@@ -898,11 +908,11 @@ var script = {
         }
     },
     directives: {
-        ripple: Ripple
+        ripple: Ripple__default["default"]
     },
     components: {
-        VirtualScroller: VirtualScroller,
-        Portal: Portal
+        VirtualScroller: VirtualScroller__default["default"],
+        Portal: Portal__default["default"]
     }
 };
 
@@ -953,7 +963,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (vue.openBlock(), vue.createElementBlock("div", {
     ref: "container",
-    id: $options.id,
+    id: $data.id,
     class: vue.normalizeClass($options.containerClass),
     onClick: _cache[16] || (_cache[16] = (...args) => ($options.onContainerClick && $options.onContainerClick(...args)))
   }, [
@@ -975,7 +985,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "aria-labelledby": _ctx.ariaLabelledby,
           "aria-haspopup": "listbox",
           "aria-expanded": $data.overlayVisible,
-          "aria-controls": $options.id + '_list',
+          "aria-controls": $data.id + '_list',
           "aria-activedescendant": $data.focused ? $options.focusedOptionId : undefined,
           onFocus: _cache[0] || (_cache[0] = (...args) => ($options.onFocus && $options.onFocus(...args))),
           onBlur: _cache[1] || (_cache[1] = (...args) => ($options.onBlur && $options.onBlur(...args))),
@@ -994,7 +1004,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "aria-labelledby": _ctx.ariaLabelledby,
           "aria-haspopup": "listbox",
           "aria-expanded": $data.overlayVisible,
-          "aria-controls": $options.id + '_list',
+          "aria-controls": $data.id + '_list',
           "aria-activedescendant": $data.focused ? $options.focusedOptionId : undefined,
           "aria-disabled": $props.disabled,
           onFocus: _cache[4] || (_cache[4] = (...args) => ($options.onFocus && $options.onFocus(...args))),
@@ -1066,7 +1076,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                             placeholder: $props.filterPlaceholder,
                             role: "searchbox",
                             autocomplete: "off",
-                            "aria-owns": $options.id + '_list',
+                            "aria-owns": $data.id + '_list',
                             "aria-activedescendant": $options.focusedOptionId,
                             onKeydown: _cache[10] || (_cache[10] = (...args) => ($options.onFilterKeyDown && $options.onFilterKeyDown(...args))),
                             onBlur: _cache[11] || (_cache[11] = (...args) => ($options.onFilterBlur && $options.onFilterBlur(...args))),
@@ -1092,7 +1102,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                       content: vue.withCtx(({ styleClass, contentRef, items, getItemOptions, contentStyle, itemSize }) => [
                         vue.createElementVNode("ul", {
                           ref: (el) => $options.listRef(el, contentRef),
-                          id: $options.id + '_list',
+                          id: $data.id + '_list',
                           class: vue.normalizeClass(['p-dropdown-items', styleClass]),
                           style: vue.normalizeStyle(contentStyle),
                           role: "listbox"
@@ -1104,7 +1114,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                               ($options.isOptionGroup(option))
                                 ? (vue.openBlock(), vue.createElementBlock("li", {
                                     key: 0,
-                                    id: $options.id + '_' + $options.getOptionIndex(i, getItemOptions),
+                                    id: $data.id + '_' + $options.getOptionIndex(i, getItemOptions),
                                     style: vue.normalizeStyle({ height: itemSize ? itemSize + 'px' : undefined }),
                                     class: "p-dropdown-item-group",
                                     role: "option"
@@ -1118,7 +1128,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                                   ], 12, _hoisted_10))
                                 : vue.withDirectives((vue.openBlock(), vue.createElementBlock("li", {
                                     key: 1,
-                                    id: $options.id + '_' + $options.getOptionIndex(i, getItemOptions),
+                                    id: $data.id + '_' + $options.getOptionIndex(i, getItemOptions),
                                     style: vue.normalizeStyle({ height: itemSize ? itemSize + 'px' : undefined }),
                                     class: vue.normalizeClass(['p-dropdown-item', { 'p-highlight': $options.isSelected(option), 'p-focus': $data.focusedOptionIndex === $options.getOptionIndex(i, getItemOptions), 'p-disabled': $options.isOptionDisabled(option) }]),
                                     role: "option",
@@ -1223,7 +1233,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = "\n.p-dropdown {\n    display: inline-flex;\n    cursor: pointer;\n    position: relative;\n    user-select: none;\n}\n.p-dropdown-clear-icon {\n    position: absolute;\n    top: 50%;\n    margin-top: -0.5rem;\n}\n.p-dropdown-trigger {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-shrink: 0;\n}\n.p-dropdown-label {\n    display: block;\n    white-space: nowrap;\n    overflow: hidden;\n    flex: 1 1 auto;\n    width: 1%;\n    text-overflow: ellipsis;\n    cursor: pointer;\n}\n.p-dropdown-label-empty {\n    overflow: hidden;\n    opacity: 0;\n}\ninput.p-dropdown-label {\n    cursor: default;\n}\n.p-dropdown .p-dropdown-panel {\n    min-width: 100%;\n}\n.p-dropdown-panel {\n    position: absolute;\n    top: 0;\n    left: 0;\n}\n.p-dropdown-items-wrapper {\n    overflow: auto;\n}\n.p-dropdown-item {\n    cursor: pointer;\n    font-weight: normal;\n    white-space: nowrap;\n    position: relative;\n    overflow: hidden;\n}\n.p-dropdown-item-group {\n    cursor: auto;\n}\n.p-dropdown-items {\n    margin: 0;\n    padding: 0;\n    list-style-type: none;\n}\n.p-dropdown-filter {\n    width: 100%;\n}\n.p-dropdown-filter-container {\n    position: relative;\n}\n.p-dropdown-filter-icon {\n    position: absolute;\n    top: 50%;\n    margin-top: -0.5rem;\n}\n.p-fluid .p-dropdown {\n    display: flex;\n}\n.p-fluid .p-dropdown .p-dropdown-label {\n    width: 1%;\n}\n";
+var css_248z = "\n.p-dropdown {\r\n    display: inline-flex;\r\n    cursor: pointer;\r\n    position: relative;\r\n    user-select: none;\n}\n.p-dropdown-clear-icon {\r\n    position: absolute;\r\n    top: 50%;\r\n    margin-top: -0.5rem;\n}\n.p-dropdown-trigger {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    flex-shrink: 0;\n}\n.p-dropdown-label {\r\n    display: block;\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    flex: 1 1 auto;\r\n    width: 1%;\r\n    text-overflow: ellipsis;\r\n    cursor: pointer;\n}\n.p-dropdown-label-empty {\r\n    overflow: hidden;\r\n    opacity: 0;\n}\ninput.p-dropdown-label {\r\n    cursor: default;\n}\n.p-dropdown .p-dropdown-panel {\r\n    min-width: 100%;\n}\n.p-dropdown-panel {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\n}\n.p-dropdown-items-wrapper {\r\n    overflow: auto;\n}\n.p-dropdown-item {\r\n    cursor: pointer;\r\n    font-weight: normal;\r\n    white-space: nowrap;\r\n    position: relative;\r\n    overflow: hidden;\n}\n.p-dropdown-item-group {\r\n    cursor: auto;\n}\n.p-dropdown-items {\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style-type: none;\n}\n.p-dropdown-filter {\r\n    width: 100%;\n}\n.p-dropdown-filter-container {\r\n    position: relative;\n}\n.p-dropdown-filter-icon {\r\n    position: absolute;\r\n    top: 50%;\r\n    margin-top: -0.5rem;\n}\n.p-fluid .p-dropdown {\r\n    display: flex;\n}\n.p-fluid .p-dropdown .p-dropdown-label {\r\n    width: 1%;\n}\r\n";
 styleInject(css_248z);
 
 script.render = render;

@@ -61,7 +61,7 @@ const _hoisted_2$1 = {
   class: "p-menuitem-text"
 };
 const _hoisted_3$1 = ["href", "target", "aria-current"];
-const _hoisted_4 = {
+const _hoisted_4$1 = {
   key: 1,
   class: "p-menuitem-text"
 };
@@ -117,7 +117,7 @@ function render$1(_ctx, _cache, $props, $setup, $data, $options) {
                         }, null, 2))
                       : createCommentVNode("", true),
                     ($props.item.label)
-                      ? (openBlock(), createElementBlock("span", _hoisted_4, toDisplayString($options.label()), 1))
+                      ? (openBlock(), createElementBlock("span", _hoisted_4$1, toDisplayString($options.label()), 1))
                       : createCommentVNode("", true)
                   ], 10, _hoisted_3$1))
             ], 64))
@@ -154,12 +154,17 @@ var script = {
 
 const _hoisted_1 = { class: "p-breadcrumb p-component" };
 const _hoisted_2 = { class: "p-breadcrumb-list" };
-const _hoisted_3 = /*#__PURE__*/createElementVNode("li", { class: "p-menuitem-separator" }, [
-  /*#__PURE__*/createElementVNode("span", {
-    class: "pi pi-chevron-right",
-    "aria-hidden": "true"
-  })
-], -1);
+const _hoisted_3 = {
+  key: 0,
+  class: "p-menuitem-separator"
+};
+const _hoisted_4 = /*#__PURE__*/createElementVNode("span", {
+  class: "pi pi-chevron-right",
+  "aria-hidden": "true"
+}, null, -1);
+const _hoisted_5 = [
+  _hoisted_4
+];
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_BreadcrumbItem = resolveComponent("BreadcrumbItem");
@@ -171,14 +176,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             key: 0,
             item: $props.home,
             class: "p-breadcrumb-home",
+            template: _ctx.$slots.item,
             exact: $props.exact
-          }, null, 8, ["item", "exact"]))
+          }, null, 8, ["item", "template", "exact"]))
         : createCommentVNode("", true),
-      (openBlock(true), createElementBlock(Fragment, null, renderList($props.model, (item) => {
+      (openBlock(true), createElementBlock(Fragment, null, renderList($props.model, (item, i) => {
         return (openBlock(), createElementBlock(Fragment, {
           key: item.label
         }, [
-          _hoisted_3,
+          ($props.home || i !== 0)
+            ? (openBlock(), createElementBlock("li", _hoisted_3, _hoisted_5))
+            : createCommentVNode("", true),
           createVNode(_component_BreadcrumbItem, {
             item: item,
             template: _ctx.$slots.item,
@@ -217,7 +225,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = "\n.p-breadcrumb {\n    overflow-x: auto;\n}\n.p-breadcrumb .p-breadcrumb-list {\n    margin: 0;\n    padding: 0;\n    list-style-type: none;\n    display: flex;\n    align-items: center;\n    flex-wrap: nowrap;\n}\n.p-breadcrumb .p-menuitem-text {\n    line-height: 1;\n}\n.p-breadcrumb .p-menuitem-link {\n    text-decoration: none;\n    display: flex;\n    align-items: center;\n}\n.p-breadcrumb .p-menuitem-separator {\n    display: flex;\n    align-items: center;\n}\n.p-breadcrumb::-webkit-scrollbar {\n    display: none;\n}\n";
+var css_248z = "\n.p-breadcrumb {\r\n    overflow-x: auto;\n}\n.p-breadcrumb .p-breadcrumb-list {\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style-type: none;\r\n    display: flex;\r\n    align-items: center;\r\n    flex-wrap: nowrap;\n}\n.p-breadcrumb .p-menuitem-text {\r\n    line-height: 1;\n}\n.p-breadcrumb .p-menuitem-link {\r\n    text-decoration: none;\r\n    display: flex;\r\n    align-items: center;\n}\n.p-breadcrumb .p-menuitem-separator {\r\n    display: flex;\r\n    align-items: center;\n}\n.p-breadcrumb::-webkit-scrollbar {\r\n    display: none;\n}\r\n";
 styleInject(css_248z);
 
 script.render = render;

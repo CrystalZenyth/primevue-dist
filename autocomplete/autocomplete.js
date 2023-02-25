@@ -2,6 +2,14 @@ this.primevue = this.primevue || {};
 this.primevue.autocomplete = (function (Button, OverlayEventBus, Portal, Ripple, utils, VirtualScroller, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Button__default = /*#__PURE__*/_interopDefaultLegacy(Button);
+    var OverlayEventBus__default = /*#__PURE__*/_interopDefaultLegacy(OverlayEventBus);
+    var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+    var VirtualScroller__default = /*#__PURE__*/_interopDefaultLegacy(VirtualScroller);
+
     var script = {
         name: 'AutoComplete',
         emits: ['update:modelValue', 'change', 'focus', 'blur', 'item-select', 'item-unselect', 'dropdown-click', 'clear', 'complete', 'before-show', 'before-hide', 'show', 'hide'],
@@ -172,6 +180,7 @@ this.primevue.autocomplete = (function (Button, OverlayEventBus, Portal, Ripple,
         dirty: false,
         data() {
             return {
+                id: this.$attrs.id,
                 focused: false,
                 focusedOptionIndex: -1,
                 focusedMultipleOptionIndex: -1,
@@ -180,6 +189,9 @@ this.primevue.autocomplete = (function (Button, OverlayEventBus, Portal, Ripple,
             };
         },
         watch: {
+            '$attrs.id': function (newValue) {
+                this.id = newValue || utils.UniqueComponentId();
+            },
             suggestions() {
                 if (this.searching) {
                     utils.ObjectUtils.isNotEmpty(this.suggestions) ? this.show() : !!this.$slots.empty ? this.show() : this.hide();
@@ -191,6 +203,8 @@ this.primevue.autocomplete = (function (Button, OverlayEventBus, Portal, Ripple,
             }
         },
         mounted() {
+            this.id = this.id || utils.UniqueComponentId();
+
             this.autoUpdateModel();
         },
         updated() {
@@ -467,7 +481,7 @@ this.primevue.autocomplete = (function (Button, OverlayEventBus, Portal, Ripple,
                 }
             },
             onOverlayClick(event) {
-                OverlayEventBus.emit('overlay-click', {
+                OverlayEventBus__default["default"].emit('overlay-click', {
                     originalEvent: event,
                     target: this.$el
                 });
@@ -898,9 +912,6 @@ this.primevue.autocomplete = (function (Button, OverlayEventBus, Portal, Ripple,
             selectedMessageText() {
                 return this.hasSelectedOption ? this.selectionMessageText.replaceAll('{0}', this.multiple ? this.modelValue.length : '1') : this.emptySelectionMessageText;
             },
-            id() {
-                return this.$attrs.id || utils.UniqueComponentId();
-            },
             focusedOptionId() {
                 return this.focusedOptionIndex !== -1 ? `${this.id}_${this.focusedOptionIndex}` : null;
             },
@@ -915,12 +926,12 @@ this.primevue.autocomplete = (function (Button, OverlayEventBus, Portal, Ripple,
             }
         },
         components: {
-            Button: Button,
-            VirtualScroller: VirtualScroller,
-            Portal: Portal
+            Button: Button__default["default"],
+            VirtualScroller: VirtualScroller__default["default"],
+            Portal: Portal__default["default"]
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -983,7 +994,7 @@ this.primevue.autocomplete = (function (Button, OverlayEventBus, Portal, Ripple,
               "aria-haspopup": "listbox",
               "aria-autocomplete": "list",
               "aria-expanded": $data.overlayVisible,
-              "aria-controls": $options.id + '_list',
+              "aria-controls": $data.id + '_list',
               "aria-activedescendant": $data.focused ? $options.focusedOptionId : undefined,
               onFocus: _cache[0] || (_cache[0] = (...args) => ($options.onFocus && $options.onFocus(...args))),
               onBlur: _cache[1] || (_cache[1] = (...args) => ($options.onBlur && $options.onBlur(...args))),
@@ -1008,7 +1019,7 @@ this.primevue.autocomplete = (function (Button, OverlayEventBus, Portal, Ripple,
               (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($props.modelValue, (option, i) => {
                 return (vue.openBlock(), vue.createElementBlock("li", {
                   key: i,
-                  id: $options.id + '_multiple_option_' + i,
+                  id: $data.id + '_multiple_option_' + i,
                   class: vue.normalizeClass(['p-autocomplete-token', { 'p-focus': $data.focusedMultipleOptionIndex === i }]),
                   role: "option",
                   "aria-label": $options.getOptionLabel(option),
@@ -1043,7 +1054,7 @@ this.primevue.autocomplete = (function (Button, OverlayEventBus, Portal, Ripple,
                   "aria-haspopup": "listbox",
                   "aria-autocomplete": "list",
                   "aria-expanded": $data.overlayVisible,
-                  "aria-controls": $options.id + '_list',
+                  "aria-controls": $data.id + '_list',
                   "aria-activedescendant": $data.focused ? $options.focusedOptionId : undefined,
                   onFocus: _cache[5] || (_cache[5] = (...args) => ($options.onFocus && $options.onFocus(...args))),
                   onBlur: _cache[6] || (_cache[6] = (...args) => ($options.onBlur && $options.onBlur(...args))),
@@ -1107,7 +1118,7 @@ this.primevue.autocomplete = (function (Button, OverlayEventBus, Portal, Ripple,
                         content: vue.withCtx(({ styleClass, contentRef, items, getItemOptions, contentStyle, itemSize }) => [
                           vue.createElementVNode("ul", {
                             ref: (el) => $options.listRef(el, contentRef),
-                            id: $options.id + '_list',
+                            id: $data.id + '_list',
                             class: vue.normalizeClass(['p-autocomplete-items', styleClass]),
                             style: vue.normalizeStyle(contentStyle),
                             role: "listbox"
@@ -1119,7 +1130,7 @@ this.primevue.autocomplete = (function (Button, OverlayEventBus, Portal, Ripple,
                                 ($options.isOptionGroup(option))
                                   ? (vue.openBlock(), vue.createElementBlock("li", {
                                       key: 0,
-                                      id: $options.id + '_' + $options.getOptionIndex(i, getItemOptions),
+                                      id: $data.id + '_' + $options.getOptionIndex(i, getItemOptions),
                                       style: vue.normalizeStyle({ height: itemSize ? itemSize + 'px' : undefined }),
                                       class: "p-autocomplete-item-group",
                                       role: "option"
@@ -1134,7 +1145,7 @@ this.primevue.autocomplete = (function (Button, OverlayEventBus, Portal, Ripple,
                                     ], 12, _hoisted_10))
                                   : vue.withDirectives((vue.openBlock(), vue.createElementBlock("li", {
                                       key: 1,
-                                      id: $options.id + '_' + $options.getOptionIndex(i, getItemOptions),
+                                      id: $data.id + '_' + $options.getOptionIndex(i, getItemOptions),
                                       style: vue.normalizeStyle({ height: itemSize ? itemSize + 'px' : undefined }),
                                       class: vue.normalizeClass(['p-autocomplete-item', { 'p-highlight': $options.isSelected(option), 'p-focus': $data.focusedOptionIndex === $options.getOptionIndex(i, getItemOptions), 'p-disabled': $options.isOptionDisabled(option) }]),
                                       role: "option",
@@ -1230,7 +1241,7 @@ this.primevue.autocomplete = (function (Button, OverlayEventBus, Portal, Ripple,
       }
     }
 
-    var css_248z = "\n.p-autocomplete {\n    display: inline-flex;\n    position: relative;\n}\n.p-autocomplete-loader {\n    position: absolute;\n    top: 50%;\n    margin-top: -0.5rem;\n}\n.p-autocomplete-dd .p-autocomplete-input {\n    flex: 1 1 auto;\n    width: 1%;\n}\n.p-autocomplete-dd .p-autocomplete-input,\n.p-autocomplete-dd .p-autocomplete-multiple-container {\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0;\n}\n.p-autocomplete-dd .p-autocomplete-dropdown {\n    border-top-left-radius: 0;\n    border-bottom-left-radius: 0px;\n}\n.p-autocomplete .p-autocomplete-panel {\n    min-width: 100%;\n}\n.p-autocomplete-panel {\n    position: absolute;\n    overflow: auto;\n    top: 0;\n    left: 0;\n}\n.p-autocomplete-items {\n    margin: 0;\n    padding: 0;\n    list-style-type: none;\n}\n.p-autocomplete-item {\n    cursor: pointer;\n    white-space: nowrap;\n    position: relative;\n    overflow: hidden;\n}\n.p-autocomplete-multiple-container {\n    margin: 0;\n    padding: 0;\n    list-style-type: none;\n    cursor: text;\n    overflow: hidden;\n    display: flex;\n    align-items: center;\n    flex-wrap: wrap;\n}\n.p-autocomplete-token {\n    cursor: default;\n    display: inline-flex;\n    align-items: center;\n    flex: 0 0 auto;\n}\n.p-autocomplete-token-icon {\n    cursor: pointer;\n}\n.p-autocomplete-input-token {\n    flex: 1 1 auto;\n    display: inline-flex;\n}\n.p-autocomplete-input-token input {\n    border: 0 none;\n    outline: 0 none;\n    background-color: transparent;\n    margin: 0;\n    padding: 0;\n    box-shadow: none;\n    border-radius: 0;\n    width: 100%;\n}\n.p-fluid .p-autocomplete {\n    display: flex;\n}\n.p-fluid .p-autocomplete-dd .p-autocomplete-input {\n    width: 1%;\n}\n";
+    var css_248z = "\n.p-autocomplete {\r\n    display: inline-flex;\r\n    position: relative;\n}\n.p-autocomplete-loader {\r\n    position: absolute;\r\n    top: 50%;\r\n    margin-top: -0.5rem;\n}\n.p-autocomplete-dd .p-autocomplete-input {\r\n    flex: 1 1 auto;\r\n    width: 1%;\n}\n.p-autocomplete-dd .p-autocomplete-input,\r\n.p-autocomplete-dd .p-autocomplete-multiple-container {\r\n    border-top-right-radius: 0;\r\n    border-bottom-right-radius: 0;\n}\n.p-autocomplete-dd .p-autocomplete-dropdown {\r\n    border-top-left-radius: 0;\r\n    border-bottom-left-radius: 0px;\n}\n.p-autocomplete .p-autocomplete-panel {\r\n    min-width: 100%;\n}\n.p-autocomplete-panel {\r\n    position: absolute;\r\n    overflow: auto;\r\n    top: 0;\r\n    left: 0;\n}\n.p-autocomplete-items {\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style-type: none;\n}\n.p-autocomplete-item {\r\n    cursor: pointer;\r\n    white-space: nowrap;\r\n    position: relative;\r\n    overflow: hidden;\n}\n.p-autocomplete-multiple-container {\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style-type: none;\r\n    cursor: text;\r\n    overflow: hidden;\r\n    display: flex;\r\n    align-items: center;\r\n    flex-wrap: wrap;\n}\n.p-autocomplete-token {\r\n    cursor: default;\r\n    display: inline-flex;\r\n    align-items: center;\r\n    flex: 0 0 auto;\n}\n.p-autocomplete-token-icon {\r\n    cursor: pointer;\n}\n.p-autocomplete-input-token {\r\n    flex: 1 1 auto;\r\n    display: inline-flex;\n}\n.p-autocomplete-input-token input {\r\n    border: 0 none;\r\n    outline: 0 none;\r\n    background-color: transparent;\r\n    margin: 0;\r\n    padding: 0;\r\n    box-shadow: none;\r\n    border-radius: 0;\r\n    width: 100%;\n}\n.p-fluid .p-autocomplete {\r\n    display: flex;\n}\n.p-fluid .p-autocomplete-dd .p-autocomplete-input {\r\n    width: 1%;\n}\r\n";
     styleInject(css_248z);
 
     script.render = render;

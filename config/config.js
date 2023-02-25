@@ -97,7 +97,6 @@ this.primevue.config = (function (exports, api, vue) {
                 nextPageLabel: 'Next Page',
                 prevPageLabel: 'Previous Page',
                 rowsPerPageLabel: 'Rows per page',
-                previousPageLabel: 'Previous Page',
                 jumpToPageDropdownLabel: 'Jump to Page Dropdown',
                 jumpToPageInputLabel: 'Jump to Page Input',
                 selectRow: 'Row Selected',
@@ -159,7 +158,7 @@ this.primevue.config = (function (exports, api, vue) {
         }
     };
 
-    exports.default = PrimeVue;
+    exports["default"] = PrimeVue;
     exports.usePrimeVue = usePrimeVue;
 
     Object.defineProperty(exports, '__esModule', { value: true });

@@ -2,6 +2,11 @@ this.primevue = this.primevue || {};
 this.primevue.listbox = (function (api, Ripple, utils, VirtualScroller, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+    var VirtualScroller__default = /*#__PURE__*/_interopDefaultLegacy(VirtualScroller);
+
     var script = {
         name: 'Listbox',
         emits: ['update:modelValue', 'change', 'focus', 'blur', 'filter'],
@@ -88,17 +93,23 @@ this.primevue.listbox = (function (api, Ripple, utils, VirtualScroller, vue) {
         focusOnHover: false,
         data() {
             return {
+                id: this.$attrs.id,
                 filterValue: null,
                 focused: false,
                 focusedOptionIndex: -1
             };
         },
         watch: {
+            '$attrs.id': function (newValue) {
+                this.id = newValue || utils.UniqueComponentId();
+            },
             options() {
                 this.autoUpdateModel();
             }
         },
         mounted() {
+            this.id = this.id || utils.UniqueComponentId();
+
             this.autoUpdateModel();
         },
         methods: {
@@ -633,9 +644,6 @@ this.primevue.listbox = (function (api, Ripple, utils, VirtualScroller, vue) {
             selectedMessageText() {
                 return this.hasSelectedOption ? this.selectionMessageText.replaceAll('{0}', this.multiple ? this.modelValue.length : '1') : this.emptySelectionMessageText;
             },
-            id() {
-                return this.$attrs.id || utils.UniqueComponentId();
-            },
             focusedOptionId() {
                 return this.focusedOptionIndex !== -1 ? `${this.id}_${this.focusedOptionIndex}` : null;
             },
@@ -647,10 +655,10 @@ this.primevue.listbox = (function (api, Ripple, utils, VirtualScroller, vue) {
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         },
         components: {
-            VirtualScroller: VirtualScroller
+            VirtualScroller: VirtualScroller__default["default"]
         }
     };
 
@@ -698,7 +706,7 @@ this.primevue.listbox = (function (api, Ripple, utils, VirtualScroller, vue) {
       const _directive_ripple = vue.resolveDirective("ripple");
 
       return (vue.openBlock(), vue.createElementBlock("div", {
-        id: $options.id,
+        id: $data.id,
         class: vue.normalizeClass($options.containerClass),
         onFocusout: _cache[10] || (_cache[10] = (...args) => ($options.onFocusout && $options.onFocusout(...args)))
       }, [
@@ -725,7 +733,7 @@ this.primevue.listbox = (function (api, Ripple, utils, VirtualScroller, vue) {
                   placeholder: $props.filterPlaceholder,
                   role: "searchbox",
                   autocomplete: "off",
-                  "aria-owns": $options.id + '_list',
+                  "aria-owns": $data.id + '_list',
                   "aria-activedescendant": $options.focusedOptionId,
                   tabindex: !$props.disabled && !$data.focused ? $props.tabindex : -1,
                   onInput: _cache[2] || (_cache[2] = (...args) => ($options.onFilterChange && $options.onFilterChange(...args))),
@@ -755,7 +763,7 @@ this.primevue.listbox = (function (api, Ripple, utils, VirtualScroller, vue) {
             content: vue.withCtx(({ styleClass, contentRef, items, getItemOptions, contentStyle, itemSize }) => [
               vue.createElementVNode("ul", {
                 ref: (el) => $options.listRef(el, contentRef),
-                id: $options.id + '_list',
+                id: $data.id + '_list',
                 class: vue.normalizeClass(['p-listbox-list', styleClass]),
                 style: vue.normalizeStyle(contentStyle),
                 tabindex: -1,
@@ -776,7 +784,7 @@ this.primevue.listbox = (function (api, Ripple, utils, VirtualScroller, vue) {
                     ($options.isOptionGroup(option))
                       ? (vue.openBlock(), vue.createElementBlock("li", {
                           key: 0,
-                          id: $options.id + '_' + $options.getOptionIndex(i, getItemOptions),
+                          id: $data.id + '_' + $options.getOptionIndex(i, getItemOptions),
                           style: vue.normalizeStyle({ height: itemSize ? itemSize + 'px' : undefined }),
                           class: "p-listbox-item-group",
                           role: "option"
@@ -790,7 +798,7 @@ this.primevue.listbox = (function (api, Ripple, utils, VirtualScroller, vue) {
                         ], 12, _hoisted_8))
                       : vue.withDirectives((vue.openBlock(), vue.createElementBlock("li", {
                           key: 1,
-                          id: $options.id + '_' + $options.getOptionIndex(i, getItemOptions),
+                          id: $data.id + '_' + $options.getOptionIndex(i, getItemOptions),
                           style: vue.normalizeStyle({ height: itemSize ? itemSize + 'px' : undefined }),
                           class: vue.normalizeClass(['p-listbox-item', { 'p-highlight': $options.isSelected(option), 'p-focus': $data.focusedOptionIndex === $options.getOptionIndex(i, getItemOptions), 'p-disabled': $options.isOptionDisabled(option) }]),
                           role: "option",
@@ -889,7 +897,7 @@ this.primevue.listbox = (function (api, Ripple, utils, VirtualScroller, vue) {
       }
     }
 
-    var css_248z = "\n.p-listbox-list-wrapper {\n    overflow: auto;\n}\n.p-listbox-list {\n    list-style-type: none;\n    margin: 0;\n    padding: 0;\n}\n.p-listbox-item {\n    cursor: pointer;\n    position: relative;\n    overflow: hidden;\n}\n.p-listbox-item-group {\n    cursor: auto;\n}\n.p-listbox-filter-container {\n    position: relative;\n}\n.p-listbox-filter-icon {\n    position: absolute;\n    top: 50%;\n    margin-top: -0.5rem;\n}\n.p-listbox-filter {\n    width: 100%;\n}\n";
+    var css_248z = "\n.p-listbox-list-wrapper {\r\n    overflow: auto;\n}\n.p-listbox-list {\r\n    list-style-type: none;\r\n    margin: 0;\r\n    padding: 0;\n}\n.p-listbox-item {\r\n    cursor: pointer;\r\n    position: relative;\r\n    overflow: hidden;\n}\n.p-listbox-item-group {\r\n    cursor: auto;\n}\n.p-listbox-filter-container {\r\n    position: relative;\n}\n.p-listbox-filter-icon {\r\n    position: absolute;\r\n    top: 50%;\r\n    margin-top: -0.5rem;\n}\n.p-listbox-filter {\r\n    width: 100%;\n}\r\n";
     styleInject(css_248z);
 
     script.render = render;

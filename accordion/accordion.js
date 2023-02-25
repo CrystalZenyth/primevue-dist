@@ -2,6 +2,10 @@ this.primevue = this.primevue || {};
 this.primevue.accordion = (function (Ripple, utils, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
     var script = {
         name: 'Accordion',
         emits: ['update:activeIndex', 'tab-open', 'tab-close', 'tab-click'],
@@ -37,13 +41,20 @@ this.primevue.accordion = (function (Ripple, utils, vue) {
         },
         data() {
             return {
+                id: this.$attrs.id,
                 d_activeIndex: this.activeIndex
             };
         },
         watch: {
+            '$attrs.id': function (newValue) {
+                this.id = newValue || utils.UniqueComponentId();
+            },
             activeIndex(newValue) {
                 this.d_activeIndex = newValue;
             }
+        },
+        mounted() {
+            this.id = this.id || utils.UniqueComponentId();
         },
         methods: {
             isAccordionTab(child) {
@@ -211,13 +222,10 @@ this.primevue.accordion = (function (Ripple, utils, vue) {
 
                     return tabs;
                 }, []);
-            },
-            id() {
-                return this.$attrs.id || utils.UniqueComponentId();
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -319,7 +327,7 @@ this.primevue.accordion = (function (Ripple, utils, vue) {
       }
     }
 
-    var css_248z = "\n.p-accordion-header-action {\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    user-select: none;\n    position: relative;\n    text-decoration: none;\n}\n.p-accordion-header-action:focus {\n    z-index: 1;\n}\n.p-accordion-header-text {\n    line-height: 1;\n}\n";
+    var css_248z = "\n.p-accordion-header-action {\r\n    cursor: pointer;\r\n    display: flex;\r\n    align-items: center;\r\n    user-select: none;\r\n    position: relative;\r\n    text-decoration: none;\n}\n.p-accordion-header-action:focus {\r\n    z-index: 1;\n}\n.p-accordion-header-text {\r\n    line-height: 1;\n}\r\n";
     styleInject(css_248z);
 
     script.render = render;

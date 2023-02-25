@@ -1,5 +1,5 @@
 import Ripple from 'primevue/ripple';
-import { DomHandler, UniqueComponentId } from 'primevue/utils';
+import { UniqueComponentId, DomHandler } from 'primevue/utils';
 import { openBlock, createElementBlock, Fragment, renderList, normalizeClass, createElementVNode, mergeProps, toDisplayString, createCommentVNode, createBlock, resolveDynamicComponent, createVNode, Transition, withCtx, withDirectives, vShow } from 'vue';
 
 var script = {
@@ -37,13 +37,20 @@ var script = {
     },
     data() {
         return {
+            id: this.$attrs.id,
             d_activeIndex: this.activeIndex
         };
     },
     watch: {
+        '$attrs.id': function (newValue) {
+            this.id = newValue || UniqueComponentId();
+        },
         activeIndex(newValue) {
             this.d_activeIndex = newValue;
         }
+    },
+    mounted() {
+        this.id = this.id || UniqueComponentId();
     },
     methods: {
         isAccordionTab(child) {
@@ -211,9 +218,6 @@ var script = {
 
                 return tabs;
             }, []);
-        },
-        id() {
-            return this.$attrs.id || UniqueComponentId();
         }
     },
     directives: {
@@ -319,7 +323,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = "\n.p-accordion-header-action {\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    user-select: none;\n    position: relative;\n    text-decoration: none;\n}\n.p-accordion-header-action:focus {\n    z-index: 1;\n}\n.p-accordion-header-text {\n    line-height: 1;\n}\n";
+var css_248z = "\n.p-accordion-header-action {\r\n    cursor: pointer;\r\n    display: flex;\r\n    align-items: center;\r\n    user-select: none;\r\n    position: relative;\r\n    text-decoration: none;\n}\n.p-accordion-header-action:focus {\r\n    z-index: 1;\n}\n.p-accordion-header-text {\r\n    line-height: 1;\n}\r\n";
 styleInject(css_248z);
 
 script.render = render;

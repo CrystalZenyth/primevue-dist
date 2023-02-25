@@ -2,6 +2,11 @@ this.primevue = this.primevue || {};
 this.primevue.orderlist = (function (Button, Ripple, utils, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Button__default = /*#__PURE__*/_interopDefaultLegacy(Button);
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
     var script = {
         name: 'OrderList',
         emits: ['update:modelValue', 'reorder', 'update:selection', 'selection-change', 'focus', 'blur'],
@@ -77,10 +82,16 @@ this.primevue.orderlist = (function (Button, Ripple, utils, vue) {
         list: null,
         data() {
             return {
+                id: this.$attrs.id,
                 d_selection: this.selection,
                 focused: false,
                 focusedOptionIndex: -1
             };
+        },
+        watch: {
+            '$attrs.id': function (newValue) {
+                this.id = newValue || utils.UniqueComponentId();
+            }
         },
         beforeUnmount() {
             this.destroyStyle();
@@ -92,6 +103,8 @@ this.primevue.orderlist = (function (Button, Ripple, utils, vue) {
             }
         },
         mounted() {
+            this.id = this.id || utils.UniqueComponentId();
+
             if (this.responsive) {
                 this.createStyle();
             }
@@ -501,9 +514,6 @@ this.primevue.orderlist = (function (Button, Ripple, utils, vue) {
                     }
                 ];
             },
-            id() {
-                return this.$attrs.id || utils.UniqueComponentId();
-            },
             attributeSelector() {
                 return utils.UniqueComponentId();
             },
@@ -524,10 +534,10 @@ this.primevue.orderlist = (function (Button, Ripple, utils, vue) {
             }
         },
         components: {
-            OLButton: Button
+            OLButton: Button__default["default"]
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -586,7 +596,7 @@ this.primevue.orderlist = (function (Button, Ripple, utils, vue) {
             : vue.createCommentVNode("", true),
           vue.createVNode(vue.TransitionGroup, vue.mergeProps({
             ref: $options.listRef,
-            id: $options.id + '_list',
+            id: $data.id + '_list',
             name: "p-orderlist-flip",
             tag: "ul",
             class: "p-orderlist-list",
@@ -605,9 +615,9 @@ this.primevue.orderlist = (function (Button, Ripple, utils, vue) {
               (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList($props.modelValue, (item, i) => {
                 return vue.withDirectives((vue.openBlock(), vue.createElementBlock("li", {
                   key: $options.getItemKey(item, i),
-                  id: $options.id + '_' + i,
+                  id: $data.id + '_' + i,
                   role: "option",
-                  class: vue.normalizeClass($options.itemClass(item, `${$options.id}_${i}`)),
+                  class: vue.normalizeClass($options.itemClass(item, `${$data.id}_${i}`)),
                   onClick: $event => ($options.onItemClick($event, item, i)),
                   onTouchend: _cache[0] || (_cache[0] = (...args) => ($options.onItemTouchEnd && $options.onItemTouchEnd(...args))),
                   "aria-selected": $options.isSelected(item),
@@ -655,7 +665,7 @@ this.primevue.orderlist = (function (Button, Ripple, utils, vue) {
       }
     }
 
-    var css_248z = "\n.p-orderlist {\n    display: flex;\n}\n.p-orderlist-controls {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n}\n.p-orderlist-list-container {\n    flex: 1 1 auto;\n}\n.p-orderlist-list {\n    list-style-type: none;\n    margin: 0;\n    padding: 0;\n    overflow: auto;\n    min-height: 12rem;\n    max-height: 24rem;\n}\n.p-orderlist-item {\n    cursor: pointer;\n    overflow: hidden;\n    position: relative;\n}\n.p-orderlist.p-state-disabled .p-orderlist-item,\n.p-orderlist.p-state-disabled .p-button {\n    cursor: default;\n}\n.p-orderlist.p-state-disabled .p-orderlist-list {\n    overflow: hidden;\n}\n";
+    var css_248z = "\n.p-orderlist {\r\n    display: flex;\n}\n.p-orderlist-controls {\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\n}\n.p-orderlist-list-container {\r\n    flex: 1 1 auto;\n}\n.p-orderlist-list {\r\n    list-style-type: none;\r\n    margin: 0;\r\n    padding: 0;\r\n    overflow: auto;\r\n    min-height: 12rem;\r\n    max-height: 24rem;\n}\n.p-orderlist-item {\r\n    cursor: pointer;\r\n    overflow: hidden;\r\n    position: relative;\n}\n.p-orderlist.p-state-disabled .p-orderlist-item,\r\n.p-orderlist.p-state-disabled .p-button {\r\n    cursor: default;\n}\n.p-orderlist.p-state-disabled .p-orderlist-list {\r\n    overflow: hidden;\n}\r\n";
     styleInject(css_248z);
 
     script.render = render;

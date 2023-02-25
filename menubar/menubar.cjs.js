@@ -4,6 +4,10 @@ var utils = require('primevue/utils');
 var Ripple = require('primevue/ripple');
 var vue = require('vue');
 
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
 var script$1 = {
     name: 'MenubarSub',
     emits: ['item-mouseenter', 'item-click'],
@@ -130,7 +134,7 @@ var script$1 = {
         }
     },
     directives: {
-        ripple: Ripple
+        ripple: Ripple__default["default"]
     }
 };
 
@@ -293,6 +297,7 @@ var script = {
     },
     data() {
         return {
+            id: this.$attrs.id,
             mobileActive: false,
             focused: false,
             focusedItemInfo: { index: -1, level: 0, parentKey: '' },
@@ -301,6 +306,9 @@ var script = {
         };
     },
     watch: {
+        '$attrs.id': function (newValue) {
+            this.id = newValue || utils.UniqueComponentId();
+        },
         activeItemPath(newPath) {
             if (utils.ObjectUtils.isNotEmpty(newPath)) {
                 this.bindOutsideClickListener();
@@ -314,6 +322,9 @@ var script = {
     outsideClickListener: null,
     container: null,
     menubar: null,
+    mounted() {
+        this.id = this.id || utils.UniqueComponentId();
+    },
     beforeUnmount() {
         this.mobileActive = false;
         this.unbindOutsideClickListener();
@@ -806,9 +817,6 @@ var script = {
 
             return processedItem ? processedItem.items : this.processedItems;
         },
-        id() {
-            return this.$attrs.id || utils.UniqueComponentId();
-        },
         focusedItemId() {
             return this.focusedItemInfo.index !== -1 ? `${this.id}${utils.ObjectUtils.isNotEmpty(this.focusedItemInfo.parentKey) ? '_' + this.focusedItemInfo.parentKey : ''}_${this.focusedItemInfo.index}` : null;
         }
@@ -853,7 +861,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           class: "p-menubar-button",
           "aria-haspopup": $props.model.length && $props.model.length > 0 ? true : false,
           "aria-expanded": $data.mobileActive,
-          "aria-controls": $options.id,
+          "aria-controls": $data.id,
           "aria-label": _ctx.$primevue.config.locale.aria.navigation,
           onClick: _cache[0] || (_cache[0] = $event => ($options.menuButtonClick($event))),
           onKeydown: _cache[1] || (_cache[1] = $event => ($options.menuButtonKeydown($event)))
@@ -861,7 +869,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       : vue.createCommentVNode("", true),
     vue.createVNode(_component_MenubarSub, {
       ref: $options.menubarRef,
-      id: $options.id,
+      id: $data.id,
       class: "p-menubar-root-list",
       role: "menubar",
       items: $options.processedItems,
@@ -870,7 +878,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       mobileActive: $data.mobileActive,
       tabindex: "0",
       "aria-activedescendant": $data.focused ? $options.focusedItemId : undefined,
-      menuId: $options.id,
+      menuId: $data.id,
       focusedItemId: $data.focused ? $options.focusedItemId : undefined,
       activeItemPath: $data.activeItemPath,
       exact: $props.exact,
@@ -918,7 +926,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = "\n.p-menubar {\n    display: flex;\n    align-items: center;\n}\n.p-menubar ul {\n    margin: 0;\n    padding: 0;\n    list-style: none;\n}\n.p-menubar .p-menuitem-link {\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    text-decoration: none;\n    overflow: hidden;\n    position: relative;\n}\n.p-menubar .p-menuitem-text {\n    line-height: 1;\n}\n.p-menubar .p-menuitem {\n    position: relative;\n}\n.p-menubar-root-list {\n    display: flex;\n    align-items: center;\n    flex-wrap: wrap;\n}\n.p-menubar-root-list > li ul {\n    display: none;\n    z-index: 1;\n}\n.p-menubar-root-list > .p-menuitem-active > .p-submenu-list {\n    display: block;\n}\n.p-menubar .p-submenu-list {\n    display: none;\n    position: absolute;\n    z-index: 1;\n}\n.p-menubar .p-submenu-list > .p-menuitem-active > .p-submenu-list {\n    display: block;\n    left: 100%;\n    top: 0;\n}\n.p-menubar .p-submenu-list .p-menuitem .p-menuitem-content .p-menuitem-link .p-submenu-icon {\n    margin-left: auto;\n}\n.p-menubar .p-menubar-end {\n    margin-left: auto;\n    align-self: center;\n}\n.p-menubar-button {\n    display: none;\n    cursor: pointer;\n    align-items: center;\n    justify-content: center;\n    text-decoration: none;\n}\n";
+var css_248z = "\n.p-menubar {\r\n    display: flex;\r\n    align-items: center;\n}\n.p-menubar ul {\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style: none;\n}\n.p-menubar .p-menuitem-link {\r\n    cursor: pointer;\r\n    display: flex;\r\n    align-items: center;\r\n    text-decoration: none;\r\n    overflow: hidden;\r\n    position: relative;\n}\n.p-menubar .p-menuitem-text {\r\n    line-height: 1;\n}\n.p-menubar .p-menuitem {\r\n    position: relative;\n}\n.p-menubar-root-list {\r\n    display: flex;\r\n    align-items: center;\r\n    flex-wrap: wrap;\n}\n.p-menubar-root-list > li ul {\r\n    display: none;\r\n    z-index: 1;\n}\n.p-menubar-root-list > .p-menuitem-active > .p-submenu-list {\r\n    display: block;\n}\n.p-menubar .p-submenu-list {\r\n    display: none;\r\n    position: absolute;\r\n    z-index: 1;\n}\n.p-menubar .p-submenu-list > .p-menuitem-active > .p-submenu-list {\r\n    display: block;\r\n    left: 100%;\r\n    top: 0;\n}\n.p-menubar .p-submenu-list .p-menuitem .p-menuitem-content .p-menuitem-link .p-submenu-icon {\r\n    margin-left: auto;\n}\n.p-menubar .p-menubar-end {\r\n    margin-left: auto;\r\n    align-self: center;\n}\n.p-menubar-button {\r\n    display: none;\r\n    cursor: pointer;\r\n    align-items: center;\r\n    justify-content: center;\r\n    text-decoration: none;\n}\r\n";
 styleInject(css_248z);
 
 script.render = render;

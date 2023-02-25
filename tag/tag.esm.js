@@ -1,4 +1,4 @@
-import { openBlock, createElementBlock, mergeProps, normalizeClass, createCommentVNode, renderSlot, createElementVNode, toDisplayString } from 'vue';
+import { openBlock, createElementBlock, normalizeClass, createCommentVNode, renderSlot, createElementVNode, toDisplayString } from 'vue';
 
 var script = {
     name: 'Tag',
@@ -30,7 +30,9 @@ var script = {
 const _hoisted_1 = { class: "p-tag-value" };
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (openBlock(), createElementBlock("span", mergeProps({ class: $options.containerClass }, _ctx.$attrs), [
+  return (openBlock(), createElementBlock("span", {
+    class: normalizeClass($options.containerClass)
+  }, [
     ($props.icon)
       ? (openBlock(), createElementBlock("span", {
           key: 0,
@@ -40,7 +42,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     renderSlot(_ctx.$slots, "default", {}, () => [
       createElementVNode("span", _hoisted_1, toDisplayString($props.value), 1)
     ])
-  ], 16))
+  ], 2))
 }
 
 function styleInject(css, ref) {
@@ -70,7 +72,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = "\n.p-tag {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n}\n.p-tag-icon,\n.p-tag-value,\n.p-tag-icon.pi {\n    line-height: 1.5;\n}\n.p-tag.p-tag-rounded {\n    border-radius: 10rem;\n}\n";
+var css_248z = "\n.p-tag {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n.p-tag-icon,\r\n.p-tag-value,\r\n.p-tag-icon.pi {\r\n    line-height: 1.5;\n}\n.p-tag.p-tag-rounded {\r\n    border-radius: 10rem;\n}\r\n";
 styleInject(css_248z);
 
 script.render = render;

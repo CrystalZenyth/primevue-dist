@@ -2,6 +2,12 @@ this.primevue = this.primevue || {};
 this.primevue.menu = (function (OverlayEventBus, Portal, utils, Ripple, vue) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var OverlayEventBus__default = /*#__PURE__*/_interopDefaultLegacy(OverlayEventBus);
+    var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
     var script$1 = {
         name: 'Menuitem',
         inheritAttrs: false,
@@ -49,15 +55,15 @@ this.primevue.menu = (function (OverlayEventBus, Portal, utils, Ripple, vue) {
             }
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
     const _hoisted_1$1 = ["id", "aria-label", "aria-disabled"];
     const _hoisted_2$1 = ["href", "onClick"];
     const _hoisted_3$1 = { class: "p-menuitem-text" };
-    const _hoisted_4 = ["href", "target"];
-    const _hoisted_5 = { class: "p-menuitem-text" };
+    const _hoisted_4$1 = ["href", "target"];
+    const _hoisted_5$1 = { class: "p-menuitem-text" };
 
     function render$1(_ctx, _cache, $props, $setup, $data, $options) {
       const _component_router_link = vue.resolveComponent("router-link");
@@ -120,8 +126,8 @@ this.primevue.menu = (function (OverlayEventBus, Portal, utils, Ripple, vue) {
                                 class: vue.normalizeClass(['p-menuitem-icon', $props.item.icon])
                               }, null, 2))
                             : vue.createCommentVNode("", true),
-                          vue.createElementVNode("span", _hoisted_5, vue.toDisplayString($options.label()), 1)
-                        ], 10, _hoisted_4)), [
+                          vue.createElementVNode("span", _hoisted_5$1, vue.toDisplayString($options.label()), 1)
+                        ], 10, _hoisted_4$1)), [
                           [_directive_ripple]
                         ])
                   ], 64))
@@ -180,11 +186,17 @@ this.primevue.menu = (function (OverlayEventBus, Portal, utils, Ripple, vue) {
         },
         data() {
             return {
+                id: this.$attrs.id,
                 overlayVisible: false,
                 focused: false,
                 focusedOptionIndex: -1,
                 selectedOptionIndex: -1
             };
+        },
+        watch: {
+            '$attrs.id': function (newValue) {
+                this.id = newValue || utils.UniqueComponentId();
+            }
         },
         target: null,
         outsideClickListener: null,
@@ -193,6 +205,8 @@ this.primevue.menu = (function (OverlayEventBus, Portal, utils, Ripple, vue) {
         container: null,
         list: null,
         mounted() {
+            this.id = this.id || utils.UniqueComponentId();
+
             if (!this.popup) {
                 this.bindResizeListener();
                 this.bindOutsideClickListener();
@@ -459,7 +473,7 @@ this.primevue.menu = (function (OverlayEventBus, Portal, utils, Ripple, vue) {
                 return ['p-menuitem-separator', item.class];
             },
             onOverlayClick(event) {
-                OverlayEventBus.emit('overlay-click', {
+                OverlayEventBus__default["default"].emit('overlay-click', {
                     originalEvent: event,
                     target: this.target
                 });
@@ -482,22 +496,27 @@ this.primevue.menu = (function (OverlayEventBus, Portal, utils, Ripple, vue) {
                     }
                 ];
             },
-            id() {
-                return this.$attrs.id || utils.UniqueComponentId();
-            },
             focusedOptionId() {
                 return this.focusedOptionIndex !== -1 ? this.focusedOptionIndex : null;
             }
         },
         components: {
             PVMenuitem: script$1,
-            Portal: Portal
+            Portal: Portal__default["default"]
         }
     };
 
     const _hoisted_1 = ["id"];
-    const _hoisted_2 = ["id", "tabindex", "aria-activedescendant", "aria-label", "aria-labelledby"];
-    const _hoisted_3 = ["id"];
+    const _hoisted_2 = {
+      key: 0,
+      class: "p-menu-start"
+    };
+    const _hoisted_3 = ["id", "tabindex", "aria-activedescendant", "aria-label", "aria-labelledby"];
+    const _hoisted_4 = ["id"];
+    const _hoisted_5 = {
+      key: 1,
+      class: "p-menu-end"
+    };
 
     function render(_ctx, _cache, $props, $setup, $data, $options) {
       const _component_PVMenuitem = vue.resolveComponent("PVMenuitem");
@@ -519,14 +538,19 @@ this.primevue.menu = (function (OverlayEventBus, Portal, utils, Ripple, vue) {
                 ? (vue.openBlock(), vue.createElementBlock("div", vue.mergeProps({
                     key: 0,
                     ref: $options.containerRef,
-                    id: $options.id,
+                    id: $data.id,
                     class: $options.containerClass
                   }, _ctx.$attrs, {
                     onClick: _cache[3] || (_cache[3] = (...args) => ($options.onOverlayClick && $options.onOverlayClick(...args)))
                   }), [
+                    (_ctx.$slots.start)
+                      ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_2, [
+                          vue.renderSlot(_ctx.$slots, "start")
+                        ]))
+                      : vue.createCommentVNode("", true),
                     vue.createElementVNode("ul", {
                       ref: $options.listRef,
-                      id: $options.id + '_list',
+                      id: $data.id + '_list',
                       class: "p-menu-list p-reset",
                       role: "menu",
                       tabindex: $props.tabindex,
@@ -546,14 +570,14 @@ this.primevue.menu = (function (OverlayEventBus, Portal, utils, Ripple, vue) {
                                 (item.items)
                                   ? (vue.openBlock(), vue.createElementBlock("li", {
                                       key: 0,
-                                      id: $options.id + '_' + i,
+                                      id: $data.id + '_' + i,
                                       class: "p-submenu-header",
                                       role: "none"
                                     }, [
                                       vue.renderSlot(_ctx.$slots, "item", { item: item }, () => [
                                         vue.createTextVNode(vue.toDisplayString($options.label(item)), 1)
                                       ])
-                                    ], 8, _hoisted_3))
+                                    ], 8, _hoisted_4))
                                   : vue.createCommentVNode("", true),
                                 (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(item.items, (child, j) => {
                                   return (vue.openBlock(), vue.createElementBlock(vue.Fragment, {
@@ -562,7 +586,7 @@ this.primevue.menu = (function (OverlayEventBus, Portal, utils, Ripple, vue) {
                                     ($options.visible(child) && !child.separator)
                                       ? (vue.openBlock(), vue.createBlock(_component_PVMenuitem, {
                                           key: 0,
-                                          id: $options.id + '_' + i + '_' + j,
+                                          id: $data.id + '_' + i + '_' + j,
                                           item: child,
                                           template: _ctx.$slots.item,
                                           exact: $props.exact,
@@ -589,7 +613,7 @@ this.primevue.menu = (function (OverlayEventBus, Portal, utils, Ripple, vue) {
                                 }, null, 6))
                               : (vue.openBlock(), vue.createBlock(_component_PVMenuitem, {
                                   key: $options.label(item) + i.toString(),
-                                  id: $options.id + '_' + i,
+                                  id: $data.id + '_' + i,
                                   item: item,
                                   template: _ctx.$slots.item,
                                   exact: $props.exact,
@@ -598,7 +622,12 @@ this.primevue.menu = (function (OverlayEventBus, Portal, utils, Ripple, vue) {
                                 }, null, 8, ["id", "item", "template", "exact", "focusedOptionId", "onItemClick"]))
                         ], 64))
                       }), 128))
-                    ], 40, _hoisted_2)
+                    ], 40, _hoisted_3),
+                    (_ctx.$slots.end)
+                      ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_5, [
+                          vue.renderSlot(_ctx.$slots, "end")
+                        ]))
+                      : vue.createCommentVNode("", true)
                   ], 16, _hoisted_1))
                 : vue.createCommentVNode("", true)
             ]),
@@ -636,7 +665,7 @@ this.primevue.menu = (function (OverlayEventBus, Portal, utils, Ripple, vue) {
       }
     }
 
-    var css_248z = "\n.p-menu-overlay {\n    position: absolute;\n    top: 0;\n    left: 0;\n}\n.p-menu ul {\n    margin: 0;\n    padding: 0;\n    list-style: none;\n}\n.p-menu .p-menuitem-link {\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    text-decoration: none;\n    overflow: hidden;\n    position: relative;\n}\n.p-menu .p-menuitem-text {\n    line-height: 1;\n}\n";
+    var css_248z = "\n.p-menu-overlay {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\n}\n.p-menu ul {\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style: none;\n}\n.p-menu .p-menuitem-link {\r\n    cursor: pointer;\r\n    display: flex;\r\n    align-items: center;\r\n    text-decoration: none;\r\n    overflow: hidden;\r\n    position: relative;\n}\n.p-menu .p-menuitem-text {\r\n    line-height: 1;\n}\r\n";
     styleInject(css_248z);
 
     script.render = render;

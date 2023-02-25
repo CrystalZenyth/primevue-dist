@@ -6,6 +6,12 @@ var utils = require('primevue/utils');
 var Ripple = require('primevue/ripple');
 var vue = require('vue');
 
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var OverlayEventBus__default = /*#__PURE__*/_interopDefaultLegacy(OverlayEventBus);
+var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
+var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
 var script$1 = {
     name: 'TieredMenuSub',
     emits: ['item-click', 'item-mouseenter'],
@@ -111,7 +117,7 @@ var script$1 = {
         }
     },
     directives: {
-        ripple: Ripple
+        ripple: Ripple__default["default"]
     }
 };
 
@@ -304,6 +310,7 @@ var script = {
     searchValue: null,
     data() {
         return {
+            id: this.$attrs.id,
             focused: false,
             focusedItemInfo: { index: -1, level: 0, parentKey: '' },
             activeItemPath: [],
@@ -312,6 +319,9 @@ var script = {
         };
     },
     watch: {
+        '$attrs.id': function (newValue) {
+            this.id = newValue || utils.UniqueComponentId();
+        },
         activeItemPath(newPath) {
             if (!this.popup) {
                 if (utils.ObjectUtils.isNotEmpty(newPath)) {
@@ -323,6 +333,9 @@ var script = {
                 }
             }
         }
+    },
+    mounted() {
+        this.id = this.id || utils.UniqueComponentId();
     },
     beforeUnmount() {
         this.unbindOutsideClickListener();
@@ -487,7 +500,7 @@ var script = {
             isFocus && utils.DomHandler.focus(this.menubar);
         },
         onOverlayClick(event) {
-            OverlayEventBus.emit('overlay-click', {
+            OverlayEventBus__default["default"].emit('overlay-click', {
                 originalEvent: event,
                 target: this.target
             });
@@ -843,16 +856,13 @@ var script = {
 
             return processedItem ? processedItem.items : this.processedItems;
         },
-        id() {
-            return this.$attrs.id || utils.UniqueComponentId();
-        },
         focusedItemId() {
             return this.focusedItemInfo.index !== -1 ? `${this.id}${utils.ObjectUtils.isNotEmpty(this.focusedItemInfo.parentKey) ? '_' + this.focusedItemInfo.parentKey : ''}_${this.focusedItemInfo.index}` : null;
         }
     },
     components: {
         TieredMenuSub: script$1,
-        Portal: Portal
+        Portal: Portal__default["default"]
     }
 };
 
@@ -879,13 +889,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             ? (vue.openBlock(), vue.createElementBlock("div", vue.mergeProps({
                 key: 0,
                 ref: $options.containerRef,
-                id: $options.id,
+                id: $data.id,
                 class: $options.containerClass,
                 onClick: _cache[0] || (_cache[0] = (...args) => ($options.onOverlayClick && $options.onOverlayClick(...args)))
               }, _ctx.$attrs), [
                 vue.createVNode(_component_TieredMenuSub, {
                   ref: $options.menubarRef,
-                  id: $options.id + '_list',
+                  id: $data.id + '_list',
                   class: "p-tieredmenu-root-list",
                   tabindex: !$props.disabled ? $props.tabindex : -1,
                   role: "menubar",
@@ -894,7 +904,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                   "aria-disabled": $props.disabled || undefined,
                   "aria-orientation": "vertical",
                   "aria-activedescendant": $data.focused ? $options.focusedItemId : undefined,
-                  menuId: $options.id,
+                  menuId: $data.id,
                   focusedItemId: $data.focused ? $options.focusedItemId : undefined,
                   items: $options.processedItems,
                   template: _ctx.$slots.item,
@@ -944,7 +954,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = "\n.p-tieredmenu-overlay {\n    position: absolute;\n    top: 0;\n    left: 0;\n}\n.p-tieredmenu ul {\n    margin: 0;\n    padding: 0;\n    list-style: none;\n}\n.p-tieredmenu .p-submenu-list {\n    position: absolute;\n    min-width: 100%;\n    z-index: 1;\n    display: none;\n}\n.p-tieredmenu .p-menuitem-link {\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    text-decoration: none;\n    overflow: hidden;\n    position: relative;\n}\n.p-tieredmenu .p-menuitem-text {\n    line-height: 1;\n}\n.p-tieredmenu .p-menuitem {\n    position: relative;\n}\n.p-tieredmenu .p-menuitem-link .p-submenu-icon {\n    margin-left: auto;\n}\n.p-tieredmenu .p-menuitem-active > .p-submenu-list {\n    display: block;\n    left: 100%;\n    top: 0;\n}\n";
+var css_248z = "\n.p-tieredmenu-overlay {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\n}\n.p-tieredmenu ul {\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style: none;\n}\n.p-tieredmenu .p-submenu-list {\r\n    position: absolute;\r\n    min-width: 100%;\r\n    z-index: 1;\r\n    display: none;\n}\n.p-tieredmenu .p-menuitem-link {\r\n    cursor: pointer;\r\n    display: flex;\r\n    align-items: center;\r\n    text-decoration: none;\r\n    overflow: hidden;\r\n    position: relative;\n}\n.p-tieredmenu .p-menuitem-text {\r\n    line-height: 1;\n}\n.p-tieredmenu .p-menuitem {\r\n    position: relative;\n}\n.p-tieredmenu .p-menuitem-link .p-submenu-icon {\r\n    margin-left: auto;\n}\n.p-tieredmenu .p-menuitem-active > .p-submenu-list {\r\n    display: block;\r\n    left: 100%;\r\n    top: 0;\n}\r\n";
 styleInject(css_248z);
 
 script.render = render;

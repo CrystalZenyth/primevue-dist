@@ -5,6 +5,11 @@ var Ripple = require('primevue/ripple');
 var utils = require('primevue/utils');
 var vue = require('vue');
 
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var Button__default = /*#__PURE__*/_interopDefaultLegacy(Button);
+var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+
 var script = {
     name: 'PickList',
     emits: ['update:modelValue', 'reorder', 'update:selection', 'selection-change', 'move-to-target', 'move-to-source', 'move-all-to-target', 'move-all-to-source', 'focus', 'blur'],
@@ -99,6 +104,7 @@ var script = {
     styleElement: null,
     data() {
         return {
+            id: this.$attrs.id,
             d_selection: this.selection,
             focused: {
                 sourceList: false,
@@ -108,6 +114,9 @@ var script = {
         };
     },
     watch: {
+        '$attrs.id': function (newValue) {
+            this.id = newValue || utils.UniqueComponentId();
+        },
         selection(newValue) {
             this.d_selection = newValue;
         }
@@ -123,6 +132,8 @@ var script = {
         this.destroyStyle();
     },
     mounted() {
+        this.id = this.id || utils.UniqueComponentId();
+
         if (this.responsive) {
             this.createStyle();
         }
@@ -689,10 +700,10 @@ var script = {
     },
     computed: {
         idSource() {
-            return this.$attrs.id || utils.UniqueComponentId();
+            return `${this.id}_source`;
         },
         idTarget() {
-            return this.$attrs.id || utils.UniqueComponentId();
+            return `${this.id}_target`;
         },
         focusedOptionId() {
             return this.focusedOptionIndex !== -1 ? this.focusedOptionIndex : null;
@@ -740,10 +751,10 @@ var script = {
         }
     },
     components: {
-        PLButton: Button
+        PLButton: Button__default["default"]
     },
     directives: {
-        ripple: Ripple
+        ripple: Ripple__default["default"]
     }
 };
 
@@ -1007,7 +1018,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = "\n.p-picklist {\n    display: flex;\n}\n.p-picklist-buttons {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n}\n.p-picklist-list-wrapper {\n    flex: 1 1 50%;\n}\n.p-picklist-list {\n    list-style-type: none;\n    margin: 0;\n    padding: 0;\n    overflow: auto;\n    min-height: 12rem;\n    max-height: 24rem;\n}\n.p-picklist-item {\n    cursor: pointer;\n    overflow: hidden;\n    position: relative;\n}\n.p-picklist-item.p-picklist-flip-enter-active.p-picklist-flip-enter-to,\n.p-picklist-item.p-picklist-flip-leave-active.p-picklist-flip-leave-to {\n    transition: none !important;\n}\n";
+var css_248z = "\n.p-picklist {\r\n    display: flex;\n}\n.p-picklist-buttons {\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\n}\n.p-picklist-list-wrapper {\r\n    flex: 1 1 50%;\n}\n.p-picklist-list {\r\n    list-style-type: none;\r\n    margin: 0;\r\n    padding: 0;\r\n    overflow: auto;\r\n    min-height: 12rem;\r\n    max-height: 24rem;\n}\n.p-picklist-item {\r\n    cursor: pointer;\r\n    overflow: hidden;\r\n    position: relative;\n}\n.p-picklist-item.p-picklist-flip-enter-active.p-picklist-flip-enter-to,\r\n.p-picklist-item.p-picklist-flip-leave-active.p-picklist-flip-leave-to {\r\n    transition: none !important;\n}\r\n";
 styleInject(css_248z);
 
 script.render = render;

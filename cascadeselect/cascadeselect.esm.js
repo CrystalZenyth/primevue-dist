@@ -1,6 +1,6 @@
 import OverlayEventBus from 'primevue/overlayeventbus';
 import Portal from 'primevue/portal';
-import { ObjectUtils, DomHandler, ZIndexUtils, ConnectedOverlayScrollHandler, UniqueComponentId } from 'primevue/utils';
+import { ObjectUtils, DomHandler, UniqueComponentId, ZIndexUtils, ConnectedOverlayScrollHandler } from 'primevue/utils';
 import Ripple from 'primevue/ripple';
 import { resolveComponent, resolveDirective, openBlock, createElementBlock, Fragment, renderList, normalizeClass, withDirectives, createBlock, resolveDynamicComponent, toDisplayString, createCommentVNode, createElementVNode, mergeProps, renderSlot, createTextVNode, createVNode, withCtx, Transition } from 'vue';
 
@@ -283,6 +283,7 @@ var script = {
     focusOnHover: false,
     data() {
         return {
+            id: this.$attrs.id,
             focused: false,
             focusedOptionInfo: { index: -1, level: 0, parentKey: '' },
             activeOptionPath: [],
@@ -291,11 +292,16 @@ var script = {
         };
     },
     watch: {
+        '$attrs.id': function (newValue) {
+            this.id = newValue || UniqueComponentId();
+        },
         options() {
             this.autoUpdateModel();
         }
     },
     mounted() {
+        this.id = this.id || UniqueComponentId();
+
         this.autoUpdateModel();
     },
     beforeUnmount() {
@@ -934,9 +940,6 @@ var script = {
         selectedMessageText() {
             return this.hasSelectedOption ? this.selectionMessageText.replaceAll('{0}', '1') : this.emptySelectionMessageText;
         },
-        id() {
-            return this.$attrs.id || UniqueComponentId();
-        },
         focusedOptionId() {
             return this.focusedOptionInfo.index !== -1 ? `${this.id}${ObjectUtils.isNotEmpty(this.focusedOptionInfo.parentKey) ? '_' + this.focusedOptionInfo.parentKey : ''}_${this.focusedOptionInfo.index}` : null;
         }
@@ -992,7 +995,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "aria-labelledby": _ctx.ariaLabelledby,
         "aria-haspopup": "tree",
         "aria-expanded": $data.overlayVisible,
-        "aria-controls": $options.id + '_tree',
+        "aria-controls": $data.id + '_tree',
         "aria-activedescendant": $data.focused ? $options.focusedOptionId : undefined,
         onFocus: _cache[0] || (_cache[0] = (...args) => ($options.onFocus && $options.onFocus(...args))),
         onBlur: _cache[1] || (_cache[1] = (...args) => ($options.onBlur && $options.onBlur(...args))),
@@ -1038,10 +1041,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 }, $props.panelProps), [
                   createElementVNode("div", _hoisted_5, [
                     createVNode(_component_CascadeSelectSub, {
-                      id: $options.id + '_tree',
+                      id: $data.id + '_tree',
                       role: "tree",
                       "aria-orientation": "horizontal",
-                      selectId: $options.id,
+                      selectId: $data.id,
                       focusedOptionId: $data.focused ? $options.focusedOptionId : undefined,
                       options: $options.processedOptions,
                       activeOptionPath: $data.activeOptionPath,
@@ -1095,7 +1098,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = "\n.p-cascadeselect {\n    display: inline-flex;\n    cursor: pointer;\n    position: relative;\n    user-select: none;\n}\n.p-cascadeselect-trigger {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-shrink: 0;\n}\n.p-cascadeselect-label {\n    display: block;\n    white-space: nowrap;\n    overflow: hidden;\n    flex: 1 1 auto;\n    width: 1%;\n    text-overflow: ellipsis;\n    cursor: pointer;\n}\n.p-cascadeselect-label-empty {\n    overflow: hidden;\n    visibility: hidden;\n}\n.p-cascadeselect .p-cascadeselect-panel {\n    min-width: 100%;\n}\n.p-cascadeselect-panel {\n    position: absolute;\n    top: 0;\n    left: 0;\n}\n.p-cascadeselect-item {\n    cursor: pointer;\n    font-weight: normal;\n    white-space: nowrap;\n}\n.p-cascadeselect-item-content {\n    display: flex;\n    align-items: center;\n    overflow: hidden;\n    position: relative;\n}\n.p-cascadeselect-group-icon {\n    margin-left: auto;\n}\n.p-cascadeselect-items {\n    margin: 0;\n    padding: 0;\n    list-style-type: none;\n    min-width: 100%;\n}\n.p-fluid .p-cascadeselect {\n    display: flex;\n}\n.p-fluid .p-cascadeselect .p-cascadeselect-label {\n    width: 1%;\n}\n.p-cascadeselect-sublist {\n    position: absolute;\n    min-width: 100%;\n    z-index: 1;\n    display: none;\n}\n.p-cascadeselect-item-active {\n    overflow: visible !important;\n}\n.p-cascadeselect-item-active > .p-cascadeselect-sublist {\n    display: block;\n    left: 100%;\n    top: 0;\n}\n";
+var css_248z = "\n.p-cascadeselect {\r\n    display: inline-flex;\r\n    cursor: pointer;\r\n    position: relative;\r\n    user-select: none;\n}\n.p-cascadeselect-trigger {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    flex-shrink: 0;\n}\n.p-cascadeselect-label {\r\n    display: block;\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    flex: 1 1 auto;\r\n    width: 1%;\r\n    text-overflow: ellipsis;\r\n    cursor: pointer;\n}\n.p-cascadeselect-label-empty {\r\n    overflow: hidden;\r\n    visibility: hidden;\n}\n.p-cascadeselect .p-cascadeselect-panel {\r\n    min-width: 100%;\n}\n.p-cascadeselect-panel {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\n}\n.p-cascadeselect-item {\r\n    cursor: pointer;\r\n    font-weight: normal;\r\n    white-space: nowrap;\n}\n.p-cascadeselect-item-content {\r\n    display: flex;\r\n    align-items: center;\r\n    overflow: hidden;\r\n    position: relative;\n}\n.p-cascadeselect-group-icon {\r\n    margin-left: auto;\n}\n.p-cascadeselect-items {\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style-type: none;\r\n    min-width: 100%;\n}\n.p-fluid .p-cascadeselect {\r\n    display: flex;\n}\n.p-fluid .p-cascadeselect .p-cascadeselect-label {\r\n    width: 1%;\n}\n.p-cascadeselect-sublist {\r\n    position: absolute;\r\n    min-width: 100%;\r\n    z-index: 1;\r\n    display: none;\n}\n.p-cascadeselect-item-active {\r\n    overflow: visible !important;\n}\n.p-cascadeselect-item-active > .p-cascadeselect-sublist {\r\n    display: block;\r\n    left: 100%;\r\n    top: 0;\n}\r\n";
 styleInject(css_248z);
 
 script.render = render;

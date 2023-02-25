@@ -1,5 +1,7 @@
 'use strict';
 
+Object.defineProperty(exports, '__esModule', { value: true });
+
 var DomHandler = {
     innerWidth(el) {
         if (el) {
@@ -515,7 +517,7 @@ var DomHandler = {
     },
 
     isExist(element) {
-        return element !== null && typeof element !== 'undefined' && element.nodeName && element.parentNode;
+        return !!(element !== null && typeof element !== 'undefined' && element.nodeName && element.parentNode);
     },
 
     isClient() {
@@ -815,15 +817,10 @@ var ObjectUtils = {
     },
 
     reorderArray(value, from, to) {
-        let target;
-
         if (value && from !== to) {
             if (to >= value.length) {
-                target = to - value.length;
-
-                while (target-- + 1) {
-                    value.push(undefined);
-                }
+                to %= value.length;
+                from %= value.length;
             }
 
             value.splice(to, 0, value.splice(from, 1)[0]);

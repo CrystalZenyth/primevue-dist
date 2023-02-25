@@ -2,6 +2,17 @@ this.primevue = this.primevue || {};
 this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, OverlayEventBus, Ripple, vue, Button, Dropdown, FocusTrap, Portal) {
     'use strict';
 
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var Paginator__default = /*#__PURE__*/_interopDefaultLegacy(Paginator);
+    var VirtualScroller__default = /*#__PURE__*/_interopDefaultLegacy(VirtualScroller);
+    var OverlayEventBus__default = /*#__PURE__*/_interopDefaultLegacy(OverlayEventBus);
+    var Ripple__default = /*#__PURE__*/_interopDefaultLegacy(Ripple);
+    var Button__default = /*#__PURE__*/_interopDefaultLegacy(Button);
+    var Dropdown__default = /*#__PURE__*/_interopDefaultLegacy(Dropdown);
+    var FocusTrap__default = /*#__PURE__*/_interopDefaultLegacy(FocusTrap);
+    var Portal__default = /*#__PURE__*/_interopDefaultLegacy(Portal);
+
     var script$a = {
         name: 'RowCheckbox',
         emits: ['change'],
@@ -244,14 +255,16 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
             }
 
             if (this.d_editing && (this.editMode === 'cell' || (this.editMode === 'row' && this.columnProp('rowEditor')))) {
-                const focusableEl = utils.DomHandler.getFirstFocusableElement(this.$el);
+                setTimeout(() => {
+                    const focusableEl = utils.DomHandler.getFirstFocusableElement(this.$el);
 
-                focusableEl && focusableEl.focus();
+                    focusableEl && focusableEl.focus();
+                }, 1);
             }
         },
         beforeUnmount() {
             if (this.overlayEventListener) {
-                OverlayEventBus.off('overlay-click', this.overlayEventListener);
+                OverlayEventBus__default["default"].off('overlay-click', this.overlayEventListener);
                 this.overlayEventListener = null;
             }
         },
@@ -301,7 +314,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
             switchCellToViewMode() {
                 this.d_editing = false;
                 this.unbindDocumentEditListener();
-                OverlayEventBus.off('overlay-click', this.overlayEventListener);
+                OverlayEventBus__default["default"].off('overlay-click', this.overlayEventListener);
                 this.overlayEventListener = null;
             },
             onClick(event) {
@@ -319,7 +332,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
                             }
                         };
 
-                        OverlayEventBus.on('overlay-click', this.overlayEventListener);
+                        OverlayEventBus__default["default"].on('overlay-click', this.overlayEventListener);
                     }
                 }
             },
@@ -554,7 +567,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
             DTCheckbox: script$a
         },
         directives: {
-            ripple: Ripple
+            ripple: Ripple__default["default"]
         }
     };
 
@@ -1698,7 +1711,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
         overlayEventListener: null,
         beforeUnmount() {
             if (this.overlayEventListener) {
-                OverlayEventBus.off('overlay-click', this.overlayEventListener);
+                OverlayEventBus__default["default"].off('overlay-click', this.overlayEventListener);
                 this.overlayEventListener = null;
             }
 
@@ -1890,7 +1903,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
             onContentClick(event) {
                 this.selfClick = true;
 
-                OverlayEventBus.emit('overlay-click', {
+                OverlayEventBus__default["default"].emit('overlay-click', {
                     originalEvent: event,
                     target: this.overlay
                 });
@@ -1915,7 +1928,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
                     }
                 };
 
-                OverlayEventBus.on('overlay-click', this.overlayEventListener);
+                OverlayEventBus__default["default"].on('overlay-click', this.overlayEventListener);
             },
             onOverlayLeave() {
                 this.onOverlayHide();
@@ -1928,7 +1941,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
                 this.unbindResizeListener();
                 this.unbindScrollListener();
                 this.overlay = null;
-                OverlayEventBus.off('overlay-click', this.overlayEventListener);
+                OverlayEventBus__default["default"].off('overlay-click', this.overlayEventListener);
                 this.overlayEventListener = null;
             },
             overlayRef(el) {
@@ -2079,12 +2092,12 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
             }
         },
         components: {
-            CFDropdown: Dropdown,
-            CFButton: Button,
-            Portal: Portal
+            CFDropdown: Dropdown__default["default"],
+            CFButton: Button__default["default"],
+            Portal: Portal__default["default"]
         },
         directives: {
-            focustrap: FocusTrap
+            focustrap: FocusTrap__default["default"]
         }
     };
 
@@ -3996,7 +4009,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
 
                     if (firstSelectedRow) {
                         firstSelectedRow.tabIndex = '0';
-                        focusedItem !== firstSelectedRow && (focusedItem.tabIndex = '-1');
+                        focusedItem && focusedItem !== firstSelectedRow && (focusedItem.tabIndex = '-1');
                     } else {
                         rows[0].tabIndex = '0';
                         focusedItem !== rows[0] && (rows[rowIndex].tabIndex = '-1');
@@ -4247,7 +4260,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
 
                     if (i === 0) csv += '\n';
 
-                    if (this.columnProp(column, 'exportable') !== false && this.columnProp(column, 'field')) {
+                    if (this.columnProp(column, 'exportable') !== false && this.columnProp(column, 'exportFooter')) {
                         if (footerInitiated) csv += this.csvSeparator;
                         else footerInitiated = true;
 
@@ -4646,7 +4659,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
                     let dropIndex = this.draggedRowIndex > this.droppedRowIndex ? this.droppedRowIndex : this.droppedRowIndex === 0 ? 0 : this.droppedRowIndex - 1;
                     let processedData = [...this.processedData];
 
-                    utils.ObjectUtils.reorderArray(processedData, this.draggedRowIndex, dropIndex);
+                    utils.ObjectUtils.reorderArray(processedData, this.draggedRowIndex + this.d_first, dropIndex + this.d_first);
 
                     this.$emit('row-reorder', {
                         originalEvent: event,
@@ -5220,11 +5233,11 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
             }
         },
         components: {
-            DTPaginator: Paginator,
+            DTPaginator: Paginator__default["default"],
             DTTableHeader: script$1,
             DTTableBody: script$7,
             DTTableFooter: script$5,
-            DTVirtualScroller: VirtualScroller
+            DTVirtualScroller: VirtualScroller__default["default"]
         }
     };
 
@@ -5237,7 +5250,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
       class: "p-datatable-header"
     };
     const _hoisted_3 = {
-      key: 4,
+      key: 3,
       class: "p-datatable-footer"
     };
     const _hoisted_4 = {
@@ -5498,9 +5511,14 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
             _: 1
           }, 16, ["items", "columns", "style", "disabled"])
         ], 4),
+        (_ctx.$slots.footer)
+          ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_3, [
+              vue.renderSlot(_ctx.$slots, "footer")
+            ]))
+          : vue.createCommentVNode("", true),
         ($options.paginatorBottom)
           ? (vue.openBlock(), vue.createBlock(_component_DTPaginator, {
-              key: 3,
+              key: 4,
               rows: $data.d_rows,
               first: $data.d_first,
               totalRecords: $options.totalRecordsLength,
@@ -5531,11 +5549,6 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
                   }
                 : undefined
             ]), 1032, ["rows", "first", "totalRecords", "pageLinkSize", "template", "rowsPerPageOptions", "currentPageReportTemplate", "alwaysShow"]))
-          : vue.createCommentVNode("", true),
-        (_ctx.$slots.footer)
-          ? (vue.openBlock(), vue.createElementBlock("div", _hoisted_3, [
-              vue.renderSlot(_ctx.$slots, "footer")
-            ]))
           : vue.createCommentVNode("", true),
         vue.createElementVNode("div", _hoisted_4, null, 512),
         vue.createElementVNode("div", _hoisted_5, null, 512),
@@ -5576,7 +5589,7 @@ this.primevue.datatable = (function (api, Paginator, utils, VirtualScroller, Ove
       }
     }
 
-    var css_248z = "\n.p-datatable {\n    position: relative;\n}\n.p-datatable table {\n    border-collapse: collapse;\n    min-width: 100%;\n    table-layout: fixed;\n}\n.p-datatable .p-sortable-column {\n    cursor: pointer;\n    user-select: none;\n}\n.p-datatable .p-sortable-column .p-column-title,\n.p-datatable .p-sortable-column .p-sortable-column-icon,\n.p-datatable .p-sortable-column .p-sortable-column-badge {\n    vertical-align: middle;\n}\n.p-datatable .p-sortable-column .p-sortable-column-badge {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n}\n.p-datatable-responsive-scroll > .p-datatable-wrapper {\n    overflow-x: auto;\n}\n.p-datatable-responsive-scroll > .p-datatable-wrapper > table,\n.p-datatable-auto-layout > .p-datatable-wrapper > table {\n    table-layout: auto;\n}\n.p-datatable-hoverable-rows .p-selectable-row {\n    cursor: pointer;\n}\n\n/* Scrollable */\n.p-datatable-scrollable .p-datatable-wrapper {\n    position: relative;\n    overflow: auto;\n}\n.p-datatable-scrollable .p-datatable-thead,\n.p-datatable-scrollable .p-datatable-tbody,\n.p-datatable-scrollable .p-datatable-tfoot {\n    display: block;\n}\n.p-datatable-scrollable .p-datatable-thead > tr,\n.p-datatable-scrollable .p-datatable-tbody > tr,\n.p-datatable-scrollable .p-datatable-tfoot > tr {\n    display: flex;\n    flex-wrap: nowrap;\n    width: 100%;\n}\n.p-datatable-scrollable .p-datatable-thead > tr > th,\n.p-datatable-scrollable .p-datatable-tbody > tr > td,\n.p-datatable-scrollable .p-datatable-tfoot > tr > td {\n    display: flex;\n    flex: 1 1 0;\n    align-items: center;\n}\n.p-datatable-scrollable .p-datatable-thead {\n    position: sticky;\n    top: 0;\n    z-index: 1;\n}\n.p-datatable-scrollable .p-datatable-frozen-tbody {\n    position: sticky;\n    z-index: 1;\n}\n.p-datatable-scrollable .p-datatable-tfoot {\n    position: sticky;\n    bottom: 0;\n    z-index: 1;\n}\n.p-datatable-scrollable .p-frozen-column {\n    position: sticky;\n    background: inherit;\n}\n.p-datatable-scrollable th.p-frozen-column {\n    z-index: 1;\n}\n.p-datatable-scrollable-both .p-datatable-thead > tr > th,\n.p-datatable-scrollable-both .p-datatable-tbody > tr > td,\n.p-datatable-scrollable-both .p-datatable-tfoot > tr > td,\n.p-datatable-scrollable-horizontal .p-datatable-thead > tr > th .p-datatable-scrollable-horizontal .p-datatable-tbody > tr > td,\n.p-datatable-scrollable-horizontal .p-datatable-tfoot > tr > td {\n    flex: 1 0 auto;\n}\n.p-datatable-flex-scrollable {\n    display: flex;\n    flex-direction: column;\n    height: 100%;\n}\n.p-datatable-flex-scrollable .p-datatable-wrapper {\n    display: flex;\n    flex-direction: column;\n    flex: 1;\n    height: 100%;\n}\n.p-datatable-scrollable .p-rowgroup-header {\n    position: sticky;\n    z-index: 1;\n}\n.p-datatable-scrollable.p-datatable-grouped-header .p-datatable-thead,\n.p-datatable-scrollable.p-datatable-grouped-footer .p-datatable-tfoot {\n    display: table;\n    border-collapse: collapse;\n    width: 100%;\n    table-layout: fixed;\n}\n.p-datatable-scrollable.p-datatable-grouped-header .p-datatable-thead > tr,\n.p-datatable-scrollable.p-datatable-grouped-footer .p-datatable-tfoot > tr {\n    display: table-row;\n}\n.p-datatable-scrollable.p-datatable-grouped-header .p-datatable-thead > tr > th,\n.p-datatable-scrollable.p-datatable-grouped-footer .p-datatable-tfoot > tr > td {\n    display: table-cell;\n}\n.p-datatable-scrollable .p-virtualscroller > .p-datatable-table {\n    display: inline-block; /* For Safari */\n}\n\n/* Resizable */\n.p-datatable-resizable > .p-datatable-wrapper {\n    overflow-x: auto;\n}\n.p-datatable-resizable .p-datatable-thead > tr > th,\n.p-datatable-resizable .p-datatable-tfoot > tr > td,\n.p-datatable-resizable .p-datatable-tbody > tr > td {\n    overflow: hidden;\n    white-space: nowrap;\n}\n.p-datatable-resizable .p-resizable-column:not(.p-frozen-column) {\n    background-clip: padding-box;\n    position: relative;\n}\n.p-datatable-resizable-fit .p-resizable-column:last-child .p-column-resizer {\n    display: none;\n}\n.p-datatable .p-column-resizer {\n    display: block;\n    position: absolute !important;\n    top: 0;\n    right: 0;\n    margin: 0;\n    width: 0.5rem;\n    height: 100%;\n    padding: 0px;\n    cursor: col-resize;\n    border: 1px solid transparent;\n}\n.p-datatable .p-column-resizer-assistive-text {\n    position: absolute;\n    margin: -1px;\n    border: 0;\n    padding: 0;\n    top: 0px;\n    right: 0px;\n    width: 2px;\n    height: 100%;\n    overflow: hidden;\n    clip: rect(0 0 0 0);\n    text-transform: none;\n    white-space: nowrap;\n}\n.p-datatable .p-column-resizer-keyboard-helper {\n    position: absolute;\n    margin: -1px;\n    border: 2px solid dodgerblue;\n    padding: 0;\n    top: 0px;\n    right: 0px;\n    width: 2px;\n    height: 100%;\n    overflow: hidden;\n    display: none;\n    z-index: 10;\n}\n.p-datatable .p-column-resizer-keyboard-icon {\n    position: absolute;\n    font-size: 1.25rem;\n    z-index: 10;\n}\n.p-datatable .p-column-header-content {\n    display: flex;\n    align-items: center;\n}\n.p-datatable .p-column-resizer-helper {\n    width: 1px;\n    position: absolute;\n    z-index: 10;\n    display: none;\n}\n.p-datatable .p-column-resizer-helper-keyboard-line {\n    width: 1px;\n    position: absolute;\n    z-index: 10;\n    display: none;\n}\n.p-datatable .p-row-editor-init,\n.p-datatable .p-row-editor-save,\n.p-datatable .p-row-editor-cancel {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    overflow: hidden;\n    position: relative;\n}\n\n/* Expand */\n.p-datatable .p-row-toggler {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    overflow: hidden;\n    position: relative;\n}\n\n/* Reorder */\n.p-datatable-reorder-indicator-up,\n.p-datatable-reorder-indicator-down {\n    position: absolute;\n    display: none;\n}\n.p-reorderable-column,\n.p-datatable-reorderablerow-handle {\n    cursor: move;\n}\n\n/* Loader */\n.p-datatable .p-datatable-loading-overlay {\n    position: absolute;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    z-index: 2;\n}\n\n/* Filter */\n.p-column-filter-row {\n    display: flex;\n    align-items: center;\n    width: 100%;\n}\n.p-column-filter-menu {\n    display: inline-flex;\n    margin-left: auto;\n}\n.p-column-filter-row .p-column-filter-element {\n    flex: 1 1 auto;\n    width: 1%;\n}\n.p-column-filter-menu-button,\n.p-column-filter-clear-button {\n    display: inline-flex;\n    justify-content: center;\n    align-items: center;\n    cursor: pointer;\n    text-decoration: none;\n    overflow: hidden;\n    position: relative;\n}\n.p-column-filter-overlay {\n    position: absolute;\n    top: 0;\n    left: 0;\n}\n.p-column-filter-row-items {\n    margin: 0;\n    padding: 0;\n    list-style: none;\n}\n.p-column-filter-row-item {\n    cursor: pointer;\n}\n.p-column-filter-add-button,\n.p-column-filter-remove-button {\n    justify-content: center;\n}\n.p-column-filter-add-button .p-button-label,\n.p-column-filter-remove-button .p-button-label {\n    flex-grow: 0;\n}\n.p-column-filter-buttonbar {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n.p-column-filter-buttonbar .p-button:not(.p-button-icon-only) {\n    width: auto;\n}\n\n/* Responsive */\n.p-datatable .p-datatable-tbody > tr > td > .p-column-title {\n    display: none;\n}\n\n/* VirtualScroller */\n.p-datatable .p-virtualscroller-loading {\n    transform: none !important;\n    min-height: 0;\n    position: sticky;\n    top: 0;\n    left: 0;\n}\n";
+    var css_248z = "\n.p-datatable {\r\n    position: relative;\n}\n.p-datatable table {\r\n    border-collapse: collapse;\r\n    min-width: 100%;\r\n    table-layout: fixed;\n}\n.p-datatable .p-sortable-column {\r\n    cursor: pointer;\r\n    user-select: none;\n}\n.p-datatable .p-sortable-column .p-column-title,\r\n.p-datatable .p-sortable-column .p-sortable-column-icon,\r\n.p-datatable .p-sortable-column .p-sortable-column-badge {\r\n    vertical-align: middle;\n}\n.p-datatable .p-sortable-column .p-sortable-column-badge {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n.p-datatable-responsive-scroll > .p-datatable-wrapper {\r\n    overflow-x: auto;\n}\n.p-datatable-responsive-scroll > .p-datatable-wrapper > table,\r\n.p-datatable-auto-layout > .p-datatable-wrapper > table {\r\n    table-layout: auto;\n}\n.p-datatable-hoverable-rows .p-selectable-row {\r\n    cursor: pointer;\n}\r\n\r\n/* Scrollable */\n.p-datatable-scrollable .p-datatable-wrapper {\r\n    position: relative;\r\n    overflow: auto;\n}\n.p-datatable-scrollable .p-datatable-thead,\r\n.p-datatable-scrollable .p-datatable-tbody,\r\n.p-datatable-scrollable .p-datatable-tfoot {\r\n    display: block;\n}\n.p-datatable-scrollable .p-datatable-thead > tr,\r\n.p-datatable-scrollable .p-datatable-tbody > tr,\r\n.p-datatable-scrollable .p-datatable-tfoot > tr {\r\n    display: flex;\r\n    flex-wrap: nowrap;\r\n    width: 100%;\n}\n.p-datatable-scrollable .p-datatable-thead > tr > th,\r\n.p-datatable-scrollable .p-datatable-tbody > tr > td,\r\n.p-datatable-scrollable .p-datatable-tfoot > tr > td {\r\n    display: flex;\r\n    flex: 1 1 0;\r\n    align-items: center;\n}\n.p-datatable-scrollable .p-datatable-thead {\r\n    position: sticky;\r\n    top: 0;\r\n    z-index: 1;\n}\n.p-datatable-scrollable .p-datatable-frozen-tbody {\r\n    position: sticky;\r\n    z-index: 1;\n}\n.p-datatable-scrollable .p-datatable-tfoot {\r\n    position: sticky;\r\n    bottom: 0;\r\n    z-index: 1;\n}\n.p-datatable-scrollable .p-frozen-column {\r\n    position: sticky;\r\n    background: inherit;\n}\n.p-datatable-scrollable th.p-frozen-column {\r\n    z-index: 1;\n}\n.p-datatable-scrollable-both .p-datatable-thead > tr > th,\r\n.p-datatable-scrollable-both .p-datatable-tbody > tr > td,\r\n.p-datatable-scrollable-both .p-datatable-tfoot > tr > td,\r\n.p-datatable-scrollable-horizontal .p-datatable-thead > tr > th .p-datatable-scrollable-horizontal .p-datatable-tbody > tr > td,\r\n.p-datatable-scrollable-horizontal .p-datatable-tfoot > tr > td {\r\n    flex: 1 0 auto;\n}\n.p-datatable-flex-scrollable {\r\n    display: flex;\r\n    flex-direction: column;\r\n    height: 100%;\n}\n.p-datatable-flex-scrollable .p-datatable-wrapper {\r\n    display: flex;\r\n    flex-direction: column;\r\n    flex: 1;\r\n    height: 100%;\n}\n.p-datatable-scrollable .p-rowgroup-header {\r\n    position: sticky;\r\n    z-index: 1;\n}\n.p-datatable-scrollable.p-datatable-grouped-header .p-datatable-thead,\r\n.p-datatable-scrollable.p-datatable-grouped-footer .p-datatable-tfoot {\r\n    display: table;\r\n    border-collapse: collapse;\r\n    width: 100%;\r\n    table-layout: fixed;\n}\n.p-datatable-scrollable.p-datatable-grouped-header .p-datatable-thead > tr,\r\n.p-datatable-scrollable.p-datatable-grouped-footer .p-datatable-tfoot > tr {\r\n    display: table-row;\n}\n.p-datatable-scrollable.p-datatable-grouped-header .p-datatable-thead > tr > th,\r\n.p-datatable-scrollable.p-datatable-grouped-footer .p-datatable-tfoot > tr > td {\r\n    display: table-cell;\n}\n.p-datatable-scrollable .p-virtualscroller > .p-datatable-table {\r\n    display: inline-block; /* For Safari */\n}\r\n\r\n/* Resizable */\n.p-datatable-resizable > .p-datatable-wrapper {\r\n    overflow-x: auto;\n}\n.p-datatable-resizable .p-datatable-thead > tr > th,\r\n.p-datatable-resizable .p-datatable-tfoot > tr > td,\r\n.p-datatable-resizable .p-datatable-tbody > tr > td {\r\n    overflow: hidden;\r\n    white-space: nowrap;\n}\n.p-datatable-resizable .p-resizable-column:not(.p-frozen-column) {\r\n    background-clip: padding-box;\r\n    position: relative;\n}\n.p-datatable-resizable-fit .p-resizable-column:last-child .p-column-resizer {\r\n    display: none;\n}\n.p-datatable .p-column-resizer {\r\n    display: block;\r\n    position: absolute !important;\r\n    top: 0;\r\n    right: 0;\r\n    margin: 0;\r\n    width: 0.5rem;\r\n    height: 100%;\r\n    padding: 0px;\r\n    cursor: col-resize;\r\n    border: 1px solid transparent;\n}\n.p-datatable .p-column-resizer-assistive-text {\r\n    position: absolute;\r\n    margin: -1px;\r\n    border: 0;\r\n    padding: 0;\r\n    top: 0px;\r\n    right: 0px;\r\n    width: 2px;\r\n    height: 100%;\r\n    overflow: hidden;\r\n    clip: rect(0 0 0 0);\r\n    text-transform: none;\r\n    white-space: nowrap;\n}\n.p-datatable .p-column-resizer-keyboard-helper {\r\n    position: absolute;\r\n    margin: -1px;\r\n    border: 2px solid dodgerblue;\r\n    padding: 0;\r\n    top: 0px;\r\n    right: 0px;\r\n    width: 2px;\r\n    height: 100%;\r\n    overflow: hidden;\r\n    display: none;\r\n    z-index: 10;\n}\n.p-datatable .p-column-resizer-keyboard-icon {\r\n    position: absolute;\r\n    font-size: 1.25rem;\r\n    z-index: 10;\n}\n.p-datatable .p-column-header-content {\r\n    display: flex;\r\n    align-items: center;\n}\n.p-datatable .p-column-resizer-helper {\r\n    width: 1px;\r\n    position: absolute;\r\n    z-index: 10;\r\n    display: none;\n}\n.p-datatable .p-column-resizer-helper-keyboard-line {\r\n    width: 1px;\r\n    position: absolute;\r\n    z-index: 10;\r\n    display: none;\n}\n.p-datatable .p-row-editor-init,\r\n.p-datatable .p-row-editor-save,\r\n.p-datatable .p-row-editor-cancel {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    overflow: hidden;\r\n    position: relative;\n}\r\n\r\n/* Expand */\n.p-datatable .p-row-toggler {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    overflow: hidden;\r\n    position: relative;\n}\r\n\r\n/* Reorder */\n.p-datatable-reorder-indicator-up,\r\n.p-datatable-reorder-indicator-down {\r\n    position: absolute;\r\n    display: none;\n}\n.p-reorderable-column,\r\n.p-datatable-reorderablerow-handle {\r\n    cursor: move;\n}\r\n\r\n/* Loader */\n.p-datatable .p-datatable-loading-overlay {\r\n    position: absolute;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    z-index: 2;\n}\r\n\r\n/* Filter */\n.p-column-filter-row {\r\n    display: flex;\r\n    align-items: center;\r\n    width: 100%;\n}\n.p-column-filter-menu {\r\n    display: inline-flex;\r\n    margin-left: auto;\n}\n.p-column-filter-row .p-column-filter-element {\r\n    flex: 1 1 auto;\r\n    width: 1%;\n}\n.p-column-filter-menu-button,\r\n.p-column-filter-clear-button {\r\n    display: inline-flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    cursor: pointer;\r\n    text-decoration: none;\r\n    overflow: hidden;\r\n    position: relative;\n}\n.p-column-filter-overlay {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\n}\n.p-column-filter-row-items {\r\n    margin: 0;\r\n    padding: 0;\r\n    list-style: none;\n}\n.p-column-filter-row-item {\r\n    cursor: pointer;\n}\n.p-column-filter-add-button,\r\n.p-column-filter-remove-button {\r\n    justify-content: center;\n}\n.p-column-filter-add-button .p-button-label,\r\n.p-column-filter-remove-button .p-button-label {\r\n    flex-grow: 0;\n}\n.p-column-filter-buttonbar {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-between;\n}\n.p-column-filter-buttonbar .p-button:not(.p-button-icon-only) {\r\n    width: auto;\n}\r\n\r\n/* Responsive */\n.p-datatable .p-datatable-tbody > tr > td > .p-column-title {\r\n    display: none;\n}\r\n\r\n/* VirtualScroller */\n.p-datatable .p-virtualscroller-loading {\r\n    transform: none !important;\r\n    min-height: 0;\r\n    position: sticky;\r\n    top: 0;\r\n    left: 0;\n}\r\n";
     styleInject(css_248z);
 
     script.render = render;
