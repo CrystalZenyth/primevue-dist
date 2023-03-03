@@ -911,8 +911,8 @@ this.primevue.dropdown = (function (api, OverlayEventBus, Portal, Ripple, utils,
     };
 
     const _hoisted_1 = ["id"];
-    const _hoisted_2 = ["id", "value", "placeholder", "tabindex", "disabled", "aria-label", "aria-labelledby", "aria-expanded", "aria-controls", "aria-activedescendant"];
-    const _hoisted_3 = ["id", "tabindex", "aria-label", "aria-labelledby", "aria-expanded", "aria-controls", "aria-activedescendant", "aria-disabled"];
+    const _hoisted_2 = ["id", "value", "placeholder", "tabindex", "disabled", "aria-label", "aria-labelledby", "aria-describedby", "aria-expanded", "aria-controls", "aria-activedescendant"];
+    const _hoisted_3 = ["id", "tabindex", "aria-label", "aria-labelledby", "aria-describedby", "aria-expanded", "aria-controls", "aria-activedescendant", "aria-disabled"];
     const _hoisted_4 = { class: "p-dropdown-trigger" };
     const _hoisted_5 = {
       key: 0,
@@ -977,6 +977,7 @@ this.primevue.dropdown = (function (api, OverlayEventBus, Portal, Ripple, utils,
               role: "combobox",
               "aria-label": _ctx.ariaLabel,
               "aria-labelledby": _ctx.ariaLabelledby,
+              "aria-describedby": _ctx.ariaDescribedby,
               "aria-haspopup": "listbox",
               "aria-expanded": $data.overlayVisible,
               "aria-controls": $data.id + '_list',
@@ -996,6 +997,7 @@ this.primevue.dropdown = (function (api, OverlayEventBus, Portal, Ripple, utils,
               role: "combobox",
               "aria-label": _ctx.ariaLabel || ($options.label === 'p-emptylabel' ? undefined : $options.label),
               "aria-labelledby": _ctx.ariaLabelledby,
+              "aria-describedby": _ctx.ariaDescribedby,
               "aria-haspopup": "listbox",
               "aria-expanded": $data.overlayVisible,
               "aria-controls": $data.id + '_list',
