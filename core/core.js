@@ -4987,6 +4987,10 @@ this.primevue.dropdown = (function (api, OverlayEventBus, Portal, Ripple, utils,
                 type: Number,
                 default: 0
             },
+            'aria-describedby': {
+                type: String,
+                default: null
+            },
             'aria-label': {
                 type: String,
                 default: null
@@ -5759,7 +5763,7 @@ this.primevue.dropdown = (function (api, OverlayEventBus, Portal, Ripple, utils,
       "aria-live": "polite",
       class: "p-hidden-accessible"
     };
-    const _hoisted_9 = ["id", "aria-labeledby"];
+    const _hoisted_9 = ["id", "aria-labelledby"];
     const _hoisted_10 = ["id"];
     const _hoisted_11 = ["id", "aria-label", "aria-selected", "aria-disabled", "aria-setsize", "aria-posinset", "onClick", "onMousemove"];
     const _hoisted_12 = {
@@ -5936,7 +5940,7 @@ this.primevue.dropdown = (function (api, OverlayEventBus, Portal, Ripple, utils,
                               class: vue.normalizeClass(['p-dropdown-items', styleClass]),
                               style: vue.normalizeStyle(contentStyle),
                               role: "listbox",
-                              "aria-labeledby": _ctx.ariaLabelledby
+                              "aria-labelledby": _ctx.ariaLabelledby
                             }, [
                               (vue.openBlock(true), vue.createElementBlock(vue.Fragment, null, vue.renderList(items, (option, i) => {
                                 return (vue.openBlock(), vue.createElementBlock(vue.Fragment, {

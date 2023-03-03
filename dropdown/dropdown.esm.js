@@ -150,6 +150,10 @@ var script = {
             type: Number,
             default: 0
         },
+        'aria-describedby': {
+            type: String,
+            default: null
+        },
         'aria-label': {
             type: String,
             default: null
@@ -922,7 +926,7 @@ const _hoisted_8 = {
   "aria-live": "polite",
   class: "p-hidden-accessible"
 };
-const _hoisted_9 = ["id", "aria-labeledby"];
+const _hoisted_9 = ["id", "aria-labelledby"];
 const _hoisted_10 = ["id"];
 const _hoisted_11 = ["id", "aria-label", "aria-selected", "aria-disabled", "aria-setsize", "aria-posinset", "onClick", "onMousemove"];
 const _hoisted_12 = {
@@ -1099,7 +1103,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                           class: normalizeClass(['p-dropdown-items', styleClass]),
                           style: normalizeStyle(contentStyle),
                           role: "listbox",
-                          "aria-labeledby": _ctx.ariaLabelledby
+                          "aria-labelledby": _ctx.ariaLabelledby
                         }, [
                           (openBlock(true), createElementBlock(Fragment, null, renderList(items, (option, i) => {
                             return (openBlock(), createElementBlock(Fragment, {
