@@ -75,6 +75,7 @@
                                 @blur="onFilterBlur"
                                 @input="onFilterChange"
                                 v-bind="filterInputProps"
+                                aria-label="search"
                             />
                             <span :class="['p-dropdown-filter-icon', filterIcon]" />
                         </div>
@@ -85,7 +86,7 @@
                     <div class="p-dropdown-items-wrapper" :style="{ 'max-height': virtualScrollerDisabled ? scrollHeight : '' }">
                         <VirtualScroller :ref="virtualScrollerRef" v-bind="virtualScrollerOptions" :items="visibleOptions" :style="{ height: scrollHeight }" :tabindex="-1" :disabled="virtualScrollerDisabled">
                             <template v-slot:content="{ styleClass, contentRef, items, getItemOptions, contentStyle, itemSize }">
-                                <ul :ref="(el) => listRef(el, contentRef)" :id="id + '_list'" :class="['p-dropdown-items', styleClass]" :style="contentStyle" role="listbox">
+                                <ul :ref="(el) => listRef(el, contentRef)" :id="id + '_list'" :class="['p-dropdown-items', styleClass]" :style="contentStyle" role="listbox" :aria-labeledby="ariaLabelledby">
                                     <template v-for="(option, i) of items" :key="getOptionRenderKey(option, getOptionIndex(i, getItemOptions))">
                                         <li v-if="isOptionGroup(option)" :id="id + '_' + getOptionIndex(i, getItemOptions)" :style="{ height: itemSize ? itemSize + 'px' : undefined }" class="p-dropdown-item-group" role="option">
                                             <slot name="optiongroup" :option="option.optionGroup" :index="getOptionIndex(i, getItemOptions)">{{ getOptionGroupLabel(option.optionGroup) }}</slot>
@@ -383,9 +384,9 @@ export default {
         show(isFocus) {
             this.$emit('before-show');
             this.overlayVisible = true;
-            this.focusedOptionIndex = this.focusedOptionIndex !== -1 ? this.focusedOptionIndex : this.autoOptionFocus ? this.findFirstFocusedOptionIndex() : -1;
+            // this.focusedOptionIndex = this.focusedOptionIndex !== -1 ? this.focusedOptionIndex : this.autoOptionFocus ? this.findFirstFocusedOptionIndex() : -1;
 
-            isFocus && DomHandler.focus(this.$refs.focusInput);
+            // isFocus && DomHandler.focus(this.$refs.focusInput);
         },
         hide(isFocus) {
             const _hide = () => {
@@ -675,7 +676,7 @@ export default {
         },
         onEnterKey(event) {
             if (!this.overlayVisible) {
-                this.onArrowDownKey(event);
+                !this.overlayVisible && this.show();
             } else {
                 if (this.focusedOptionIndex !== -1) {
                     this.onOptionSelect(event, this.visibleOptions[this.focusedOptionIndex]);

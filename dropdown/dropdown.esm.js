@@ -246,9 +246,9 @@ var script = {
         show(isFocus) {
             this.$emit('before-show');
             this.overlayVisible = true;
-            this.focusedOptionIndex = this.focusedOptionIndex !== -1 ? this.focusedOptionIndex : this.autoOptionFocus ? this.findFirstFocusedOptionIndex() : -1;
+            // this.focusedOptionIndex = this.focusedOptionIndex !== -1 ? this.focusedOptionIndex : this.autoOptionFocus ? this.findFirstFocusedOptionIndex() : -1;
 
-            isFocus && DomHandler.focus(this.$refs.focusInput);
+            // isFocus && DomHandler.focus(this.$refs.focusInput);
         },
         hide(isFocus) {
             const _hide = () => {
@@ -532,7 +532,7 @@ var script = {
         },
         onEnterKey(event) {
             if (!this.overlayVisible) {
-                this.onArrowDownKey(event);
+                !this.overlayVisible && this.show();
             } else {
                 if (this.focusedOptionIndex !== -1) {
                     this.onOptionSelect(event, this.visibleOptions[this.focusedOptionIndex]);
@@ -922,7 +922,7 @@ const _hoisted_8 = {
   "aria-live": "polite",
   class: "p-hidden-accessible"
 };
-const _hoisted_9 = ["id"];
+const _hoisted_9 = ["id", "aria-labeledby"];
 const _hoisted_10 = ["id"];
 const _hoisted_11 = ["id", "aria-label", "aria-selected", "aria-disabled", "aria-setsize", "aria-posinset", "onClick", "onMousemove"];
 const _hoisted_12 = {
@@ -1072,7 +1072,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                             onKeydown: _cache[10] || (_cache[10] = (...args) => ($options.onFilterKeyDown && $options.onFilterKeyDown(...args))),
                             onBlur: _cache[11] || (_cache[11] = (...args) => ($options.onFilterBlur && $options.onFilterBlur(...args))),
                             onInput: _cache[12] || (_cache[12] = (...args) => ($options.onFilterChange && $options.onFilterChange(...args)))
-                          }, $props.filterInputProps), null, 16, _hoisted_7),
+                          }, $props.filterInputProps, { "aria-label": "search" }), null, 16, _hoisted_7),
                           createElementVNode("span", {
                             class: normalizeClass(['p-dropdown-filter-icon', $props.filterIcon])
                           }, null, 2)
@@ -1096,7 +1096,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                           id: $data.id + '_list',
                           class: normalizeClass(['p-dropdown-items', styleClass]),
                           style: normalizeStyle(contentStyle),
-                          role: "listbox"
+                          role: "listbox",
+                          "aria-labeledby": _ctx.ariaLabelledby
                         }, [
                           (openBlock(true), createElementBlock(Fragment, null, renderList(items, (option, i) => {
                             return (openBlock(), createElementBlock(Fragment, {
