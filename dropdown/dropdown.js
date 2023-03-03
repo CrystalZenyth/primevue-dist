@@ -249,9 +249,9 @@ this.primevue.dropdown = (function (api, OverlayEventBus, Portal, Ripple, utils,
             show(isFocus) {
                 this.$emit('before-show');
                 this.overlayVisible = true;
-                // this.focusedOptionIndex = this.focusedOptionIndex !== -1 ? this.focusedOptionIndex : this.autoOptionFocus ? this.findFirstFocusedOptionIndex() : -1;
+                this.focusedOptionIndex = this.focusedOptionIndex !== -1 ? this.focusedOptionIndex : this.autoOptionFocus ? this.findFirstFocusedOptionIndex() : -1;
 
-                // isFocus && DomHandler.focus(this.$refs.focusInput);
+                isFocus && utils.DomHandler.focus(this.$refs.focusInput);
             },
             hide(isFocus) {
                 const _hide = () => {
@@ -535,7 +535,7 @@ this.primevue.dropdown = (function (api, OverlayEventBus, Portal, Ripple, utils,
             },
             onEnterKey(event) {
                 if (!this.overlayVisible) {
-                    !this.overlayVisible && this.show();
+                    !this.overlayVisible && this.show(false);
                 } else {
                     if (this.focusedOptionIndex !== -1) {
                         this.onOptionSelect(event, this.visibleOptions[this.focusedOptionIndex]);
