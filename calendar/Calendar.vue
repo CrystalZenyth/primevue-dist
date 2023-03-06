@@ -12,7 +12,6 @@
             autocomplete="off"
             aria-autocomplete="none"
             aria-haspopup="dialog"
-            :aria-expanded="overlayVisible"
             :aria-controls="panelId"
             :aria-labelledby="ariaLabelledby"
             :aria-label="ariaLabel"
@@ -36,7 +35,6 @@
             type="button"
             :aria-label="$primevue.config.locale.chooseDate"
             aria-haspopup="dialog"
-            :aria-expanded="overlayVisible"
             :aria-controls="panelId"
         />
         <Portal :appendTo="appendTo" :disabled="inline">

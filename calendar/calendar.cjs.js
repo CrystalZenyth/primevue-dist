@@ -2613,7 +2613,7 @@ var script = {
 };
 
 const _hoisted_1 = ["id"];
-const _hoisted_2 = ["id", "placeholder", "aria-expanded", "aria-controls", "aria-labelledby", "aria-label", "disabled", "readonly"];
+const _hoisted_2 = ["id", "placeholder", "aria-controls", "aria-labelledby", "aria-label", "disabled", "readonly"];
 const _hoisted_3 = ["id", "role", "aria-modal", "aria-label"];
 const _hoisted_4 = { class: "p-datepicker-group-container" };
 const _hoisted_5 = { class: "p-datepicker-header" };
@@ -2735,7 +2735,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           autocomplete: "off",
           "aria-autocomplete": "none",
           "aria-haspopup": "dialog",
-          "aria-expanded": $data.overlayVisible,
           "aria-controls": $options.panelId,
           "aria-labelledby": _ctx.ariaLabelledby,
           "aria-label": _ctx.ariaLabel,
@@ -2760,9 +2759,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           type: "button",
           "aria-label": _ctx.$primevue.config.locale.chooseDate,
           "aria-haspopup": "dialog",
-          "aria-expanded": $data.overlayVisible,
           "aria-controls": $options.panelId
-        }, null, 8, ["icon", "disabled", "onClick", "aria-label", "aria-expanded", "aria-controls"]))
+        }, null, 8, ["icon", "disabled", "onClick", "aria-label", "aria-controls"]))
       : vue.createCommentVNode("", true),
     vue.createVNode(_component_Portal, {
       appendTo: $props.appendTo,
