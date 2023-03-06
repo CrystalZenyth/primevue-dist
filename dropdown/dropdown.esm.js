@@ -542,7 +542,7 @@ var script = {
                     this.onOptionSelect(event, this.visibleOptions[this.focusedOptionIndex]);
                 }
 
-                this.hide();
+                this.hide(true);
             }
 
             event.preventDefault();

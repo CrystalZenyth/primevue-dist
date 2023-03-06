@@ -545,7 +545,7 @@ this.primevue.dropdown = (function (api, OverlayEventBus, Portal, Ripple, utils,
                         this.onOptionSelect(event, this.visibleOptions[this.focusedOptionIndex]);
                     }
 
-                    this.hide();
+                    this.hide(true);
                 }
 
                 event.preventDefault();
