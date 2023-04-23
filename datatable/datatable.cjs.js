@@ -4285,6 +4285,7 @@ var script = {
             this.$emit('update:first', this.d_first);
         },
         onColumnResizeStart(event) {
+            utils.DomHandler.addClass(this.$refs.table, 'p-unselectable-text');
             let containerLeft = utils.DomHandler.getOffset(this.$el).left;
 
             this.resizeColumnElement = event.target.parentElement;
@@ -4393,6 +4394,7 @@ var script = {
 
             this.$refs.resizeHelper.style.display = 'none';
             this.resizeColumn = null;
+            utils.DomHandler.removeClass(this.$refs.table, 'p-unselectable-text');
             utils.DomHandler.removeClass(this.$el, 'p-unselectable-text');
 
             this.unbindColumnResizeEvents();
